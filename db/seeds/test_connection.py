@@ -1,7 +1,4 @@
-# PHASE 1 — connection test.
-# Loads MONGODB_URI / DB_NAME from db/.env, connects to MongoDB Atlas,
-# and "pings" the server (a lightweight check that doesn't read or write
-# any real data). Prints a clear SUCCESS or FAILED message.
+# Connection test.
 
 import os
 import sys
@@ -11,8 +8,6 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
 
-# db/.env lives one folder above this script (db/seeds/test_connection.py -> db/.env).
-# Spelling out the path means this script works no matter where you run it from.
 env_path = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
