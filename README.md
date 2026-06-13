@@ -64,12 +64,4 @@ source dataset, JSON-schema validators, sanity checks) — see
 - API + Swagger docs: <https://koyash-production.up.railway.app/docs>
 - Demo video: <https://youtu.be/ftTVnoXQvI8>
 
-## Team
 
-| Name | GitHub/GitLab | Role |
-| --- | --- | --- |
-| Anna | _TODO_ | UX/UI design, frontend implementation |
-| Arthur | _TODO_ | Backend implementation; API and recommendation logic support |
-| Daria | _TODO_ | Team lead; database structure and data layer support |
-| Khasana | _TODO_ | UX/UI design |
-| Milana | _TODO_ | UX/UI design, frontend implementation |
