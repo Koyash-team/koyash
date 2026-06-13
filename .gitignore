@@ -1,6 +1,26 @@
+# Environment — never commit secrets
+.env
 *.env
 .env.*
 # ...but DO track the example template (it has no real secrets in it)
 !.env.example
+!backend/.env.example
+
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+backend/.venv/
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.iml
