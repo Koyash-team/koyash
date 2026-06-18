@@ -1,0 +1,19 @@
+name: Course Task
+description: Assignment administration, reporting, grading evidence
+title: ""
+labels: ["course-task"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Expected Evidence / Deliverable
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes

@@ -1,0 +1,33 @@
+name: Other PBI
+description: Technical task, spike, infrastructure, etc.
+title: ""
+labels: ["other-pbi"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: PBI Type
+      options:
+        - Technical Task
+        - Infrastructure
+        - Design
+        - Testing
+        - Deployment
+        - Documentation
+        - Research
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+  - type: input
+    id: moscow
+    attributes:
+      label: MoSCoW Priority (if applicable)
