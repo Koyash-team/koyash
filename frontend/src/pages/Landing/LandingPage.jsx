@@ -40,7 +40,7 @@ const T = ({ x, y, w, cls = 'lBody', align = 'left', reveal = true, style, child
     style={{ left: x, top: y, width: w, textAlign: align, ...style }}>{children}</p>
 );
 const Btn = ({ x, y, onClick, children }) => (
-  <button className="lBtn reveal" style={{ left: x, top: y }} onClick={onClick}>{children}</button>
+  <button type="button" className="lBtn reveal" style={{ left: x, top: y }} onClick={onClick}>{children}</button>
 );
 
 // Section title sitting on a smear: text is centered (H+V) over the brush.
@@ -104,9 +104,9 @@ export function LandingPage() {
 
         {/* Header */}
         <Img src={logo} x={165} y={-13} w={233} h={194} reveal={false} />
-        <span className="lAbs lNav" style={{ left: 492, top: 47 }} onClick={scrollTo('top')}>О нас</span>
-        <span className="lAbs lNav" style={{ left: 614, top: 47 }} onClick={scrollTo('how')}>Как это работает?</span>
-        <span className="lAbs lNav" style={{ left: 836, top: 47 }} onClick={scrollTo('trust')}>Забота и Доверие</span>
+        <button type="button" className="lAbs lNav" style={{ left: 492, top: 47 }} onClick={scrollTo('top')}>О нас</button>
+        <button type="button" className="lAbs lNav" style={{ left: 614, top: 47 }} onClick={scrollTo('how')}>Как это работает?</button>
+        <button type="button" className="lAbs lNav" style={{ left: 836, top: 47 }} onClick={scrollTo('trust')}>Забота и Доверие</button>
         <Btn x={1153} y={40} onClick={toChoice}>Подобрать уход</Btn>
 
         {/* Hero */}
@@ -222,7 +222,7 @@ export function LandingPage() {
         <Btn x={218} y={5215} onClick={quick}>Подобрать уход</Btn>
 
         {/* Disclaimer */}
-        <T x={219} y={5322} w={720} cls="lCardTitle">Кoyash не делает медицинских заявлений об излечении</T>
+        <T x={219} y={5322} w={720} cls="lCardTitle">Koyash не делает медицинских заявлений об излечении</T>
         <T x={219} y={5364} w={971} style={{ fontSize: 16 }}>
           Рекомендации носят информационный характер и не являются медицинской консультацией; перед применением новых средств рекомендуется патч-тест; при кожных заболеваниях — консультация дерматолога.
         </T>
