@@ -38,10 +38,14 @@ vs. prioritize full category coverage); no defect, a product decision still pend
 Also surfaced a catalog gap: no low-budget product for the "toning" step, correctly
 reported as an empty step rather than filled incorrectly.
 
-**Resulting PBIs or issues:** Budget-matching-precision and toning catalog-gap
-decisions are tracked as open action items (see
+**Resulting PBIs or issues:** The budget-matching-precision question is resolved
+as [PBI-302](https://github.com/Koyash-team/koyash/issues/103) — decision: keep
+the segment-first engine and make the budget presentation honest (tier +
+approximate per-product price + approximate total, with an "approximate price"
+note in the results) rather than force the total into a fixed range. The
+low-budget "toning" catalog gap remains an open follow-up (see
 [reports/week4/customer-review-summary.md](../reports/week4/customer-review-summary.md),
-action point A2) pending a product decision before being filed as a PBI.
+action point A2).
 
 ## UAT-002: Declared allergens are never recommended
 
