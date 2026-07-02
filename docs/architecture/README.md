@@ -274,5 +274,7 @@ These three decisions explain the shape of the system shown in the views above:
   why the allergen filter sits in application code rather than in the query.
 - **ADR-003** is why the engine does per-step, segment-priority selection with
   substitution notes instead of price-band enforcement — the mechanism behind
-  the QR-002 graceful-degradation behaviour. Its known tradeoff (assembled total
-  vs. displayed budget range) is tracked as PBI-302.
+  the QR-002 graceful-degradation behaviour. Its tradeoff (the assembled total is
+  not a fixed ₽ range) was resolved by PBI-302 at the presentation layer: the
+  budget step now shows an approximate tier price and total, and the results note
+  that prices are approximate — the engine is kept as-is.
