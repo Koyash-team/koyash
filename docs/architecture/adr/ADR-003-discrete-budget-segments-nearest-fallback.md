@@ -7,8 +7,8 @@
 
 ## Context
 
-Users choose a budget, presented on the frontend as ranges (≤ 3500 / 3500–8000 /
-8000+ ₽). Internally each product has a `segment` of `low`, `mid`, or `high`.
+Users choose a budget tier. Internally each product has a `segment` of `low`,
+`mid`, or `high`.
 The catalog is small and uneven — some routine steps have no product in a given
 segment (for example, the high segment has very few products). An earlier design
 that forced the basket total into a hard price band made `budget=high` fail
@@ -39,10 +39,13 @@ total.
 - **Positive:** the fallback only relaxes the *segment*; it never relaxes the
   hard filters (vegan, cruelty-free, allergens), which are applied before
   selection.
-- **Negative / tradeoff (known, tracked):** because price bands are not
-  enforced, the assembled total may not land tightly inside the budget range the
-  frontend showed the user. Tightening this is the explicit subject of
-  **PBI-302** (budget precision), which will measure real totals against the
-  displayed ranges and decide whether to recalibrate the boundaries or target the
-  range during assembly. This ADR will be revisited (and superseded if the
-  decision changes materially) based on that work.
+- **Tradeoff (resolved at the presentation layer via PBI-302):** because price
+  bands are not enforced, the assembled total does not land inside a fixed ₽
+  range — with ~6 items per bag, the sum overshoots a per-item tier. **PBI-302**
+  measured this against the real catalog and decided to keep this engine
+  unchanged and fix the mismatch in presentation: the questionnaire now frames
+  budget as a tier with an approximate per-product price and an approximate
+  total, and the results show the real computed total with an "approximate
+  price" note, instead of promising an exact basket range. This ADR is therefore
+  **retained, not superseded**. A true total-budget model would only make sense
+  with reliable price data and would need a new ADR superseding this one.
