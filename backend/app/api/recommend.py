@@ -31,6 +31,21 @@ SEGMENT_PRIORITY: dict[str, list[str]] = {
 CORE_STEPS = ["cleanse", "tone", "serum", "moisturize", "spf"]
 OCCASIONAL_STEPS = ["exfoliant", "mask"]
 
+# Special-condition safety filter (US-20). Products whose key actives or allergen
+# tokens contain any contraindicated token for a declared condition are hard-
+# excluded, like the allergen filter — deterministic, not an LLM judgement.
+# This is a conservative, best-effort starting mapping (matched case-insensitively
+# as substrings); replace/extend it with the customer's ingredient guide. It is
+# best-effort filtering, not medical advice.
+CONDITION_EXCLUDED_TOKENS: dict[str, set[str]] = {
+    "pregnancy": {
+        "retinol", "retinal", "retinaldehyde", "retinyl", "retinoic",
+        "tretinoin", "adapalene", "retinoid",
+    },
+    "dermatitis": {"fragrance", "parfum", "alcohol denat", "menthol"},
+    "rosacea": {"fragrance", "parfum", "alcohol denat", "menthol"},
+}
+
 # ---------------------------------------------------------------------------
 # Justification dictionaries (§9)
 # ---------------------------------------------------------------------------
@@ -81,6 +96,18 @@ CONCERN_NAME_RU: dict[str, str] = {
 
 def _concern_match(product: Product, concerns: set[str]) -> int:
     return len(set(product.concerns_addressed) & concerns)
+
+
+def _condition_excluded(product: Product, conditions: set[str]) -> bool:
+    """True if the product carries an ingredient contraindicated for any declared
+    condition. Matches contraindicated tokens (case-insensitive substring) against
+    the product's key actives and normalized allergen tokens."""
+    haystack = " ".join(product.main_actives_short + product.allergens_norm).lower()
+    for cond in conditions:
+        for token in CONDITION_EXCLUDED_TOKENS.get(cond, set()):
+            if token in haystack:
+                return True
+    return False
 
 
 def _to_out(p: Product) -> ProductOut:
@@ -274,6 +301,12 @@ async def recommend(request: RecommendRequest):
         ]
     else:
         pool = all_products
+
+    # Special-condition filter (US-20): hard-exclude products with ingredients
+    # contraindicated for a declared condition (e.g. retinoids during pregnancy).
+    if request.conditions:
+        conditions_set = {c.lower() for c in request.conditions}
+        pool = [p for p in pool if not _condition_excluded(p, conditions_set)]
 
     concerns_set = set(request.concerns)
     basket, missing_steps, substituted_steps = _base_select(
