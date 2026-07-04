@@ -167,33 +167,7 @@ revised.
 
 **Resulting PBIs or issues:** Prompt/model refinement tracked on [PBI-303](https://github.com/Koyash-team/koyash/issues/104) for a later iteration.
 
-## UAT-006: Special conditions exclude contraindicated products
-
-**Status:** Active
-
-**User goal:** As a user with a special condition (e.g. pregnancy), I do not want products
-that are unsuitable for my condition in my bag.
-
-**Preconditions:** The deployed app is reachable.
-
-**Steps:**
-1. Complete the questionnaire and, on the conditions step, declare a condition (e.g.
-   pregnancy).
-2. Open the results screen and inspect the bag.
-
-**Expected outcome:** No product whose ingredients are contraindicated for the declared
-condition (e.g. a retinoid product during pregnancy) appears in the bag; the affected step
-is filled with a suitable alternative or reported as empty, never with a contraindicated
-product. Declaring no condition does not change the result.
-
-**Related:** [US-20](https://github.com/Koyash-team/koyash/issues/124), [PBI-312](https://github.com/Koyash-team/koyash/issues/125).
-
-**Execution results:** Not yet customer-executed — the safety filter (PBI-312) was
-delivered after the 2026-07-03 review. Verified by automated tests
-(`backend/tests/test_conditions.py`); scheduled for the next customer session.
-
-**Customer comments / observed issues:** The customer approved the deterministic
-rules-based approach at the 2026-07-03 review and may share an ingredient guide to refine
-the mapping.
-
-**Resulting PBIs or issues:** None open — mapping refinement is a follow-up on [PBI-312](https://github.com/Koyash-team/koyash/issues/125).
+> The special-condition safety filter (US-20 / PBI-312) is delivered this Sprint and
+> covered by automated tests (`backend/tests/test_conditions.py`), but it shipped after
+> the 2026-07-03 customer review, so a customer-executed UAT for it will be added once the
+> customer runs it (next session / Sprint 4).
