@@ -1,5 +1,10 @@
 # Week 5 Reflection
 
+*Sprint 3 closed with the full planned scope delivered: MVP v2 — honest budget presentation,
+the optional LLM justification layer, the special-condition safety filter, the skin-type
+mini-quiz, and the landing rework + copy pass — plus the maintained architecture and
+development-process documentation.*
+
 ## Learning points
 
 - **Documenting the architecture surfaced implicit decisions.** Writing the static, dynamic,
@@ -26,13 +31,17 @@
 
 - The customer-authored LLM prompt is not final (a model change to Gemini is expected), so
   prompt/model is a moving target and required several iterations.
-- Frontend capacity was the bottleneck: the skin-type mini-quiz reached design-only.
+- Frontend integration was compressed into the end of the Sprint: the skin-type mini-quiz and
+  the landing rework were designed early but implemented in the frontend only after the customer
+  review — delivered within the Sprint, but late rather than spread across it.
 - Some maintained documentation drifted from the delivered state and needed a consistency
   pass late in the week.
 
 ## Planned response
 
-- Sequence the mini-quiz frontend work first next Sprint and pair on it.
+- Begin frontend integration as soon as a design is agreed (rather than after the review) and
+  pair on it, so implementation is spread across the Sprint — this matters for Sprint 4, the
+  final Sprint (user account, authentication, saving the cosmetic bag, and leaving feedback).
 - Continue treating the LLM prompt/model as configuration and re-adapt when the customer
   switches to Gemini.
 - Add a lightweight "do the maintained docs still match reality?" check to our

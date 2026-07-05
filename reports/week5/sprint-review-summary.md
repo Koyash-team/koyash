@@ -2,10 +2,11 @@
 
 **Date:** 2026-07-03
 **Participants (roles):** Customer; Team — Team Lead, Backend, Frontend (×2), UX/UI.
-**Format & recording:** Online review, recorded. The sanitized English transcript is
-published at [sprint-review-transcript.md](sprint-review-transcript.md); it uses roles
-(`Customer` / `Interviewer`) instead of names. The customer-executed UAT happened within
-the same recorded session.
+**Format & recording:** Online review, recorded with the participants' permission. The
+sanitized English transcript is published (with permission) at
+[sprint-review-transcript.md](sprint-review-transcript.md); it uses roles (`Customer` /
+`Interviewer`) instead of names. The customer-executed UAT happened within the same recorded
+session.
 **Related evidence:** [sprint-review-transcript.md](sprint-review-transcript.md) ·
 [docs/roadmap.md](../../docs/roadmap.md) ·
 [docs/user-acceptance-tests.md](../../docs/user-acceptance-tests.md) ·
