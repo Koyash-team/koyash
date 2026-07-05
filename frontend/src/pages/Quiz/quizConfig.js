@@ -55,7 +55,7 @@ export const STEPS = [
     scene: sceneSkinType,
     fig: {
       scene: { x: 610, y: 68, w: 644, h: 644 },
-      notePill: { x: 71, y: 117, w: 507 }, narr: { x: 71, y: 217, w: 659 },
+      notePill: { x: 71, y: 120, w: 507 }, narr: { x: 71, y: 217, w: 659 },
       head: { x: 71, y: 360, w: 460 },
       opts: { x: 71, y: 448, rowGap: 27 },
       back: { x: 60, y: 647 }, next: { x: 637, y: 647 },
@@ -71,7 +71,7 @@ export const STEPS = [
     scene: sceneSpf,
     fig: {
       scene: { x: 50, y: 129, w: 571, h: 571 },
-      notePill: { x: 637, y: 181, w: 334 },
+      notePill: { x: 637, y: 139, w: 334 },
       title: { x: 639, y: 255, w: 420 }, heart: { x: 928, y: 225, w: 100 }, body: { x: 639, y: 340, w: 546 },
       advice: { x: 621, y: 439, w: 599, h: 162 }, highlight: { x: 661, y: 470, w: 540 },
       back: { x: 69, y: 659 }, next: { x: 637, y: 659 },
@@ -99,7 +99,7 @@ export const STEPS = [
     scene: sceneProblems,
     fig: {
       scene: { x: 714, y: 62, w: 543, h: 543 },
-      notePill: { x: 58, y: 162, w: 607 }, narr: { x: 71, y: 217, w: 660 },
+      notePill: { x: 58, y: 120, w: 607 }, narr: { x: 71, y: 217, w: 660 },
       head: { x: 71, y: 360, w: 420 },
       opts: { x: 77, y: 442, rowGap: 47, cols: 2, col2x: 395 },
       back: { x: 79, y: 650 }, next: { x: 557, y: 650 },
@@ -122,7 +122,7 @@ export const STEPS = [
     scene: sceneBudget,
     fig: {
       scene: { x: 676, y: 144, w: 548, h: 548 },
-      notePill: { x: 71, y: 169, w: 705 }, narr: { x: 81, y: 236, w: 701 },
+      notePill: { x: 71, y: 130, w: 705 }, narr: { x: 81, y: 236, w: 701 },
       head: { x: 71, y: 375, w: 654 }, subNote: { x: 71, y: 430, w: 654 },
       opts: { x: 90, y: 490, rowGap: 38 },
       back: { x: 90, y: 650 }, next: { x: 444, y: 650 },
@@ -138,7 +138,7 @@ export const STEPS = [
     scene: sceneCleanser,
     fig: {
       scene: { x: 626, y: 61, w: 593, h: 593 },
-      notePill: { x: 60, y: 176, w: 381 },
+      notePill: { x: 60, y: 137, w: 381 },
       title: { x: 59, y: 250, w: 560 }, heart: { x: 388, y: 220, w: 100 }, body: { x: 59, y: 317, w: 600 },
       advice: { x: 16, y: 408, w: 661, h: 179 }, highlight: { x: 60, y: 445, w: 560 },
       back: { x: 80, y: 650 }, next: { x: 449, y: 650 },
@@ -162,7 +162,7 @@ export const STEPS = [
     scene: sceneAllergens,
     fig: {
       scene: { x: 770, y: 226, w: 487, h: 487 },
-      notePill: { x: 50, y: 117, w: 580 }, narr: { x: 71, y: 205, w: 850 },
+      notePill: { x: 50, y: 114, w: 580 }, narr: { x: 71, y: 205, w: 850 },
       head: { x: 71, y: 320, w: 820 },
       opts: { x: 77, y: 405, rowGap: 40 },
       back: { x: 85, y: 650 }, next: { x: 432, y: 650 },
@@ -186,7 +186,7 @@ export const STEPS = [
     scene: sceneImportance,
     fig: {
       scene: { x: 707, y: 135, w: 550, h: 550 },
-      notePill: { x: 56, y: 117, w: 724 }, narr: { x: 71, y: 217, w: 745 },
+      notePill: { x: 56, y: 120, w: 724 }, narr: { x: 71, y: 217, w: 745 },
       head: { x: 71, y: 323, w: 820 },
       opts: { x: 77, y: 410, rowGap: 47 },
       back: { x: 77, y: 650 }, next: { x: 427, y: 650 },
@@ -202,7 +202,7 @@ export const STEPS = [
     scene: sceneActives,
     fig: {
       scene: { x: 50, y: 137, w: 558, h: 558 },
-      notePill: { x: 637, y: 181, w: 334 },
+      notePill: { x: 637, y: 139, w: 334 },
       title: { x: 639, y: 255, w: 420 }, heart: { x: 962, y: 225, w: 100 }, body: { x: 639, y: 340, w: 546 },
       advice: { x: 601, y: 433, w: 636, h: 172 }, highlight: { x: 653, y: 465, w: 540 },
       back: { x: 81, y: 650 }, next: { x: 637, y: 650 },
@@ -224,7 +224,7 @@ export const STEPS = [
     scene: sceneExperience,
     fig: {
       scene: { x: 730, y: 139, w: 565, h: 565 },
-      notePill: { x: 62, y: 130, w: 765 }, narr: { x: 62, y: 205, w: 760 },
+      notePill: { x: 62, y: 114, w: 765 }, narr: { x: 62, y: 205, w: 760 },
       head: { x: 71, y: 346, w: 660 },
       opts: { x: 77, y: 450, rowGap: 38 },
       back: { x: 86, y: 642 }, next: { x: 478, y: 642 },
@@ -247,7 +247,7 @@ export const STEPS = [
     scene: sceneIssues,
     fig: {
       scene: { x: 608, y: 86, w: 633, h: 633 },
-      notePill: { x: 62, y: 117, w: 665 }, narr: { x: 71, y: 217, w: 659 },
+      notePill: { x: 62, y: 120, w: 665 }, narr: { x: 71, y: 217, w: 659 },
       head: { x: 71, y: 346, w: 660 },
       opts: { x: 77, y: 436, rowGap: 47 },
       back: { x: 77, y: 650 }, next: { x: 454, y: 650 },
