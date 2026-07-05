@@ -40,9 +40,8 @@ export const STEPS = [
       { label: 'Комбинированная — Т-зона жирная, щёки сухие', value: 'combination' },
       { label: 'Нормальная — в целом всё хорошо', value: 'normal' },
       { label: 'Чувствительная — легко реагирует на новые средства', value: 'sensitive' },
-      { label: 'Не знаю — не уверена', value: 'unknown' },
+      { label: 'Не знаю', value: 'unknown' },
     ],
-    skinTestOption: 'unknown',
     skinTestBtn: { label: 'Узнать свой тип кожи', x: 285, y: 610, w: 259 },
     scene: sceneSkinType,
     fig: { scene: { x: 666, y: 67, w: 579, h: 579 }, head: { x: 58, y: 149, w: 560 }, helper: { x: 58, y: 256, w: 600 }, opts: { x: 64, y: 385, rowGap: 27 }, back: { x: 58, y: 610 }, next: { x: 635, y: 610 } },
@@ -73,6 +72,7 @@ export const STEPS = [
     type: 'single',
     questionStep: 4,
     question: 'На сколько ориентируемся?',
+    subNote: '(одной косметички хватит на 3-6 месяцев)',
     helper:
       'Бюджет помогает подобрать средства, которые будут комфортны не только для кожи, но и для кошелька. Мы ориентируемся на примерную стоимость полного набора ухода, которого обычно хватает на 2–3 месяца.',
     options: [
@@ -81,7 +81,7 @@ export const STEPS = [
       { label: 'Премиум · от 3 000 ₽/шт · набор ≈ от 12 000 ₽', value: 'high' },
     ],
     scene: sceneBudget,
-    fig: { scene: { x: 695, y: 133, w: 548, h: 548 }, head: { x: 71, y: 168, w: 654 }, helper: { x: 71, y: 290, w: 701 }, opts: { x: 71, y: 444, rowGap: 38 }, back: { x: 90, y: 650 }, next: { x: 444, y: 650 } },
+    fig: { scene: { x: 695, y: 133, w: 548, h: 548 }, head: { x: 71, y: 168, w: 654 }, subNote: { x: 71, y: 220, w: 654 }, helper: { x: 71, y: 290, w: 701 }, opts: { x: 71, y: 444, rowGap: 38 }, back: { x: 90, y: 650 }, next: { x: 444, y: 650 } },
   },
   {
     id: 'allergens',
