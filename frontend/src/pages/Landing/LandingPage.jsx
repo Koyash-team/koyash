@@ -315,7 +315,7 @@ export function LandingPage() {
         {/* Disclaimer */}
         <div className="lFootLine" style={{ left: 0, top: 3843, width: 1633 }} />
         <T x={44} y={3860} w={674} cls="lCardTitle" style={{ fontSize: 17 }}>
-          Кoyash не делает медицинских заявлений об излечении
+          Koyash не делает медицинских заявлений об излечении
         </T>
         <T x={44} y={3885} w={1561} style={{ fontSize: 15 }}>
           Рекомендации носят информационный характер и не являются медицинской консультацией; перед
@@ -348,7 +348,7 @@ export function LandingPage() {
           className="lAbs lFooter lContact"
           href="https://t.me/diana_minn"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           style={{ left: 940, top: 4028, display: 'flex', alignItems: 'center', gap: 18 }}
         >
           <img src={endTelegram} alt="" width={51} height={51} />
