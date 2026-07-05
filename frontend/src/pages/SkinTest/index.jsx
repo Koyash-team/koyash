@@ -12,9 +12,14 @@ export default function SkinTest({ onDone, onCancel }) {
   const setAnswer = (id, v) => setAnswers((p) => ({ ...p, [id]: v }));
   const isResult = step >= SKIN_QUESTIONS.length;
 
-  function next() { setStep((s) => s + 1); }
+  function next() {
+    setStep((s) => s + 1);
+  }
   function back() {
-    if (step === 0) { onCancel(); return; }
+    if (step === 0) {
+      onCancel();
+      return;
+    }
     setStep((s) => s - 1);
   }
 

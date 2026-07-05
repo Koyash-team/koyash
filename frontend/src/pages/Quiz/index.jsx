@@ -85,7 +85,10 @@ export default function Quiz() {
   if (skinTest) {
     return (
       <SkinTest
-        onDone={(type) => { setAnswer('skin_type', type); setSkinTest(false); }}
+        onDone={(type) => {
+          setAnswer('skin_type', type);
+          setSkinTest(false);
+        }}
         onCancel={() => setSkinTest(false)}
       />
     );

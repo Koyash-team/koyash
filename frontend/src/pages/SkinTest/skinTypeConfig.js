@@ -26,10 +26,12 @@ export const SKIN_QUESTIONS = [
     scene: sceneCleanse,
     fig: {
       scene: { x: 544, y: 106, w: 671, h: 671 },
-      notePill: { x: 71, y: 115, w: 567 }, narr: { x: 71, y: 180, w: 604 },
+      notePill: { x: 71, y: 115, w: 567 },
+      narr: { x: 71, y: 180, w: 604 },
       head: { x: 71, y: 278, w: 660 },
       opts: { x: 77, y: 415, rowGap: 27 },
-      back: { x: 53, y: 650 }, next: { x: 432, y: 650 },
+      back: { x: 53, y: 650 },
+      next: { x: 432, y: 650 },
     },
   },
   {
@@ -49,10 +51,12 @@ export const SKIN_QUESTIONS = [
     scene: scenePore,
     fig: {
       scene: { x: 664, y: 100, w: 630, h: 550 },
-      notePill: { x: 71, y: 108, w: 567 }, narr: { x: 71, y: 177, w: 558 },
+      notePill: { x: 71, y: 108, w: 567 },
+      narr: { x: 71, y: 177, w: 558 },
       head: { x: 71, y: 293, w: 820 },
       opts: { x: 77, y: 400, rowGap: 27 },
-      back: { x: 53, y: 650 }, next: { x: 432, y: 650 },
+      back: { x: 53, y: 650 },
+      next: { x: 432, y: 650 },
     },
   },
   {
@@ -72,10 +76,12 @@ export const SKIN_QUESTIONS = [
     scene: sceneHours,
     fig: {
       scene: { x: 561, y: 67, w: 696, h: 696 },
-      notePill: { x: 71, y: 111, w: 567 }, narr: { x: 71, y: 183, w: 567 },
+      notePill: { x: 71, y: 111, w: 567 },
+      narr: { x: 71, y: 183, w: 567 },
       head: { x: 71, y: 275, w: 660 },
       opts: { x: 77, y: 415, rowGap: 27 },
-      back: { x: 53, y: 650 }, next: { x: 432, y: 650 },
+      back: { x: 53, y: 650 },
+      next: { x: 432, y: 650 },
     },
   },
   {
@@ -95,10 +101,12 @@ export const SKIN_QUESTIONS = [
     scene: sceneWeather,
     fig: {
       scene: { x: 599, y: 120, w: 658, h: 549 },
-      notePill: { x: 71, y: 120, w: 567 }, narr: { x: 71, y: 191, w: 607 },
+      notePill: { x: 71, y: 120, w: 567 },
+      narr: { x: 71, y: 191, w: 607 },
       head: { x: 71, y: 273, w: 660 },
       opts: { x: 77, y: 415, rowGap: 27 },
-      back: { x: 53, y: 650 }, next: { x: 432, y: 650 },
+      back: { x: 53, y: 650 },
+      next: { x: 432, y: 650 },
     },
   },
 ];
@@ -172,7 +180,10 @@ export function scoreSkinType(answers) {
   let bestN = -1;
   PRIORITY.forEach((type) => {
     const n = counts[type] || 0;
-    if (n > bestN) { bestN = n; best = type; }
+    if (n > bestN) {
+      bestN = n;
+      best = type;
+    }
   });
   return best || 'normal';
 }

@@ -16,7 +16,15 @@ function ageError(value) {
   return '';
 }
 
-export default function QuizStep({ step, answer, progressPct, onChange, onNext, onBack, onSkinTest }) {
+export default function QuizStep({
+  step,
+  answer,
+  progressPct,
+  onChange,
+  onNext,
+  onBack,
+  onSkinTest,
+}) {
   const isTip = step.type === 'tip';
   const f = step.fig;
 
@@ -47,7 +55,8 @@ export default function QuizStep({ step, answer, progressPct, onChange, onNext, 
 
   function canProceed() {
     if (isTip) return true;
-    if (step.type === 'input') return Boolean(answer && String(answer).trim()) && !(isAge && ageErr);
+    if (step.type === 'input')
+      return Boolean(answer && String(answer).trim()) && !(isAge && ageErr);
     if (step.type === 'single') return answer !== null && answer !== undefined;
     if (step.type === 'multi') return Array.isArray(answer) && answer.length > 0;
     return true;
@@ -151,7 +160,10 @@ export default function QuizStep({ step, answer, progressPct, onChange, onNext, 
               {step.subQuestion && <span className="qHeadSub"> {step.subQuestion}</span>}
             </h2>
             {step.subNote && f.subNote && (
-              <div className="qSubNote" style={{ left: f.subNote.x, top: f.subNote.y, width: f.subNote.w }}>
+              <div
+                className="qSubNote"
+                style={{ left: f.subNote.x, top: f.subNote.y, width: f.subNote.w }}
+              >
                 {step.subNote}
               </div>
             )}
@@ -169,7 +181,10 @@ export default function QuizStep({ step, answer, progressPct, onChange, onNext, 
                   onChange={(e) => onChange(e.target.value)}
                 />
                 {isAge && ageErr && (
-                  <div className="qInputError" style={{ left: f.input.x, top: f.input.y + 56, width: f.input.w }}>
+                  <div
+                    className="qInputError"
+                    style={{ left: f.input.x, top: f.input.y + 56, width: f.input.w }}
+                  >
                     {ageErr}
                   </div>
                 )}
