@@ -38,10 +38,33 @@ Sprint-by-Sprint delivery plan. For story-level detail, current status, and acce
   - Product: [PBI-301](https://github.com/Koyash-team/koyash/issues/102) (mini-quiz), [PBI-302](https://github.com/Koyash-team/koyash/issues/103) (budget precision), [PBI-303](https://github.com/Koyash-team/koyash/issues/104) (LLM justifications), [PBI-304](https://github.com/Koyash-team/koyash/issues/105) (design/copy polish), [PBI-312](https://github.com/Koyash-team/koyash/issues/125) (special-condition filter)
   - Architecture & process: [PBI-305](https://github.com/Koyash-team/koyash/issues/106)–[PBI-308](https://github.com/Koyash-team/koyash/issues/109) (static/dynamic/deployment views, ADRs), [PBI-309](https://github.com/Koyash-team/koyash/issues/110) (development process), [PBI-310](https://github.com/Koyash-team/koyash/issues/111) (hosted docs), [PBI-311](https://github.com/Koyash-team/koyash/issues/112) (tests, UATs, Definition of Done)
 
-## Sprint 4 and beyond (direction, not yet scheduled)
+## Sprint 4 — Personal account: sign-in, profile, history and feedback (Week 6 trial)
 
-- **Sprint 4 (next):** personal account, authentication, and saved cosmetic-bag history with lightweight "worked / didn't work" feedback ([US-12](https://github.com/Koyash-team/koyash/issues/16), [US-13](https://github.com/Koyash-team/koyash/issues/17)) — deferred from Sprint 3 to keep MVP v2 focused. The customer prefers account data stored in a database and explicitly not Outlook for authentication.
-- **Backlog / later:** product photo on each card ([US-10](https://github.com/Koyash-team/koyash/issues/14)); irritant warning ([US-11](https://github.com/Koyash-team/koyash/issues/15)) — deferred pending a separate customer decision about letting the LLM reason about ingredients (out of scope for the current justification-only LLM); a mobile version.
+- **Milestone:** [Sprint 4](https://github.com/Koyash-team/koyash/milestone/4)
+- **Dates:** 2026-07-06 – 2026-07-12 (Mon–Sun)
+- **Sprint Goal:** Turn Koyash from an anonymous one-shot tool into a personal service. Users can register and sign in (email + password; a phone number is collected but not used for authentication), while the questionnaire → cosmetic-bag flow stays fully available to guests without an account. Signed-in users get a personal account: a profile card, saved cosmetic-bag history (with the query that produced each bag), and like/dislike feedback on recommended products. In parallel, publish the customer-facing documentation set and cut the Week 6 trial release `v1.3.0`.
+- **Focus:** Guest-first authentication, the personal account (profile, history, feedback), the Assignment 6 customer-facing docs (README entry point, `CONTRIBUTING.md`, `AGENTS.md`, `docs/customer-handover.md`), ADR-004 for authentication, and a stable trial release for the Week 6 customer trial and transition-readiness meeting.
+- **Planned items:**
+  - User stories: [US-21](https://github.com/Koyash-team/koyash/issues/136) (account + sign-in), [US-22](https://github.com/Koyash-team/koyash/issues/137) (profile card), [US-12](https://github.com/Koyash-team/koyash/issues/16) (cosmetic-bag history), [US-13](https://github.com/Koyash-team/koyash/issues/17) ("worked / didn't work" feedback)
+  - Product: [PBI-401](https://github.com/Koyash-team/koyash/issues/140)–[PBI-407](https://github.com/Koyash-team/koyash/issues/146) (auth backend/frontend, profile, history backend/frontend, feedback backend/frontend)
+  - Architecture, quality & docs: [PBI-408](https://github.com/Koyash-team/koyash/issues/147) (ADR-004 + config), [PBI-409](https://github.com/Koyash-team/koyash/issues/148) (auth/history tests), [PBI-410](https://github.com/Koyash-team/koyash/issues/149) (README entry point), [PBI-411](https://github.com/Koyash-team/koyash/issues/150) (CONTRIBUTING/AGENTS), [PBI-412](https://github.com/Koyash-team/koyash/issues/151) (customer-handover), [PBI-413](https://github.com/Koyash-team/koyash/issues/152) (trial release v1.3.0)
+
+## Sprint 5 — Trial feedback, favorites, progress check-in and final transition (Week 7, MVP v3)
+
+- **Milestone:** [Sprint 5](https://github.com/Koyash-team/koyash/milestone/5)
+- **Dates:** 2026-07-13 – 2026-07-19 (Mon–Sun)
+- **Sprint Goal:** Respond to the Week 6 trial feedback and complete the transition: add favorites and a lightweight skin-progress check-in, fold in customer-requested fixes, finalize the customer-handover documentation and confirmation, and ship the final course version, `MVP v3`.
+- **Focus:** Week 6 customer-trial follow-up. Part of this scope is expected follow-up that depends on the trial feedback, so additional fix PBIs and the final-transition and MVP v3 release work will be added during the week.
+- **Delivered increment:** MVP v3 (final course version).
+- **Planned items:**
+  - User stories: [US-23](https://github.com/Koyash-team/koyash/issues/138) (favorites), [US-24](https://github.com/Koyash-team/koyash/issues/139) (monthly skin-progress check-in)
+  - Product: [PBI-501](https://github.com/Koyash-team/koyash/issues/153) (favorites), [PBI-502](https://github.com/Koyash-team/koyash/issues/154) (lightweight tracker / check-in)
+  - Tentative: [US-11](https://github.com/Koyash-team/koyash/issues/15) (irritant warning) — only if the customer opens up ingredient analysis; still pending that decision.
+  - Follow-up fixes from the Week 6 trial, the final `docs/customer-handover.md` and transition confirmation, and the final MVP v3 release + public demo video will be added as PBIs during Week 7.
+
+## Backlog / later (not scheduled)
+
+- Product photo on each card ([US-10](https://github.com/Koyash-team/koyash/issues/14)); a mobile version. Full skin-progress tracking beyond the lightweight Sprint 5 check-in (daily habit calendar, dynamics charts, before/after photos) remains a product vision, not scheduled course work.
 
 ## Continuing work (maintained across Sprints)
 
