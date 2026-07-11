@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap');
+
+/* ── Account / auth screens ────────────────────────────────────────────────
+   Every screen is built on the 1633px-wide Figma canvas and scaled to the
+   viewport by <Stage>, exactly like the questionnaire and landing. All
+   positions are the raw Figma coordinates. */
+
+.acCanvas {
+  position: relative;
+  width: 1633px;
+  background: #ffffff;
+  color: #634938;
+  font-family: 'Manrope', Arial, sans-serif;
+  overflow: hidden;
+}
+
+.acAbs { position: absolute; margin: 0; }
+img.acAbs { pointer-events: none; object-fit: contain; }
+
+/* ── Header / navigation ───────────────────────────────────────────────── */
+.acNav {
+  font-family: 'Manrope', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #634938;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s ease;
+  white-space: nowrap;
+}
+.acNav:hover { color: #e9a563; }
+
+/* ── Buttons ───────────────────────────────────────────────────────────── */
+.acBtn {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #ffca96;
+  border-radius: 10px;
+  background: #ffca96;
+  color: #634938;
+  font-family: 'Manrope', Arial, sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.acBtn:hover { background: #ffbd80; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(233, 165, 99, 0.3); }
+.acBtn:disabled { opacity: 0.6; cursor: default; transform: none; box-shadow: none; }
+
+/* outlined variant (e.g. "Назад") */
+.acBtnGhost {
+  background: transparent;
+  border-color: #ffca96;
+}
+.acBtnGhost:hover { background: #fff4e6; }
+
+/* ── Typography ────────────────────────────────────────────────────────── */
+.acTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 48px;
+  color: #634938;
+  text-align: center;
+  white-space: nowrap; /* titles are single-line phrases; keep them centered on their anchor */
+}
+.acHeading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 33px;
+  color: #634938;
+}
+.acBody {
+  font-family: 'Manrope', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  color: #634938;
+}
+.acSmall {
+  font-family: 'Manrope', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  color: #634938;
+}
+
+/* accent link (Войти / Забыли пароль? / Зарегистрироваться …) */
+.acLink {
+  font-family: 'Manrope', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  color: #d7863b;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+.acLink:hover { text-decoration: underline; }
+
+/* ── Form fields ───────────────────────────────────────────────────────── */
+.acField {
+  position: absolute;
+  height: 44px;
+  border: 3px solid #fdd59d;
+  border-radius: 9px;
+  background: #fdf3e9;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.acField img.acFieldIcon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  margin: 0 10px 0 12px;
+  flex: 0 0 auto;
+  pointer-events: none;
+}
+.acInput {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'Manrope', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: #634938;
+  padding: 0;
+}
+.acInput::placeholder { color: #634938; opacity: 0.85; }
+.acField.acFieldError { border-color: #e06a5a; }
+
+/* eye toggle inside a password field */
+.acEye {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  margin-right: 8px;
+  border: none;
+  background: transparent center/contain no-repeat;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.acEye:hover { opacity: 1; }
+
+/* inline validation / server error message — brown to match the Figma spec */
+.acError {
+  position: absolute;
+  font-family: 'Manrope', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  color: #634938;
+  text-align: center;
+}
+
+/* ── Cards (offer / cabinet tiles) ─────────────────────────────────────── */
+.acCard {
+  position: absolute;
+  background: #fffdfa;
+  border: 1px solid #e9a563;
+  border-radius: 17px;
+  box-sizing: border-box;
+}
