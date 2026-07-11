@@ -90,14 +90,14 @@ export default function ProfileCard({
                 className="acAbs"
                 aria-hidden="true"
                 style={{
-                  left: 88,
-                  top: ROW_LAYOUT[i].y - 6,
-                  width: 44,
-                  height: 44,
+                  left: 96,
+                  top: ROW_LAYOUT[i].y - 1,
+                  width: 34,
+                  height: 34,
                   backgroundImage: `url(${ROW_LAYOUT[i].icon})`,
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',
-                  backgroundSize: '260%',
+                  backgroundSize: '185%',
                 }}
               />
             )}

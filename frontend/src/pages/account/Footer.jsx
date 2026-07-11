@@ -68,7 +68,7 @@ export default function Footer() {
           backgroundImage: `url(${email})`,
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundSize: '175%',
+          backgroundSize: '135%',
         }}
       />
       <a
@@ -97,7 +97,7 @@ export default function Footer() {
           backgroundImage: `url(${telegram})`,
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundSize: '175%',
+          backgroundSize: '135%',
         }}
       />
       <a
