@@ -167,6 +167,87 @@ img.acAbs { pointer-events: none; object-fit: contain; }
   text-align: center;
 }
 
+/* ── Editable data fields (profile & security cards) ───────────────────── */
+.acEditInput {
+  position: absolute;
+  height: 47px;
+  box-sizing: border-box;
+  border: 1px solid #e9a563;
+  border-radius: 10px;
+  background: #fffdfa;
+  padding: 0 44px 0 14px;
+  font-family: 'Manrope', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #634938;
+  outline: none;
+}
+.acEditInput:focus { border-color: #d7863b; }
+
+/* ── Modal dialogs (confirm update / delete) ───────────────────────────── */
+.acModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(99, 73, 56, 0.35);
+}
+.acModal {
+  width: 500px;
+  max-width: 94vw;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(99, 73, 56, 0.28);
+  padding: 40px 30px 30px;
+  text-align: center;
+  color: #634938;
+  font-family: 'Manrope', Arial, sans-serif;
+  position: relative;
+}
+.acModalTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0 0 12px;
+}
+.acModalText {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  margin: 0 auto 22px;
+  max-width: 400px;
+  white-space: pre-line;
+}
+.acModalActions {
+  display: flex;
+  gap: 46px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.acModalBtn {
+  position: static;
+  width: 170px;
+  height: 45px;
+  font-size: 18px;
+}
+.acModalField {
+  position: relative;
+  height: 44px;
+  width: 364px;
+  max-width: 100%;
+  margin: 0 auto 20px;
+  border: 3px solid #fdd59d;
+  border-radius: 9px;
+  background: #fdf3e9;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
 /* ── Cards (offer / cabinet tiles) ─────────────────────────────────────── */
 .acCard {
   position: absolute;

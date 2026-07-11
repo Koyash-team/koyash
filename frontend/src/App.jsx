@@ -9,6 +9,9 @@ import Register from './pages/account/Register';
 import Offer from './pages/account/Offer';
 import ForgotPassword from './pages/account/ForgotPassword';
 import ResetPassword from './pages/account/ResetPassword';
+import Cabinet from './pages/account/Cabinet';
+import ProfileSecurity from './pages/account/ProfileSecurity';
+import HowItWorks from './pages/account/HowItWorks';
 
 export default function App() {
   return (
@@ -24,6 +27,9 @@ export default function App() {
           <Route path="/offer" element={<Offer />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/account" element={<Cabinet />} />
+          <Route path="/account/security" element={<ProfileSecurity />} />
+          <Route path="/account/how" element={<HowItWorks />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
