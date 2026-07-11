@@ -160,15 +160,30 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 }
 .acEye:hover { opacity: 1; }
 
-/* inline validation / server error message — brown to match the Figma spec */
-.acError {
-  position: absolute;
+/* inline validation / server error message — warning glyph + text, centered on
+   the form and width-capped so long messages wrap inside the paper note. */
+.acErrRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+.acErrIcon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  background: center / contain no-repeat;
+}
+.acErrText {
   font-family: 'Manrope', Arial, sans-serif;
   font-weight: 500;
   font-size: 15px;
   line-height: 20px;
   color: #634938;
   text-align: center;
+  max-width: 360px;
 }
 
 /* ── Editable data fields (profile & security cards) ───────────────────── */

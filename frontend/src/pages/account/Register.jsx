@@ -4,6 +4,7 @@ import './account.css';
 import Stage from '../Quiz/Stage';
 import TopNav from './TopNav';
 import AuthField from './AuthField';
+import FieldError from './FieldError';
 import { useAuth } from '../../auth/useAuth';
 import { ApiError, registerUser } from '../../api/client';
 
@@ -158,11 +159,7 @@ export default function Register() {
           autoComplete="new-password"
         />
 
-        {error && (
-          <p className="acAbs acError" style={{ left: 597, top: 689, width: 434 }}>
-            {error}
-          </p>
-        )}
+        {error && <FieldError message={error} top={689} />}
 
         <button
           type="button"

@@ -4,6 +4,7 @@ import './account.css';
 import Stage from '../Quiz/Stage';
 import TopNav from './TopNav';
 import AuthField from './AuthField';
+import FieldError from './FieldError';
 
 import hero from '../../assets/account/hero-login.png';
 import icPass from '../../assets/account/ic-pass.png';
@@ -133,11 +134,7 @@ export default function ResetPassword() {
           autoComplete="new-password"
         />
 
-        {error && (
-          <p className="acAbs acError" style={{ left: 597, top: 597, width: 434 }}>
-            {error}
-          </p>
-        )}
+        {error && <FieldError message={error} top={595} />}
 
         <button
           type="button"
