@@ -13,13 +13,13 @@ import { avatarSrc } from './avatars';
 // beside it. «Тип кожи» uses the little sun. Rows are always shown — before the
 // questionnaire the labels appear without values.
 const ROWS = [
-  { y: 553, label: 'Возраст', icon: icAge },
-  { y: 610, label: 'Тип кожи', icon: sun },
-  { y: 677, label: 'Проблемы', icon: icProblems },
-  { y: 744, label: 'Аллергии', icon: icAllergy },
-  { y: 813, label: 'Бюджет', icon: icBudget },
-  { y: 876, label: 'Предпочтения', icon: icPref },
-  { y: 943, label: 'Важные условия', icon: icConditions },
+  { y: 553, label: 'Возраст', icon: icAge, size: 44 },
+  { y: 610, label: 'Тип кожи', icon: sun, size: 50 },
+  { y: 677, label: 'Проблемы', icon: icProblems, size: 44 },
+  { y: 744, label: 'Аллергии', icon: icAllergy, size: 46 },
+  { y: 813, label: 'Бюджет', icon: icBudget, size: 50 },
+  { y: 876, label: 'Предпочтения', icon: icPref, size: 52 },
+  { y: 943, label: 'Важные условия', icon: icConditions, size: 46 },
 ];
 
 // Shared left column: greeting, contact, the profile snapshot and the edit /
@@ -105,10 +105,10 @@ export default function ProfileCard({
               className="acAbs"
               aria-hidden="true"
               style={{
-                left: 96,
-                top: row.y - 1,
-                width: 34,
-                height: 34,
+                left: 138 - row.size,
+                top: row.y + 14 - row.size / 2,
+                width: row.size,
+                height: row.size,
                 backgroundImage: `url(${row.icon})`,
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',

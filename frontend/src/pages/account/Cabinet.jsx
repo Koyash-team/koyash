@@ -239,7 +239,7 @@ export default function Cabinet() {
             >
               Последний результат:
               <br />
-              {lastResult || 'Пока нет отметок'}
+              <span style={{ fontWeight: 700 }}>{lastResult || 'Пока нет отметок'}</span>
             </p>
             <div className="acCard" style={{ left: 743, top: 826, width: 225, height: 88 }} />
             <StatIcon src={trkIc3} x={755} y={840} w={59} h={60} />
@@ -248,7 +248,8 @@ export default function Cabinet() {
               style={{ left: 822, top: 846, width: 146, fontSize: 16, lineHeight: '22px' }}
             >
               Частота отметок:
-              <br />1 раз в 2 недели
+              <br />
+              <span style={{ fontWeight: 700 }}>1 раз в 2 недели</span>
             </p>
             <div className="acCard" style={{ left: 511, top: 925, width: 458, height: 88 }} />
             <StatIcon src={trkIc4} x={525} y={937} w={67} h={66} />
@@ -258,7 +259,7 @@ export default function Cabinet() {
             >
               Следующая отметка результата:
               <br />
-              {nextDate || '—'}
+              <span style={{ fontWeight: 700 }}>{nextDate || '—'}</span>
             </p>
             <button
               type="button"
@@ -332,7 +333,7 @@ export default function Cabinet() {
             >
               Обновлено
               <br />
-              {formatDate(care.updated_at)}
+              <span style={{ fontWeight: 400 }}>{formatDate(care.updated_at)}</span>
             </p>
             <div className="acCard" style={{ left: 1130, top: 843, width: 382, height: 72 }} />
             <StatIcon src={bagIcCount} x={1171} y={851} w={24} h={55} />
@@ -349,7 +350,7 @@ export default function Cabinet() {
             >
               Средств в уходе:
               <br />
-              {activeCount}
+              <span style={{ fontWeight: 400 }}>{activeCount}</span>
             </p>
             <div className="acCard" style={{ left: 1130, top: 935, width: 382, height: 72 }} />
             <StatIcon src={bagIcTotal} x={1150} y={946} w={65} h={51} />
@@ -366,7 +367,7 @@ export default function Cabinet() {
             >
               Средств заменено:
               <br />
-              {replacedCount}
+              <span style={{ fontWeight: 400 }}>{replacedCount}</span>
             </p>
             <button
               type="button"
