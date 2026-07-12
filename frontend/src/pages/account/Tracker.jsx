@@ -1,22 +1,23 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './account.css';
 import Stage from '../Quiz/Stage';
 import TopNav from './TopNav';
 import { useAuth } from '../../auth/useAuth';
 import { fetchTracker, submitCheckpoint } from '../../api/client';
-import heartImg from '../../assets/account/trk-heart.svg';
-import flagImg from '../../assets/account/trk-flag.svg';
-import lockImg from '../../assets/account/trk-lock.svg';
-import arrowImg from '../../assets/account/trk-arrow.svg';
-import faceNeutral from '../../assets/account/trk-face-neutral.svg';
-import faceSad from '../../assets/account/trk-face-sad.svg';
-import n1 from '../../assets/account/trk-n1.svg';
-import n2 from '../../assets/account/trk-n2.svg';
-import n3 from '../../assets/account/trk-n3.svg';
-import n4 from '../../assets/account/trk-n4.svg';
+import heartImg from '../../assets/account/trk-heart.png';
+import flagImg from '../../assets/account/trk-flag.png';
+import lockImg from '../../assets/account/trk-lock.png';
+import arrowImg from '../../assets/account/trk-arrow.png';
+import checkImg from '../../assets/account/trk-check.png';
+import faceNeutral from '../../assets/account/trk-face-neutral.png';
+import faceSad from '../../assets/account/trk-face-sad.png';
+import n1 from '../../assets/account/trk-n1.png';
+import n2 from '../../assets/account/trk-n2.png';
+import n3 from '../../assets/account/trk-n3.png';
+import n4 from '../../assets/account/trk-n4.png';
 
-const NUM = [null, n1, n2, n3, n4]; // Figma number circles, 1..4 (CSS fallback beyond)
+const NUM = [null, n1, n2, n3, n4]; // Figma number circles 1..4 (CSS ring fallback beyond)
 const OVERALL_IMG = { better: heartImg, same: faceNeutral, worse: faceSad };
 
 const OVERALL = [
@@ -25,29 +26,22 @@ const OVERALL = [
   { value: 'worse', label: 'Стало хуже', left: 1414, width: 144 },
 ];
 
+const STEP_PITCH = 129; // card height 107 + 22 gap, matching Figma
+
 function formatDate(iso) {
   if (!iso) return '';
   return new Date(iso).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 const weekLabel = (cp) => `Неделя ${cp.index * 2}`;
 
-// green check — kept as SVG (green marks a filled checkpoint; no raster asset for it)
-const IChk = ({ size = 26 }) => (
-  <svg width={size} height={size} viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#CDFFBB" />
-    <path d="M7 13.5l4 4 8-8.5" fill="none" stroke="#087508" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
-);
+// status marker: filled → green check ("отмечено"), available → arrow ("текущий"),
+// locked → lock.
+const STAT_IMG = { done: checkImg, active: arrowImg, locked: lockImg };
+
 const IChevron = ({ dir }) => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e9a563" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
     <path d={dir === 'left' ? 'M15 6l-6 6 6 6' : 'M9 6l6 6-6 6'} /></svg>
 );
-
-// status marker: filled → green check ("отмечено"), available → arrow ("текущий"),
-// locked → lock.
-function StatIcon({ status }) {
-  if (status === 'done') return <IChk />;
-  if (status === 'active') return <img className="trkStatImg" src={arrowImg} alt="" />;
-  return <img className="trkStatImg" src={lockImg} alt="" />;
-}
 
 // Трекер результата (Figma 2673:1842). Left checkpoint slider drives the centre
 // scoring panel; only the active checkpoint is editable, filled ones are
@@ -117,7 +111,9 @@ export default function Tracker() {
         return last;
       })()
     : 0;
-  const fillFrac = items.length > 1 ? activeOrdinal / (items.length - 1) : 0;
+  const innerH = items.length ? (items.length - 1) * STEP_PITCH + 107 : 0;
+  const dashH = items.length ? (items.length - 1) * STEP_PITCH : 0;
+  const fillPx = Math.min(activeOrdinal * STEP_PITCH + 53, innerH);
 
   const rightNav = (
     <button type="button" className="acBtn" style={{ left: 1304, top: 23, width: 281, height: 51, fontSize: 20 }}
@@ -125,7 +121,7 @@ export default function Tracker() {
   );
 
   const rowPitch = 60;
-  const innerH = 44 + criteria.length * rowPitch;
+  const innerBoxH = 44 + criteria.length * rowPitch;
 
   return (
     <Stage w={1633} mode="page">
@@ -150,34 +146,38 @@ export default function Tracker() {
 
         {tracker && (
           <>
-            {/* ── left checkpoint slider ─────────────────────────────────── */}
+            {/* ── left checkpoint slider (Figma-accurate) ────────────────── */}
             <div className="trkTl" style={{ left: 44, top: 390, width: 322, height: 494 }}>
-              <div className="trkTlInner">
-                <div className="trkTlTrack" />
-                <div className="trkTlFill" style={{ height: `calc((100% - 56px) * ${fillFrac})` }} />
-                {items.map((it) => {
-                  if (it.start) {
-                    return (
-                      <div className="trkTlItem readonly" key="start">
-                        <img className="trkDotImg" src={flagImg} alt="" />
-                        <div className="trkTlCard">
-                          <p className="trkTlName">Старт</p>
-                          <p className="trkTlDate">Начало ухода · {formatDate(tracker.start_date)}</p>
-                          <span className="trkTlStat"><IChk /></span>
-                        </div>
-                      </div>
-                    );
-                  }
-                  const cls = `trkTlItem${it.index === selected ? ' sel' : ''}${it.status === 'locked' ? ' locked' : ''}`;
+              <div className="trkTlInner" style={{ height: innerH }}>
+                <div className="trkRail" style={{ height: innerH }} />
+                <div className="trkRailFill" style={{ height: fillPx }} />
+                <div className="trkDash" style={{ height: dashH }} />
+                {items.map((it, i) => {
+                  const top = i * STEP_PITCH;
+                  const status = it.start ? 'done' : it.status;
+                  const dot = it.start
+                    ? <img className="trkDotA" src={flagImg} style={{ top: top + 26 }} alt="" />
+                    : NUM[it.index]
+                      ? <img className="trkDotA" src={NUM[it.index]} style={{ top: top + 26 }} alt="" />
+                      : <span className="trkDotA trkDotNum" style={{ top: top + 26 }}>{it.index}</span>;
+                  const cls = `trkStep${it.index === selected ? ' sel' : ''}${it.status === 'locked' ? ' locked' : ''}`;
                   return (
-                    <button type="button" className={cls} key={it.index} onClick={() => setSelected(it.index)}>
-                      {NUM[it.index] ? <img className="trkDotImg" src={NUM[it.index]} alt="" /> : <span className="trkTlDot">{it.index}</span>}
-                      <span className="trkTlCard">
-                        <span className="trkTlName" style={{ display: 'block' }}>{weekLabel(it)}</span>
-                        <span className="trkTlDate" style={{ display: 'block' }}>{formatDate(it.due_date)}</span>
-                        <span className="trkTlStat"><StatIcon status={it.status} /></span>
-                      </span>
-                    </button>
+                    <Fragment key={it.start ? 'start' : it.index}>
+                      {dot}
+                      <button type="button" className={cls} style={{ top }} disabled={it.start}
+                        onClick={() => !it.start && setSelected(it.index)}>
+                        <span className="trkStepName">{it.start ? 'Старт' : weekLabel(it)}</span>
+                        {it.start ? (
+                          <>
+                            <span className="trkStepLine" style={{ top: 48 }}>Начало ухода</span>
+                            <span className="trkStepLine" style={{ top: 70 }}>{formatDate(tracker.start_date)}</span>
+                          </>
+                        ) : (
+                          <span className="trkStepLine" style={{ top: 48 }}>{formatDate(it.due_date)}</span>
+                        )}
+                        <img className="trkStepStat" src={STAT_IMG[status]} alt="" />
+                      </button>
+                    </Fragment>
                   );
                 })}
               </div>
@@ -200,7 +200,7 @@ export default function Tracker() {
                   {formatDate(selectedCp.due_date)}
                 </p>
 
-                <div className="acAbs" style={{ left: 428, top: 519, width: 580, height: innerH, background: '#fff', border: '1px solid #f0e4d4', borderRadius: 17 }} />
+                <div className="acAbs" style={{ left: 428, top: 519, width: 580, height: innerBoxH, background: '#fff', border: '1px solid #f0e4d4', borderRadius: 17 }} />
                 <p className="trkScaleLbl" style={{ left: 758, top: 521, width: 120 }}>нет / минимально выражено</p>
                 <p className="trkScaleLbl" style={{ left: 915, top: 521, width: 80 }}>сильно выражено</p>
 
@@ -278,7 +278,7 @@ export default function Tracker() {
                 <div key={c.index} className={`trkHistCard${locked ? ' locked' : ''}`}
                   style={{ left: 117 + k * 477, top: 1010, width: 456, height: 120 }}>
                   <div className="trkHistTop">
-                    <span style={{ marginTop: 2 }}><StatIcon status={c.status} /></span>
+                    <img className="trkStatImg" style={{ marginTop: 2 }} src={STAT_IMG[c.status]} alt="" />
                     <div>
                       <p className="trkHistName">{weekLabel(c)}</p>
                       <p className="trkHistDate">{formatDate(c.due_date)}</p>

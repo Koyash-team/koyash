@@ -370,31 +370,29 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 .trkTl::-webkit-scrollbar { width: 6px; }
 .trkTl::-webkit-scrollbar-thumb { background: #ecd9c4; border-radius: 3px; }
 .trkTlInner { position: relative; }
-.trkTlTrack { position: absolute; left: 26px; top: 28px; bottom: 28px; width: 6px; border-radius: 3px; background: #f0e0cf; }
-.trkTlFill { position: absolute; left: 26px; top: 28px; width: 6px; border-radius: 3px; background: #e9a563; }
-.trkTlItem {
-  position: relative; z-index: 1; display: flex; align-items: center; gap: 14px;
-  margin: 0 0 20px; width: 100%; padding: 0; text-align: left;
-  background: none; border: none; font: inherit; color: inherit; cursor: pointer;
+/* thick rounded progress rail (the "ползунок"), sits left of the number circles */
+.trkRail { position: absolute; left: 14px; top: 0; width: 8px; border-radius: 4px; background: #f0e0cf; z-index: 1; }
+.trkRailFill { position: absolute; left: 14px; top: 0; width: 8px; border-radius: 4px; background: #e9a563; z-index: 2; }
+/* dashed connector threaded through the dot centres */
+.trkDash { position: absolute; left: 55px; top: 53px; width: 0; border-left: 2px dashed #edcfa8; z-index: 1; }
+/* dot = number circle / flag, straddling the left edge of the card */
+.trkDotA { position: absolute; left: 28px; width: 56px; height: 56px; object-fit: contain; z-index: 4; }
+.trkDotNum {
+  display: grid; place-items: center; border-radius: 50%; border: 2px solid #e9a563;
+  background: #fffdfa; box-sizing: border-box;
+  font-family: 'Playfair Display', serif; font-weight: 700; font-size: 24px; color: #e9a563;
 }
-.trkTlItem:last-child { margin-bottom: 0; }
-.trkTlItem.readonly { cursor: default; }
-.trkTlDot {
-  flex: 0 0 auto; width: 56px; height: 56px; border-radius: 50%; background: #fffdfa;
-  border: 2px solid #e9a563; display: grid; place-items: center;
-  font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; color: #e9a563;
+.trkStep {
+  position: absolute; left: 57px; width: 259px; height: 107px; box-sizing: border-box;
+  background: #fffdfa; border: 1px solid #f0e4d4; border-radius: 17px; padding: 0;
+  text-align: left; font: inherit; color: inherit; cursor: pointer; z-index: 3;
 }
-.trkTlItem.locked .trkTlDot { border-color: #d9cec2; color: #b3a494; }
-.trkTlCard {
-  flex: 1 1 auto; min-width: 0; position: relative; background: #fffdfa;
-  border: 1px solid #f0e4d4; border-radius: 17px; padding: 12px 46px 12px 18px;
-}
-.trkTlItem.sel .trkTlCard { border-color: #e9a563; box-shadow: 0 0 0 2px #ffe9cf; }
-.trkTlItem.locked .trkTlCard { opacity: 0.7; }
-.trkTlName { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; margin: 0; }
-.trkTlDate { font-family: 'Manrope', sans-serif; font-size: 15px; color: #8a6a52; margin: 3px 0 0; }
-.trkTlStat { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; }
-.trkDotImg { flex: 0 0 auto; width: 56px; height: 56px; object-fit: contain; }
+.trkStep.sel { border-color: #e9a563; box-shadow: 0 0 0 2px #ffe9cf; }
+.trkStep.locked { opacity: 0.7; }
+.trkStep:disabled { cursor: default; }
+.trkStepName { position: absolute; left: 53px; top: 20px; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: #634938; }
+.trkStepLine { position: absolute; left: 53px; font-family: 'Manrope', sans-serif; font-size: 15px; color: #8a6a52; }
+.trkStepStat { position: absolute; left: 204px; top: 38px; width: 30px; height: 30px; object-fit: contain; }
 .trkStatImg { width: 26px; height: 26px; object-fit: contain; display: block; }
 .trkNumImg { position: absolute; width: 34px; height: 34px; object-fit: contain; }
 .trkPill img { width: 24px; height: 24px; object-fit: contain; flex: 0 0 auto; }
