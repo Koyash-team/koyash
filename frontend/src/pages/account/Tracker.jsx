@@ -17,8 +17,10 @@ import n1 from '../../assets/account/trk-n1.png';
 import n2 from '../../assets/account/trk-n2.png';
 import n3 from '../../assets/account/trk-n3.png';
 import n4 from '../../assets/account/trk-n4.png';
+import n5 from '../../assets/account/trk-n5.png';
+import n6 from '../../assets/account/trk-n6.png';
 
-const NUM = [null, n1, n2, n3, n4]; // Figma number circles 1..4 (CSS ring fallback beyond)
+const NUM = [null, n1, n2, n3, n4, n5, n6]; // Figma number circles 1..6 (CSS ring fallback beyond)
 const OVERALL_IMG = { better: heartImg, same: faceNeutral, worse: faceSad };
 
 const OVERALL = [
