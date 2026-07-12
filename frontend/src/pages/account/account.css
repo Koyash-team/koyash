@@ -365,16 +365,16 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 
 .trkPanel { position: absolute; box-sizing: border-box; background: #fffdfa; border: 1px solid #e9a563; border-radius: 17px; }
 
-/* left timeline — scrolls when there are more checkpoints than fit */
-.trkTl { position: absolute; overflow-y: auto; overflow-x: hidden; padding-right: 6px; }
-.trkTl::-webkit-scrollbar { width: 6px; }
-.trkTl::-webkit-scrollbar-thumb { background: #ecd9c4; border-radius: 3px; }
+/* left timeline — a real scrollbar rail on the left, scrolling cards on the right */
+.trkTl { position: absolute; overflow: hidden; }
+.trkBar { position: absolute; left: 14px; top: 0; width: 8px; height: 100%; border-radius: 4px; background: #f0e0cf; z-index: 5; }
+.trkThumb { position: absolute; left: 0; width: 8px; border-radius: 4px; background: #e9a563; cursor: grab; }
+.trkThumb:active { cursor: grabbing; }
+.trkScroll { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+.trkScroll::-webkit-scrollbar { display: none; }
 .trkTlInner { position: relative; }
-/* thick rounded progress rail (the "ползунок"), sits left of the number circles */
-.trkRail { position: absolute; left: 14px; top: 0; width: 8px; border-radius: 4px; background: #f0e0cf; z-index: 1; }
-.trkRailFill { position: absolute; left: 14px; top: 0; width: 8px; border-radius: 4px; background: #e9a563; z-index: 2; }
-/* dashed connector threaded through the dot centres */
-.trkDash { position: absolute; left: 55px; top: 53px; width: 0; border-left: 2px dashed #edcfa8; z-index: 1; }
+/* dashed connector, drawn only in the gaps so the number circles stay on top */
+.trkDashSeg { position: absolute; left: 55px; width: 0; border-left: 2px dashed #edcfa8; z-index: 1; }
 /* dot = number circle / flag, straddling the left edge of the card */
 .trkDotA { position: absolute; left: 28px; width: 56px; height: 56px; object-fit: contain; z-index: 4; }
 .trkDotNum {
@@ -395,7 +395,7 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 .trkStepStat { position: absolute; left: 204px; top: 38px; width: 30px; height: 30px; object-fit: contain; }
 .trkStatImg { width: 26px; height: 26px; object-fit: contain; display: block; }
 .trkNumImg { position: absolute; width: 34px; height: 34px; object-fit: contain; }
-.trkPill img { width: 24px; height: 24px; object-fit: contain; flex: 0 0 auto; }
+.trkPill img { width: 20px; height: 20px; object-fit: contain; flex: 0 0 auto; }
 
 /* center panel — criterion rows */
 .trkNum {
@@ -417,8 +417,8 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 /* right panel — overall rating */
 .trkPill {
   position: absolute; height: 42px; border-radius: 10px; background: #fff; border: 1px solid #eddcc7;
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box; padding: 0 12px;
-  font-family: 'Manrope', sans-serif; font-size: 16px; color: #634938; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-sizing: border-box; padding: 0 10px;
+  font-family: 'Manrope', sans-serif; font-size: 15px; white-space: nowrap; color: #634938; cursor: pointer;
 }
 .trkPill:hover:not(.on):not(:disabled) { background: #fff7ee; }
 .trkPill.on { background: #ffe0c1; border-color: #ffd3a6; }

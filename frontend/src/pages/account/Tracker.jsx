@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './account.css';
 import Stage from '../Quiz/Stage';
@@ -6,6 +6,7 @@ import TopNav from './TopNav';
 import { useAuth } from '../../auth/useAuth';
 import { fetchTracker, submitCheckpoint } from '../../api/client';
 import heartImg from '../../assets/account/trk-heart.png';
+import titleHeart from '../../assets/account/trk-heart-title.png';
 import flagImg from '../../assets/account/trk-flag.png';
 import lockImg from '../../assets/account/trk-lock.png';
 import arrowImg from '../../assets/account/trk-arrow.png';
@@ -21,9 +22,9 @@ const NUM = [null, n1, n2, n3, n4]; // Figma number circles 1..4 (CSS ring fallb
 const OVERALL_IMG = { better: heartImg, same: faceNeutral, worse: faceSad };
 
 const OVERALL = [
-  { value: 'better', label: 'Стало лучше', left: 1101, width: 144 },
-  { value: 'same', label: 'Без изменений', left: 1252, width: 155 },
-  { value: 'worse', label: 'Стало хуже', left: 1414, width: 144 },
+  { value: 'better', label: 'Стало лучше', left: 1101, width: 147 },
+  { value: 'same', label: 'Без изменений', left: 1256, width: 147 },
+  { value: 'worse', label: 'Стало хуже', left: 1411, width: 147 },
 ];
 
 const STEP_PITCH = 129; // card height 107 + 22 gap, matching Figma
@@ -102,18 +103,28 @@ export default function Tracker() {
   const canSave = editable && !busy && overall && criteria.every((c) => scores[c]);
 
   const items = tracker ? [{ start: true }, ...checkpoints] : [];
-  const activeOrdinal = tracker
-    ? (() => {
-        const i = items.findIndex((it) => !it.start && it.index === activeCp?.index);
-        if (i >= 0) return i;
-        let last = 0;
-        items.forEach((it, k) => { if (it.start || it.status === 'done') last = k; });
-        return last;
-      })()
-    : 0;
   const innerH = items.length ? (items.length - 1) * STEP_PITCH + 107 : 0;
-  const dashH = items.length ? (items.length - 1) * STEP_PITCH : 0;
-  const fillPx = Math.min(activeOrdinal * STEP_PITCH + 53, innerH);
+
+  // custom scrollbar on the left rail (the native one is hidden)
+  const scrollRef = useRef(null);
+  const [scrollTop, setScrollTop] = useState(0);
+  const VIEW = 494;
+  const scrollable = innerH > VIEW;
+  const thumbH = scrollable ? Math.max(56, (VIEW / innerH) * VIEW) : VIEW;
+  const maxScroll = Math.max(1, innerH - VIEW);
+  const thumbTop = scrollable ? (scrollTop / maxScroll) * (VIEW - thumbH) : 0;
+  const onThumbDown = (e) => {
+    e.preventDefault();
+    const el = scrollRef.current;
+    if (!el) return;
+    const y0 = e.clientY;
+    const s0 = el.scrollTop;
+    const denom = VIEW - thumbH || 1;
+    const move = (ev) => { el.scrollTop = s0 + (ev.clientY - y0) * (maxScroll / denom); };
+    const up = () => { window.removeEventListener('mousemove', move); window.removeEventListener('mouseup', up); };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
 
   const rightNav = (
     <button type="button" className="acBtn" style={{ left: 1304, top: 23, width: 281, height: 51, fontSize: 20 }}
@@ -130,7 +141,7 @@ export default function Tracker() {
         <p className="acAbs acTitle" style={{ left: 0, top: 154, width: 1633, fontSize: 48, lineHeight: '64px' }}>
           Трекер результата
         </p>
-        <img className="acAbs acHeart" src={heartImg} alt="" style={{ left: 1040, top: 158, width: 58, height: 58 }} />
+        <img className="acAbs acHeart" src={titleHeart} alt="" style={{ left: 1040, top: 158, width: 58, height: 58 }} />
 
         <div className="trkBanner" style={{ left: 50, top: 246, width: 1533, height: 82 }}>
           <img src={heartImg} alt="" />
@@ -148,38 +159,43 @@ export default function Tracker() {
           <>
             {/* ── left checkpoint slider (Figma-accurate) ────────────────── */}
             <div className="trkTl" style={{ left: 44, top: 390, width: 322, height: 494 }}>
-              <div className="trkTlInner" style={{ height: innerH }}>
-                <div className="trkRail" style={{ height: innerH }} />
-                <div className="trkRailFill" style={{ height: fillPx }} />
-                <div className="trkDash" style={{ height: dashH }} />
-                {items.map((it, i) => {
-                  const top = i * STEP_PITCH;
-                  const status = it.start ? 'done' : it.status;
-                  const dot = it.start
-                    ? <img className="trkDotA" src={flagImg} style={{ top: top + 26 }} alt="" />
-                    : NUM[it.index]
-                      ? <img className="trkDotA" src={NUM[it.index]} style={{ top: top + 26 }} alt="" />
-                      : <span className="trkDotA trkDotNum" style={{ top: top + 26 }}>{it.index}</span>;
-                  const cls = `trkStep${it.index === selected ? ' sel' : ''}${it.status === 'locked' ? ' locked' : ''}`;
-                  return (
-                    <Fragment key={it.start ? 'start' : it.index}>
-                      {dot}
-                      <button type="button" className={cls} style={{ top }} disabled={it.start}
-                        onClick={() => !it.start && setSelected(it.index)}>
-                        <span className="trkStepName">{it.start ? 'Старт' : weekLabel(it)}</span>
-                        {it.start ? (
-                          <>
-                            <span className="trkStepLine" style={{ top: 48 }}>Начало ухода</span>
-                            <span className="trkStepLine" style={{ top: 70 }}>{formatDate(tracker.start_date)}</span>
-                          </>
-                        ) : (
-                          <span className="trkStepLine" style={{ top: 48 }}>{formatDate(it.due_date)}</span>
-                        )}
-                        <img className="trkStepStat" src={STAT_IMG[status]} alt="" />
-                      </button>
-                    </Fragment>
-                  );
-                })}
+              <div className="trkBar">
+                <div className="trkThumb" style={{ height: thumbH, top: thumbTop }} onMouseDown={onThumbDown} />
+              </div>
+              <div className="trkScroll" ref={scrollRef} onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}>
+                <div className="trkTlInner" style={{ height: innerH }}>
+                  {items.slice(0, -1).map((_, i) => (
+                    <div key={`dash${i}`} className="trkDashSeg" style={{ top: i * STEP_PITCH + 82, height: 73 }} />
+                  ))}
+                  {items.map((it, i) => {
+                    const top = i * STEP_PITCH;
+                    const status = it.start ? 'done' : it.status;
+                    const dot = it.start
+                      ? <img className="trkDotA" src={flagImg} style={{ top: top + 26 }} alt="" />
+                      : NUM[it.index]
+                        ? <img className="trkDotA" src={NUM[it.index]} style={{ top: top + 26 }} alt="" />
+                        : <span className="trkDotA trkDotNum" style={{ top: top + 26 }}>{it.index}</span>;
+                    const cls = `trkStep${it.index === selected ? ' sel' : ''}${it.status === 'locked' ? ' locked' : ''}`;
+                    return (
+                      <Fragment key={it.start ? 'start' : it.index}>
+                        {dot}
+                        <button type="button" className={cls} style={{ top }} disabled={it.start}
+                          onClick={() => !it.start && setSelected(it.index)}>
+                          <span className="trkStepName">{it.start ? 'Старт' : weekLabel(it)}</span>
+                          {it.start ? (
+                            <>
+                              <span className="trkStepLine" style={{ top: 48 }}>Начало ухода</span>
+                              <span className="trkStepLine" style={{ top: 70 }}>{formatDate(tracker.start_date)}</span>
+                            </>
+                          ) : (
+                            <span className="trkStepLine" style={{ top: 48 }}>{formatDate(it.due_date)}</span>
+                          )}
+                          <img className="trkStepStat" src={STAT_IMG[status]} alt="" />
+                        </button>
+                      </Fragment>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
@@ -266,9 +282,9 @@ export default function Tracker() {
               Отмечай результат каждые 2 недели, чтобы видеть стабильный прогресс
             </p>
 
-            <button type="button" className="trkArrow" style={{ left: 56, top: 1030 }}
+            <button type="button" className="trkArrow" style={{ left: 56, top: 1058 }}
               onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0}><IChevron dir="left" /></button>
-            <button type="button" className="trkArrow" style={{ left: 1533, top: 1030 }}
+            <button type="button" className="trkArrow" style={{ left: 1533, top: 1058 }}
               onClick={() => setPage((p) => ((p + 1) * 3 < checkpoints.length ? p + 1 : p))}
               disabled={(page + 1) * 3 >= checkpoints.length}><IChevron dir="right" /></button>
 
@@ -276,7 +292,7 @@ export default function Tracker() {
               const locked = c.status === 'locked';
               return (
                 <div key={c.index} className={`trkHistCard${locked ? ' locked' : ''}`}
-                  style={{ left: 117 + k * 477, top: 1010, width: 456, height: 120 }}>
+                  style={{ left: 117 + k * 477, top: 1002, width: 456, height: 152 }}>
                   <div className="trkHistTop">
                     <img className="trkStatImg" style={{ marginTop: 2 }} src={STAT_IMG[c.status]} alt="" />
                     <div>
