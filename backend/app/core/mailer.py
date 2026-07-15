@@ -1,12 +1,15 @@
-"""Transactional email over the customer's own mail domain (SMTP).
+"""Transactional email for the password reset (US-27).
 
-Only *sending* is needed, so the mailbox's POP3/IMAP side is not used here.
-Credentials live in the environment (``SMTP_*`` settings) and are never
-committed; see ``backend/.env.example``.
+Mail is sent over SMTP to the project's own mail domain. Only *sending* is used,
+so the mailbox's POP3/IMAP side is not configured here, and credentials live in
+the environment and are never committed.
 
-A mail failure must never break the request that triggered it — the password
-reset flow deliberately answers the same way whether or not mail went out, so
-the endpoint cannot be used to probe which addresses are registered.
+The message is handed to a background task by the caller (see the
+``/auth/forgot-password`` endpoint), so a slow or unreachable mail server never
+makes the user wait — and never makes a request for a *registered* address take
+measurably longer than one for an unknown address, which would leak who is
+registered. A mail failure must likewise never break the request: this module
+reports failure with a return value and never raises to the caller.
 """
 
 import asyncio
@@ -20,8 +23,14 @@ from app.core.config import settings
 logger = logging.getLogger(__name__)
 
 
-def _send_sync(message: EmailMessage) -> None:
+def _send_smtp(to: str, subject: str, body: str) -> None:
     """Blocking SMTP send. Runs in a worker thread (see ``send_email``)."""
+    message = EmailMessage()
+    message["From"] = settings.mail_from
+    message["To"] = to
+    message["Subject"] = subject
+    message.set_content(body)
+
     context = ssl.create_default_context()
     if settings.SMTP_SSL:
         # Implicit TLS: connect straight to the SSL/TLS port (usually 465).
@@ -46,23 +55,17 @@ def _send_sync(message: EmailMessage) -> None:
 async def send_email(to: str, subject: str, body: str) -> bool:
     """Send a plain-text email.
 
-    Returns True when the message was handed to the SMTP server. Returns False
+    Returns True when the message was accepted by the mail server. Returns False
     when mail is not configured or the send failed — callers must not surface
     either case to the user.
     """
     if not settings.mail_enabled:
-        logger.warning("SMTP is not configured; no mail sent to %s", to)
+        logger.warning("SMTP is not configured; nothing sent to %s", to)
         return False
-
-    message = EmailMessage()
-    message["From"] = settings.SMTP_FROM or settings.SMTP_USER
-    message["To"] = to
-    message["Subject"] = subject
-    message.set_content(body)
 
     try:
         # smtplib is blocking; keep the event loop free.
-        await asyncio.to_thread(_send_sync, message)
+        await asyncio.to_thread(_send_smtp, to, subject, body)
         return True
     except Exception:  # noqa: BLE001 - a mail failure must not break the request
         logger.exception("Failed to send mail to %s", to)

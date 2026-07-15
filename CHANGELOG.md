@@ -20,6 +20,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - The «Забыли пароль?» screens previously showed «Письмо отправлено!» and «Готово!»
   without contacting the backend at all — no email was ever sent and no password was
   ever changed. Both screens are now wired to the real endpoints.
+- «Отправить ссылку» no longer hangs while the mail is being sent: the email goes out
+  in the background, so the screen responds immediately. This also removes a timing
+  side channel — a request for a registered address used to take visibly longer than
+  one for an unknown address, which gave away which emails have accounts.
 
 ### Added
 
