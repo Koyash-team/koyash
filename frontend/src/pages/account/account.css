@@ -313,6 +313,10 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 .careBrand { font-size: 16px; margin: 4px 0 10px; color: #8a6a52; }
 .careDesc { font-size: 16px; line-height: 22px; margin: 0 0 8px; }
 .careWhy { font-size: 16px; line-height: 22px; margin: 0 0 12px; color: #7c6552; }
+.careWarn {
+  font-size: 15px; line-height: 21px; margin: 0 0 12px; padding: 10px 14px;
+  border-radius: 10px; background: #fff4e6; border: 1px solid #f0c98a; color: #8a5a1e;
+}
 .carePrice { font-size: 24px; font-weight: 600; margin: 8px 0 0; }
 .careShop { font-size: 16px; color: #d7863b; text-decoration: none; }
 .careShop:hover { text-decoration: underline; }

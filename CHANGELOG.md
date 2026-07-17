@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - «Мой кабинет» button on the results screen, linking straight into the personal
   account (matches the landing's cabinet button).
+- **Irritant warning (US-11).** For a user with sensitive skin (skin type
+  `sensitive` or the sensitivity concern), a recommended product that still
+  carries a common irritant — fragrance, drying alcohol, a retinoid, or a strong
+  acid — shows a ⚠️ patch-test heads-up on its card (results and «Текущий уход»).
+  It is deterministic (not produced by the LLM) and never removes the product;
+  declared allergens and special conditions remain hard-excluded as before.
 - **Password reset (US-27).** «Забыли пароль?» now works: the service emails a
   reset link, and the link opens a screen for setting a new password. The link is
   **single-use** and expires after 30 minutes, and requesting a reset for an

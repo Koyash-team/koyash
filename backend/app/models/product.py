@@ -28,6 +28,10 @@ class Justification(BaseModel):
     key_actives: list[str]  # first 2–3 names from main_actives_short, translated to RU
     why_for_you: list[str]  # concern matches + vegan/CF/allergen flags
     summary_ru: Optional[str] = None  # why_for_you joined into one ready-to-display RU sentence
+    # Deterministic heads-up (US-11): set only for sensitive-skin users when a
+    # recommended (suitable) product still carries a common irritant. Null
+    # otherwise. Not produced by the LLM (ADR-001) and does not affect selection.
+    irritant_warning: Optional[str] = None
 
 
 class ProductOut(BaseModel):
