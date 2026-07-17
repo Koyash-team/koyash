@@ -34,6 +34,11 @@ export default function ProductCard({ item, side, dimmed = false }) {
         <p className="careBrand">{p.brand}</p>
         {descLine(item) && <p className="careDesc">{descLine(item)}</p>}
         {whyLine(item) && <p className="careWhy">{whyLine(item)}</p>}
+        {item.justification?.irritant_warning && (
+          <p className="careWarn">
+            <span aria-hidden="true">⚠️</span> {item.justification.irritant_warning}
+          </p>
+        )}
         <p className="carePrice">{formatPrice(p.price_rub)}</p>
         {p.link && (
           <a className="careShop" href={p.link} target="_blank" rel="noreferrer">

@@ -54,18 +54,18 @@ Sprint-by-Sprint delivery plan. For story-level detail, current status, and acce
 
 - **Milestone:** [Sprint 5](https://github.com/Koyash-team/koyash/milestone/5)
 - **Dates:** 2026-07-13 – 2026-07-19 (Mon–Sun)
-- **Sprint Goal:** Respond to the Week 6 trial feedback and complete the transition — ship the LLM irritant warning (US-11, prompt approved by the customer), self-service password reset via the customer's mail domain (US-27), and the remaining frontend UX fixes; then deliver the final `MVP v3` release, confirm the transition with the customer, and produce the Week 7 evidence (public demo video, UAT, Sprint Review, Week 7 report).
+- **Sprint Goal:** Respond to the Week 6 trial feedback and complete the transition — ship the deterministic irritant warning for sensitive-skin users (US-11), self-service password reset via the customer's mail domain (US-27), and the remaining frontend UX fixes; then deliver the final `MVP v3` release, confirm the transition with the customer, and produce the Week 7 evidence (public demo video, UAT, Sprint Review, Week 7 report).
 - **Focus:** Week 6 trial follow-up and the final transition. Scope is fixed after the Week 6 review, with one external dependency: password reset needs the SMTP credentials for the customer's mail domain.
 - **Delivered increment:** `MVP v3` — the final course version.
 - **Planned items:**
-  - User stories: [US-11](https://github.com/Koyash-team/koyash/issues/15) (irritant warning — prompt change approved by the customer), [US-27](https://github.com/Koyash-team/koyash/issues/159) (password reset)
-  - Product: [PBI-505](https://github.com/Koyash-team/koyash/issues/184) (irritant warning in the LLM justification), [PBI-503](https://github.com/Koyash-team/koyash/issues/166) (password reset via the customer's mail domain), [PBI-506](https://github.com/Koyash-team/koyash/issues/185) (frontend UX fixes — navigation and missing actions)
+  - User stories: [US-11](https://github.com/Koyash-team/koyash/issues/15) (deterministic irritant warning for sensitive-skin users), [US-27](https://github.com/Koyash-team/koyash/issues/159) (password reset)
+  - Product: [PBI-505](https://github.com/Koyash-team/koyash/issues/184) (deterministic irritant warning for sensitive-skin users), [PBI-503](https://github.com/Koyash-team/koyash/issues/166) (password reset via the customer's mail domain), [PBI-506](https://github.com/Koyash-team/koyash/issues/185) (frontend UX fixes — navigation and missing actions)
   - Transition & delivery: [PBI-507](https://github.com/Koyash-team/koyash/issues/186) (final MVP v3 release), [PBI-508](https://github.com/Koyash-team/koyash/issues/187) (public sanitized demo video), [PBI-509](https://github.com/Koyash-team/koyash/issues/188) (final transition confirmation + handover status), [PBI-510](https://github.com/Koyash-team/koyash/issues/189) (Week 7 UAT), [PBI-511](https://github.com/Koyash-team/koyash/issues/190) (Week 7 report set)
   - **Dropped after the Week 6 review:** tracker email reminders ([PBI-504](https://github.com/Koyash-team/koyash/issues/167)) — the customer will handle reminders with her own Telegram bot, so they are out of the product's scope.
 
 ## Course outcome
 
-`MVP v3` (Sprint 5) is the final course version. It delivers the guest questionnaire → justified cosmetic bag together with the personal account (profile, one saved bag, «Подошло / Не подошло» feedback, product replacement, a 12-week result tracker, account management), password reset, and the LLM irritant warning — deployed, documented, and handed over with `docs/customer-handover.md`. The handover level and the customer-confirmation status reached by submission are recorded in that document and in `reports/week7/README.md`.
+`MVP v3` (Sprint 5) is the final course version. It delivers the guest questionnaire → justified cosmetic bag together with the personal account (profile, one saved bag, «Подошло / Не подошло» feedback, product replacement, a 12-week result tracker, account management), password reset, and a deterministic irritant warning for sensitive-skin users — deployed, documented, and handed over with `docs/customer-handover.md`. The handover level and the customer-confirmation status reached by submission are recorded in that document and in `reports/week7/README.md`.
 
 ## Backlog / later (not scheduled)
 

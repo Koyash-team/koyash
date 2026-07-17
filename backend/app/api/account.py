@@ -198,7 +198,9 @@ async def get_alternatives(
     concerns_set = set(request.concerns)
     has_allergens = bool(request.allergens)
     alternatives = [
-        make_bag_item(p, concerns_set, request.vegan, request.cruelty_free, has_allergens).product
+        make_bag_item(
+            p, concerns_set, request.vegan, request.cruelty_free, has_allergens, request.skin_type
+        ).product
         for p in products
     ]
     return AlternativesOut(
@@ -233,7 +235,8 @@ async def replace_item(
         )
 
     new_item = make_bag_item(
-        chosen, set(request.concerns), request.vegan, request.cruelty_free, bool(request.allergens)
+        chosen, set(request.concerns), request.vegan, request.cruelty_free,
+        bool(request.allergens), request.skin_type
     )
     new_entry = {**new_item.model_dump(), "status": "active", "feedback": None, "comment": None}
 

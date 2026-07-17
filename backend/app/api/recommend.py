@@ -114,6 +114,43 @@ def _concern_match(product: Product, concerns: set[str]) -> int:
     return len(set(product.concerns_addressed) & concerns)
 
 
+# Irritant warning (US-11). Declared allergens and special conditions already
+# hard-exclude irritating ingredients; this only covers the remaining gap — a
+# user with sensitive skin (or the sensitivity concern) who did not declare
+# those, and still gets a *suitable* product carrying a common irritant. This is
+# a deterministic heads-up (patch-test), not an exclusion and not an LLM output.
+# Tokens are matched case-insensitively as substrings against the product's key
+# actives and normalized allergen tokens (curated allergen tokens, not raw INCI,
+# so "alcohol" here means denatured/drying alcohol, not fatty cetyl/stearyl).
+IRRITANT_TOKENS: dict[str, set[str]] = {
+    "отдушка": {"fragrance", "parfum"},
+    "спирт": {"alcohol"},
+    "ретиноиды": {
+        "retinol", "retinal", "retinaldehyde", "retinyl", "retinoic", "retinoid",
+        "tretinoin", "adapalene",
+    },
+    "кислоты (AHA/BHA)": {
+        "aha", "bha", "glycolic", "salicylic", "lactic", "mandelic",
+    },
+}
+
+
+def _irritant_warning(product: Product, concerns: set[str], skin_type: Optional[str]) -> Optional[str]:
+    """A patch-test heads-up for sensitive-skin users on a suitable product that
+    carries a common irritant, or None when it does not apply (US-11)."""
+    if skin_type != "sensitive" and "sensitivity" not in concerns:
+        return None
+    haystack = " ".join(product.main_actives_short + product.allergens_norm).lower()
+    found = [label for label, tokens in IRRITANT_TOKENS.items()
+             if any(token in haystack for token in tokens)]
+    if not found:
+        return None
+    return (
+        "Содержит потенциально раздражающий компонент — " + ", ".join(found)
+        + ". Для чувствительной кожи рекомендуем сделать патч-тест."
+    )
+
+
 def _condition_excluded(product: Product, conditions: set[str]) -> bool:
     """True if the product carries an ingredient contraindicated for any declared
     condition. Matches contraindicated tokens (case-insensitive substring) against
@@ -150,6 +187,7 @@ def _build_justification(
     req_vegan: bool,
     req_cruelty_free: bool,
     req_has_allergens: bool,
+    skin_type: Optional[str] = None,
 ) -> Justification:
     step_name = STEP_ROLE_RU.get(p.routine_step, p.routine_step)
     if p.tier == "core" and p.order_index is not None:
@@ -186,6 +224,7 @@ def _build_justification(
         key_actives=key_actives,
         why_for_you=why,
         summary_ru=". ".join(why) + "." if why else None,
+        irritant_warning=_irritant_warning(p, concerns, skin_type),
     )
 
 
@@ -325,14 +364,14 @@ async def build_pool(db: Any, request: RecommendRequest) -> list[Product]:
 
 def make_bag_item(
     p: Product, concerns_set: set[str], req_vegan: bool,
-    req_cruelty_free: bool, req_has_allergens: bool,
+    req_cruelty_free: bool, req_has_allergens: bool, skin_type: Optional[str] = None,
 ) -> BagItem:
     """Build one bag item (product + concern match + rule-based justification)."""
     return BagItem(
         product=_to_out(p),
         concern_match=_concern_match(p, concerns_set),
         justification=_build_justification(
-            p, concerns_set, req_vegan, req_cruelty_free, req_has_allergens
+            p, concerns_set, req_vegan, req_cruelty_free, req_has_allergens, skin_type
         ),
     )
 
@@ -395,7 +434,8 @@ async def recommend(
     req_has_allergens = bool(request.allergens)
 
     bag: list[BagItem] = [
-        make_bag_item(p, concerns_set, request.vegan, request.cruelty_free, req_has_allergens)
+        make_bag_item(p, concerns_set, request.vegan, request.cruelty_free, req_has_allergens,
+                      request.skin_type)
         for p in basket
     ]
     bag.sort(key=lambda item: (item.product.order_index is None, item.product.order_index or 0))

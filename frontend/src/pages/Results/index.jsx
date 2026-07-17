@@ -112,6 +112,11 @@ function ProductCard({ product: p, justification: j }) {
         <p className="rCardBrand">{p.brand}</p>
         <p className="rCardCategory">{category(j)}</p>
         {j.summary_ru && <p className="rCardWhy">{j.summary_ru}</p>}
+        {j.irritant_warning && (
+          <p className="rCardWarn">
+            <span aria-hidden="true">⚠️</span> {j.irritant_warning}
+          </p>
+        )}
         <div className="rCardFooter">
           <span className="rCardPrice">{fmt(p.price_rub)} ₽</span>
           {href && <span className="rCardLink">Перейти в магазин →</span>}
