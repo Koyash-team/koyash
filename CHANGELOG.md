@@ -8,33 +8,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- **Password reset (US-27).** «Забыли пароль?» now works: the service emails a
-  reset link from the project's own mail domain, and the link opens a screen for
-  setting a new password. The link is **single-use** and expires after 30 minutes,
-  and requesting a reset for an unknown address responds exactly like a known one,
-  so the form cannot be used to discover who is registered. Changing the password
-  while signed in also invalidates any reset link that is still outstanding.
-
-### Fixed
-
-- The «Забыли пароль?» screens previously showed «Письмо отправлено!» and «Готово!»
-  without contacting the backend at all — no email was ever sent and no password was
-  ever changed. Both screens are now wired to the real endpoints.
-- «Отправить ссылку» no longer hangs while the mail is being sent: the email goes out
-  in the background, so the screen responds immediately. This also removes a timing
-  side channel — a request for a registered address used to take visibly longer than
-  one for an unknown address, which gave away which emails have accounts.
-
-### Added
-
 - «Мой кабинет» button on the results screen, linking straight into the personal
   account (matches the landing's cabinet button).
+- **Password reset (US-27).** «Забыли пароль?» now works: the service emails a
+  reset link, and the link opens a screen for setting a new password. The link is
+  **single-use** and expires after 30 minutes, and requesting a reset for an
+  unknown address responds exactly like a known one, so the form cannot be used to
+  discover who is registered. Changing the password while signed in also
+  invalidates any reset link that is still outstanding.
 
 ### Changed
 
 - The personal-cabinet profile card shows the questionnaire allergen categories
   («Силиконы», «Отдушки», …) under «Аллергии» instead of the expanded list of
   excluded ingredients.
+
+### Fixed
+
+- The password-reset email is delivered through the [Resend](https://resend.com)
+  HTTPS API instead of raw SMTP. Railway blocks outbound SMTP (ports 25/465/587)
+  on its Free/Hobby plans, so the previous SMTP sender could never actually deliver
+  from the deployed backend — see https://railway.com/deploy/resend-email-railway.
+  The `SMTP_*` environment variables are replaced by `RESEND_API_KEY` (with
+  `MAIL_FROM` as the verified sender address).
+- The «Забыли пароль?» screens previously showed «Письмо отправлено!» and «Готово!»
+  without contacting the backend at all — no email was ever sent and no password
+  was ever changed. Both screens are now wired to the real endpoints.
+- «Отправить ссылку» no longer hangs while the mail is being sent: the email goes
+  out in the background, so the screen responds immediately. This also removes a
+  timing side channel — a request for a registered address used to take visibly
+  longer than one for an unknown address, which gave away which emails have
+  accounts.
 
 ## [1.3.0] - 2026-07-12
 
