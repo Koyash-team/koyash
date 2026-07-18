@@ -10,7 +10,7 @@ import { useAuth } from '../../auth/useAuth';
 import { fetchCare, setItemFeedback } from '../../api/client';
 import { formatPrice } from './careFormat';
 
-const MAX_REPLACEMENTS = 1;
+const MAX_REPLACEMENTS = 2;
 
 // Моя косметичка (Figma 2673:1259) — the saved bag with per-product feedback
 // and a link into the replacement flow. Reads /care and writes feedback via

@@ -81,7 +81,8 @@ export default function CareCard({ item, replacementsLeft, busy, onFeedback, onR
                 Заменить на похожий продукт
               </button>
               <span className="careHint">
-                ✦&nbsp;Можно заменить: {replacementsLeft}&nbsp;раз
+                ✦&nbsp;Можно заменить: {replacementsLeft}&nbsp;
+                {replacementsLeft === 1 ? 'раз' : 'раза'}
               </span>
             </>
           ) : (
