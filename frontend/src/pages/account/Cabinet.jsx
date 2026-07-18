@@ -272,10 +272,10 @@ export default function Cabinet() {
               }}
             />
             <div className="acCard" style={{ left: 511, top: 826, width: 225, height: 88 }} />
-            <StatIcon src={trkIc2} x={528} y={840} w={61} h={63} />
+            <StatIcon src={trkIc2} x={524} y={841} w={52} h={54} />
             <p
               className="acAbs"
-              style={{ left: 598, top: 837, width: 138, fontSize: 16, lineHeight: '22px' }}
+              style={{ left: 589, top: 840, width: 149, fontSize: 15, lineHeight: '20px' }}
             >
               Последний результат:
               <br />
@@ -284,17 +284,17 @@ export default function Cabinet() {
               </span>
             </p>
             <div className="acCard" style={{ left: 743, top: 826, width: 225, height: 88 }} />
-            <StatIcon src={trkIc3} x={755} y={840} w={59} h={60} />
+            <StatIcon src={trkIc3} x={747} y={844} w={51} h={52} />
             <p
               className="acAbs"
-              style={{ left: 822, top: 846, width: 146, fontSize: 16, lineHeight: '22px' }}
+              style={{ left: 807, top: 847, width: 155, fontSize: 15, lineHeight: '20px' }}
             >
               Частота отметок:
               <br />
               <span style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>1 раз в 2 недели</span>
             </p>
             <div className="acCard" style={{ left: 511, top: 925, width: 458, height: 88 }} />
-            <StatIcon src={trkIc4} x={525} y={937} w={67} h={66} />
+            <StatIcon src={trkIc4} x={524} y={940} w={60} h={59} />
             <p
               className="acAbs"
               style={{ left: 624, top: 944, width: 330, fontSize: 16, lineHeight: '22px' }}
