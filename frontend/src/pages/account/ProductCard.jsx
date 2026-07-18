@@ -21,32 +21,36 @@ const STEP_IMG = {
 const bagFor = (p) => p.image_url || STEP_IMG[p.routine_step] || bagNotFound;
 
 // One product card body (image + details). The `side` slot holds the
-// screen-specific controls — feedback buttons in the bag, a select button in
-// the replacement screen. Shared by Care and Replace.
-export default function ProductCard({ item, side, dimmed = false }) {
+// screen-specific controls — feedback buttons in the bag; the `below` slot holds
+// a control rendered under the card (the replacement screen's «Выбрать»). Shared
+// by Care and Replace.
+export default function ProductCard({ item, side, below, dimmed = false }) {
   const p = item.product;
   return (
-    <div className={`careCard${dimmed ? ' isReplaced' : ''}`}>
-      <div className="careImg" style={{ backgroundImage: `url(${bagFor(p)})` }} />
-      <div className="careBody">
-        <p className="careStep">{stepLine(item)}</p>
-        <p className="careName">{p.name}</p>
-        <p className="careBrand">{p.brand}</p>
-        {descLine(item) && <p className="careDesc">{descLine(item)}</p>}
-        {whyLine(item) && <p className="careWhy">{whyLine(item)}</p>}
-        {item.justification?.irritant_warning && (
-          <p className="careWarn">
-            <span aria-hidden="true">⚠️</span> {item.justification.irritant_warning}
-          </p>
-        )}
-        <p className="carePrice">{formatPrice(p.price_rub)}</p>
-        {p.link && (
-          <a className="careShop" href={p.link} target="_blank" rel="noreferrer">
-            Перейти в магазин →
-          </a>
-        )}
+    <>
+      <div className={`careCard${dimmed ? ' isReplaced' : ''}${below ? ' hasBelow' : ''}`}>
+        <div className="careImg" style={{ backgroundImage: `url(${bagFor(p)})` }} />
+        <div className="careBody">
+          <p className="careStep">{stepLine(item)}</p>
+          <p className="careName">{p.name}</p>
+          <p className="careBrand">{p.brand}</p>
+          {descLine(item) && <p className="careDesc">{descLine(item)}</p>}
+          {whyLine(item) && <p className="careWhy">{whyLine(item)}</p>}
+          {item.justification?.irritant_warning && (
+            <p className="careWarn">
+              <span aria-hidden="true">⚠️</span> {item.justification.irritant_warning}
+            </p>
+          )}
+          <p className="carePrice">{formatPrice(p.price_rub)}</p>
+          {p.link && (
+            <a className="careShop" href={p.link} target="_blank" rel="noreferrer">
+              Перейти в магазин →
+            </a>
+          )}
+        </div>
+        {side && <div className="careSide">{side}</div>}
       </div>
-      {side && <div className="careSide">{side}</div>}
-    </div>
+      {below && <div className="careBelow">{below}</div>}
+    </>
   );
 }

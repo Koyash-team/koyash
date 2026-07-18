@@ -137,16 +137,17 @@ export function LandingPage() {
     <Stage w={1633} h={4149} mode="page">
       <div className="landingCanvas">
         <span id="top" className="lAbs" style={{ left: 0, top: 0, width: 1, height: 1 }} />
+        <span id="about" className="lAbs" style={{ left: 0, top: 700, width: 1, height: 1 }} />
         <span id="how" className="lAbs" style={{ left: 0, top: 2040, width: 1, height: 1 }} />
         <span id="trust" className="lAbs" style={{ left: 0, top: 2640, width: 1, height: 1 }} />
 
         {/* Header */}
-        <Img src={logo} x={165} y={-13} w={233} h={194} reveal={false} />
+        <Img src={logo} x={56} y={-13} w={233} h={194} reveal={false} />
         <button
           type="button"
           className="lAbs lNav"
           style={{ left: 492, top: 47 }}
-          onClick={scrollTo('top')}
+          onClick={scrollTo('about')}
         >
           О нас
         </button>
@@ -201,7 +202,7 @@ export function LandingPage() {
 
         {/* Hero */}
         <Img src={mascot} x={881} y={104} w={575} h={575} cls="lFloat" />
-        <Img src={heart} x={637} y={250} w={135} h={135} cls="lHeart" />
+        <Img src={heart} x={597} y={260} w={135} h={135} cls="lHeart" />
         <p className="lAbs reveal lHeroTitle" style={{ left: 191, top: 181, width: 510 }}>
           Косметика должна <span className="accent">служить тебе</span>,<br />а не ты — косметике
         </p>
@@ -374,7 +375,7 @@ export function LandingPage() {
         >
           {'Остались вопросы?\nСвяжитесь с нами'}
         </div>
-        <Img src={heart} x={699} y={3980} w={58} h={58} cls="lHeart" reveal={false} />
+        <Img src={heart} x={697} y={3978} w={78} h={78} cls="lHeart" reveal={false} />
         <T x={951} y={3924} w={220} cls="lCardTitleLg">
           Контакты:
         </T>

@@ -55,44 +55,44 @@ const STEPS = [
 ];
 const ARROW_Y = [346, 616, 888];
 
-export default function HowItWorks() {
+export default function HowItWorks({ onClose }) {
   const navigate = useNavigate();
   const [scale, setScale] = useState(1);
 
   useLayoutEffect(() => {
-    const recompute = () => setScale(Math.min(1, (Math.min(window.innerWidth, 700) - 28) / 600));
+    const recompute = () => setScale(Math.min(1, (Math.min(window.innerWidth, 648) - 48) / 600));
     recompute();
     window.addEventListener('resize', recompute);
     return () => window.removeEventListener('resize', recompute);
   }, []);
 
-  const close = () => navigate(-1);
+  // Slide-in drawer when opened over a page (onClose provided); falls back to a
+  // route navigation for the legacy /account/how entry.
+  const close = () => (onClose ? onClose() : navigate(-1));
 
   return (
-    <div
-      className="acModalOverlay"
-      style={{ position: 'fixed', overflowY: 'auto', alignItems: 'flex-start', padding: '24px 0' }}
-      onClick={close}
-    >
+    <div className="acDrawerOverlay" onClick={close}>
       <div
-        style={{ width: 600 * scale, height: 1350 * scale }}
+        className="acDrawer"
+        style={{ width: 600 * scale + 48 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div
-          style={{
-            position: 'relative',
-            width: 600,
-            height: 1350,
-            transformOrigin: 'top left',
-            transform: `scale(${scale})`,
-            background: '#ffffff',
-            borderRadius: 28,
-            boxShadow: '0 24px 60px rgba(99, 73, 56, 0.28)',
-            color: '#634938',
-            fontFamily: "'Manrope', sans-serif",
-            overflow: 'hidden',
-          }}
-        >
+        <div style={{ width: 600 * scale, height: 1350 * scale, margin: '24px auto' }}>
+          <div
+            style={{
+              position: 'relative',
+              width: 600,
+              height: 1350,
+              transformOrigin: 'top left',
+              transform: `scale(${scale})`,
+              background: '#ffffff',
+              borderRadius: 28,
+              boxShadow: '0 24px 60px rgba(99, 73, 56, 0.28)',
+              color: '#634938',
+              fontFamily: "'Manrope', sans-serif",
+              overflow: 'hidden',
+            }}
+          >
           <p
             style={{
               position: 'absolute',
@@ -193,6 +193,7 @@ export default function HowItWorks() {
           >
             Понятно
           </button>
+          </div>
         </div>
       </div>
     </div>

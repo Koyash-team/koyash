@@ -44,9 +44,10 @@ export default function CareCard({ item, replacementsLeft, busy, onFeedback, onR
 
       {commenting && feedback !== 'disliked' && (
         <>
+          <p className="careFbLabel">Что именно не так?</p>
           <textarea
             className="careComment"
-            placeholder="Что именно не так? Комментарий…"
+            placeholder="Комментарий"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
@@ -64,12 +65,11 @@ export default function CareCard({ item, replacementsLeft, busy, onFeedback, onR
 
       {feedback === 'disliked' && (
         <>
-          <p className="careThanks">Спасибо за отзыв!</p>
-          {item.comment && (
-            <p className="careWhy" style={{ margin: 0 }}>
-              {item.comment}
-            </p>
-          )}
+          {item.comment && <div className="careCommentBox">{item.comment}</div>}
+          <div className="careThanksRow">
+            <span className="careThanks">Спасибо за отзыв!</span>
+            <span className="careSent">Отправлен</span>
+          </div>
           {replacementsLeft > 0 ? (
             <>
               <button
@@ -80,7 +80,9 @@ export default function CareCard({ item, replacementsLeft, busy, onFeedback, onR
               >
                 Заменить на похожий продукт
               </button>
-              <span className="careHint">Можно заменить: {replacementsLeft}&nbsp;раза</span>
+              <span className="careHint">
+                ✦&nbsp;Можно заменить: {replacementsLeft}&nbsp;раз
+              </span>
             </>
           ) : (
             <span className="careHint">

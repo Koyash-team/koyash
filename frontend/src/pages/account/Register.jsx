@@ -66,7 +66,9 @@ export default function Register() {
     try {
       const token = await registerUser(payload);
       signIn(token);
-      navigate('/account/avatar', { state: { from: '/account' } });
+      // Land in the cabinet and open the avatar picker over it (dimmed),
+      // instead of a standalone empty picker screen.
+      navigate('/account', { state: { pickAvatar: true } });
     } catch (e) {
       setError(e instanceof ApiError ? e.message : 'Не удалось зарегистрироваться');
     } finally {
@@ -163,8 +165,16 @@ export default function Register() {
 
         <button
           type="button"
+          className="acBtn acBtnGhost"
+          style={{ left: 597, top: 698 + shift, width: 161, height: 41, fontSize: 16 }}
+          onClick={() => navigate(-1)}
+        >
+          Назад
+        </button>
+        <button
+          type="button"
           className="acBtn"
-          style={{ left: 684, top: 698 + shift, width: 265, height: 41, fontSize: 16 }}
+          style={{ left: 782, top: 698 + shift, width: 247, height: 41, fontSize: 16 }}
           onClick={handleSubmit}
           disabled={busy}
         >

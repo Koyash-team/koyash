@@ -4,12 +4,13 @@ import './account.css';
 import Stage from '../Quiz/Stage';
 import TopNav from './TopNav';
 import CareCard from './CareCard';
+import Replace from './Replace';
 import ConfirmDialog from './ConfirmDialog';
 import { useAuth } from '../../auth/useAuth';
 import { fetchCare, setItemFeedback } from '../../api/client';
 import { formatPrice } from './careFormat';
 
-const MAX_REPLACEMENTS = 2;
+const MAX_REPLACEMENTS = 1;
 
 // Моя косметичка (Figma 2673:1259) — the saved bag with per-product feedback
 // and a link into the replacement flow. Reads /care and writes feedback via
@@ -22,6 +23,15 @@ export default function Care() {
   const [loaded, setLoaded] = useState(false);
   const [busy, setBusy] = useState(false);
   const [askUpdate, setAskUpdate] = useState(false);
+  // Замена средства — shown as a modal over the dimmed bag.
+  const [replaceId, setReplaceId] = useState(null);
+
+  function handleReplaced() {
+    setReplaceId(null);
+    fetchCare()
+      .then(setCare)
+      .catch(() => {});
+  }
 
   useEffect(() => {
     if (ready && !isAuthenticated) navigate('/login', { replace: true });
@@ -65,6 +75,7 @@ export default function Care() {
   const leftFor = (item) => MAX_REPLACEMENTS - (replacements[item.product.routine_step] || 0);
 
   return (
+    <>
     <Stage w={1633} mode="page">
       <div className="acCanvas" style={{ width: 1633 }}>
         <div style={{ position: 'relative', height: 235 }}>
@@ -91,9 +102,11 @@ export default function Care() {
                   replacementsLeft={leftFor(item)}
                   busy={busy}
                   onFeedback={handleFeedback}
-                  onReplace={(it) => navigate(`/account/care/replace/${it.product.id}`)}
+                  onReplace={(it) => setReplaceId(it.product.id)}
                 />
               ))}
+              {/* divider separating suitable products from replaced ones */}
+              {replaced.length > 0 && <div className="careDivider" />}
               {replaced.map((item) => (
                 <CareCard
                   key={item.product.id}
@@ -151,5 +164,15 @@ export default function Care() {
         )}
       </div>
     </Stage>
+    {/* Replacement modal over the dimmed bag (outside <Stage> so its fixed
+        overlay isn't scaled by the stage transform). */}
+    {replaceId && (
+      <Replace
+        embedId={replaceId}
+        onClose={() => setReplaceId(null)}
+        onReplaced={handleReplaced}
+      />
+    )}
+    </>
   );
 }

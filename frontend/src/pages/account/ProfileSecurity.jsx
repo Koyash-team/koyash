@@ -4,6 +4,7 @@ import './account.css';
 import Stage from '../Quiz/Stage';
 import TopNav from './TopNav';
 import ProfileCard from './ProfileCard';
+import HowItWorks from './HowItWorks';
 import ConfirmDialog from './ConfirmDialog';
 import { useAuth } from '../../auth/useAuth';
 import {
@@ -41,6 +42,7 @@ export default function ProfileSecurity() {
   const [deletePw, setDeletePw] = useState('');
   const [deleteErr, setDeleteErr] = useState('');
   const [busy, setBusy] = useState(false);
+  const [showHowItWorks, setShowHowItWorks] = useState(false);
 
   useEffect(() => {
     if (ready && !isAuthenticated) navigate('/login', { replace: true });
@@ -121,6 +123,7 @@ export default function ProfileSecurity() {
   };
 
   return (
+    <>
     <Stage w={1633} h={1450} mode="screen">
       <div className="acCanvas" style={{ height: 1450 }}>
         <TopNav
@@ -161,7 +164,7 @@ export default function ProfileSecurity() {
           }
           onEdit={() => navigate('/account/security')}
           onLogout={logout}
-          onHowItWorks={() => navigate('/account/how')}
+          onHowItWorks={() => setShowHowItWorks(true)}
         />
 
         {/* ── Personal data card ── */}
@@ -272,7 +275,13 @@ export default function ProfileSecurity() {
         <button
           type="button"
           className="acAbs acLink"
-          style={{ left: 1065, top: 731, width: 481, textAlign: 'center' }}
+          style={{
+            left: 1065,
+            top: 731,
+            textAlign: 'left',
+            color: '#634938',
+            textDecoration: 'underline',
+          }}
           onClick={() => navigate('/forgot-password')}
         >
           Не помнишь текущий пароль?
@@ -338,5 +347,7 @@ export default function ProfileSecurity() {
         )}
       </div>
     </Stage>
+    {showHowItWorks && <HowItWorks onClose={() => setShowHowItWorks(false)} />}
+    </>
   );
 }

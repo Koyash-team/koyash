@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './account.css';
 import Stage from '../Quiz/Stage';
 import TopNav from './TopNav';
 import ProfileCard from './ProfileCard';
 import Footer from './Footer';
+import AvatarPicker from './AvatarPicker';
+import HowItWorks from './HowItWorks';
 import ConfirmDialog from './ConfirmDialog';
 import { useAuth } from '../../auth/useAuth';
 import { fetchProfile, fetchCare, fetchTracker } from '../../api/client';
@@ -22,6 +24,7 @@ import bagIllust from '../../assets/account/bag-illust.png';
 import bagIcDate from '../../assets/account/pf-age.png';
 import bagIcCount from '../../assets/account/bag-ic-date.png';
 import bagIcTotal from '../../assets/account/bag-ic-count.png';
+import introHeart from '../../assets/account/pf-pref.png';
 
 // Small stat glyph, sized to the Figma box (w×h).
 const StatIcon = ({ src, x, y, w = 34, h = 34 }) => (
@@ -97,12 +100,17 @@ function summarizeTracker(tracker) {
 // generated yet.
 export default function Cabinet() {
   const navigate = useNavigate();
-  const { user, isAuthenticated, ready } = useAuth();
+  const location = useLocation();
+  const { user, isAuthenticated, ready, signOut } = useAuth();
 
   const [profile, setProfile] = useState(null);
   const [care, setCare] = useState(null);
   const [trackerSummary, setTrackerSummary] = useState(null);
   const [askUpdate, setAskUpdate] = useState(false);
+  // Opened straight after registration (state.pickAvatar) or via the profile
+  // avatar button — shown as a modal over the dimmed cabinet.
+  const [showAvatar, setShowAvatar] = useState(!!location.state?.pickAvatar);
+  const [showHowItWorks, setShowHowItWorks] = useState(false);
 
   useEffect(() => {
     if (ready && !isAuthenticated) navigate('/login', { replace: true });
@@ -135,6 +143,7 @@ export default function Cabinet() {
   const replacedCount = items.filter((i) => i.status === 'replaced').length;
 
   return (
+    <>
     <Stage w={1633} h={1789} mode="screen">
       <div className="acCanvas" style={{ height: 1789 }}>
         <TopNav
@@ -170,11 +179,41 @@ export default function Cabinet() {
           values={profileValues(profile)}
           hasProfile={hasProfile}
           avatar={user?.avatar}
-          onAvatarClick={() => navigate('/account/avatar', { state: { from: '/account' } })}
+          onAvatarClick={() => setShowAvatar(true)}
           onEdit={() => navigate('/account/security')}
-          onLogout={() => navigate('/account/security')}
-          onHowItWorks={() => navigate('/account/how')}
+          onLogout={() => {
+            signOut();
+            navigate('/', { replace: true });
+          }}
+          onHowItWorks={() => setShowHowItWorks(true)}
         />
+
+        {/* ── Intro banner (Figma 2803:105 «Здесь собраны твой профиль…») ── */}
+        <div
+          className="acAbs"
+          style={{
+            left: 471,
+            top: 291,
+            width: 1102,
+            height: 82,
+            background: '#FDF3E9',
+            borderRadius: 20,
+          }}
+        />
+        <img
+          className="acAbs"
+          src={introHeart}
+          alt=""
+          aria-hidden="true"
+          style={{ left: 480, top: 298, width: 69, height: 69 }}
+        />
+        <p
+          className="acAbs acBody"
+          style={{ left: 560, top: 313, width: 1000, fontWeight: 400, fontSize: 16, lineHeight: '22px' }}
+        >
+          Здесь собраны твой профиль, текущий уход и прогресс кожи. Следи за результатами и обновляй
+          рекомендации, когда коже нужен новый подбор
+        </p>
 
         {/* ── Tracker card ── */}
         <div className="acCard" style={{ left: 477, top: 416, width: 540, height: 701 }} />
@@ -279,16 +318,16 @@ export default function Cabinet() {
               src={trkIllust}
               alt=""
               aria-hidden="true"
-              style={{ left: 552, top: 500, width: 390, height: 312 }}
+              style={{ left: 526, top: 505, width: 434, height: 357 }}
             />
             <p
               className="acAbs acTitle"
               style={{
                 left: 477,
-                top: 820,
+                top: 890,
                 width: 540,
-                fontSize: 22,
-                lineHeight: '30px',
+                fontSize: 28,
+                lineHeight: '37px',
                 whiteSpace: 'normal',
               }}
             >
@@ -296,7 +335,7 @@ export default function Cabinet() {
             </p>
             <p
               className="acAbs acBody"
-              style={{ left: 517, top: 890, width: 460, textAlign: 'center' }}
+              style={{ left: 517, top: 985, width: 460, textAlign: 'center' }}
             >
               Пройди подбор уходовой косметики, чтобы начать трекер результата
             </p>
@@ -386,10 +425,10 @@ export default function Cabinet() {
               className="acAbs acTitle"
               style={{
                 left: 1045,
-                top: 820,
+                top: 890,
                 width: 534,
-                fontSize: 22,
-                lineHeight: '30px',
+                fontSize: 28,
+                lineHeight: '37px',
                 whiteSpace: 'normal',
               }}
             >
@@ -400,11 +439,11 @@ export default function Cabinet() {
               src={bagIllust}
               alt=""
               aria-hidden="true"
-              style={{ left: 1075, top: 500, width: 470, height: 216 }}
+              style={{ left: 1057, top: 505, width: 501, height: 334 }}
             />
             <p
               className="acAbs acBody"
-              style={{ left: 1085, top: 890, width: 454, textAlign: 'center' }}
+              style={{ left: 1085, top: 985, width: 454, textAlign: 'center' }}
             >
               После подбора уходовой косметики здесь появятся твои средства
             </p>
@@ -437,27 +476,46 @@ export default function Cabinet() {
           aria-hidden="true"
           style={{ left: 1367, top: 1159, width: 186, height: 186 }}
         />
-        <p
-          className="acAbs acTitle"
-          style={{
-            left: 726,
-            top: 1170,
-            width: 456,
-            fontSize: 28,
-            lineHeight: '37px',
-            textAlign: 'left',
-          }}
-        >
-          {hasProfile ? 'Хочешь пересмотреть уход?' : 'Давай начнём твою историю!'}
-        </p>
-        <p
-          className="acAbs acBody"
-          style={{ left: 726, top: 1220, width: 481, textAlign: 'left', fontSize: 16 }}
-        >
-          {hasProfile
-            ? 'Мы обновим рекомендации под твои текущие потребности.'
-            : 'Пройди подбор уходовой косметики, чтобы получить персональные рекомендации.'}
-        </p>
+        {hasProfile ? (
+          <>
+            <p
+              className="acAbs acTitle"
+              style={{
+                left: 726,
+                top: 1170,
+                width: 456,
+                fontSize: 28,
+                lineHeight: '37px',
+                textAlign: 'left',
+              }}
+            >
+              Хочешь пересмотреть уход?
+            </p>
+            <p
+              className="acAbs acBody"
+              style={{ left: 726, top: 1220, width: 481, textAlign: 'left', fontSize: 16 }}
+            >
+              Мы обновим рекомендации под твои текущие потребности.
+            </p>
+          </>
+        ) : (
+          <p
+            className="acAbs"
+            style={{
+              left: 680,
+              top: 1186,
+              width: 680,
+              textAlign: 'center',
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 700,
+              fontSize: 30,
+              lineHeight: '40px',
+              color: '#634938',
+            }}
+          >
+            Давай начнём твою историю о мире уходовой косметики!
+          </p>
+        )}
         <button
           type="button"
           className="acBtn"
@@ -488,5 +546,10 @@ export default function Cabinet() {
         )}
       </div>
     </Stage>
+    {/* Avatar picker overlays the (dimmed) cabinet — rendered outside <Stage>
+        so its fixed-position overlay isn't affected by the stage transform. */}
+    {showAvatar && <AvatarPicker onClose={() => setShowAvatar(false)} />}
+    {showHowItWorks && <HowItWorks onClose={() => setShowHowItWorks(false)} />}
+    </>
   );
 }

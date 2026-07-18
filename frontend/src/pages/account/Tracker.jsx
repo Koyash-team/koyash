@@ -24,9 +24,9 @@ const NUM = [null, n1, n2, n3, n4, n5, n6]; // Figma number circles 1..6 (CSS ri
 const OVERALL_IMG = { better: heartImg, same: faceNeutral, worse: faceSad };
 
 const OVERALL = [
-  { value: 'better', label: 'Стало лучше', left: 1101, width: 147 },
-  { value: 'same', label: 'Без изменений', left: 1256, width: 147 },
-  { value: 'worse', label: 'Стало хуже', left: 1411, width: 147 },
+  { value: 'better', label: 'Стало лучше', left: 1097, width: 152 },
+  { value: 'same', label: 'Без изменений', left: 1255, width: 152 },
+  { value: 'worse', label: 'Стало хуже', left: 1413, width: 152 },
 ];
 
 const STEP_PITCH = 129; // card height 107 + 22 gap, matching Figma
@@ -164,7 +164,7 @@ export default function Tracker() {
     </button>
   );
 
-  const rowPitch = 60;
+  const rowPitch = 64;
   const innerBoxH = 44 + criteria.length * rowPitch;
 
   return (
@@ -181,7 +181,7 @@ export default function Tracker() {
           className="acAbs acHeart"
           src={titleHeart}
           alt=""
-          style={{ left: 1040, top: 158, width: 58, height: 58 }}
+          style={{ left: 1030, top: 150, width: 74, height: 74 }}
         />
 
         <div className="trkBanner" style={{ left: 50, top: 246, width: 1533, height: 82 }}>
@@ -256,15 +256,15 @@ export default function Tracker() {
                           <span className="trkStepName">{it.start ? 'Старт' : weekLabel(it)}</span>
                           {it.start ? (
                             <>
-                              <span className="trkStepLine" style={{ top: 48 }}>
+                              <span className="trkStepLine" style={{ top: 58 }}>
                                 Начало ухода
                               </span>
-                              <span className="trkStepLine" style={{ top: 70 }}>
+                              <span className="trkStepLine" style={{ top: 80 }}>
                                 {formatDate(tracker.start_date)}
                               </span>
                             </>
                           ) : (
-                            <span className="trkStepLine" style={{ top: 48 }}>
+                            <span className="trkStepLine" style={{ top: 62 }}>
                               {formatDate(it.due_date)}
                             </span>
                           )}
@@ -293,7 +293,7 @@ export default function Tracker() {
                   className="acAbs acTitle"
                   style={{
                     left: 428,
-                    top: 404,
+                    top: 424,
                     width: 560,
                     fontSize: 40,
                     lineHeight: '53px',
@@ -306,7 +306,7 @@ export default function Tracker() {
                   className="acAbs"
                   style={{
                     left: 434,
-                    top: 474,
+                    top: 482,
                     fontFamily: 'Manrope',
                     fontSize: 16,
                     color: '#8a6a52',
@@ -327,10 +327,16 @@ export default function Tracker() {
                     borderRadius: 17,
                   }}
                 />
-                <p className="trkScaleLbl" style={{ left: 758, top: 521, width: 120 }}>
+                <p
+                  className="trkScaleLbl"
+                  style={{ left: 768, top: 521, width: 120, textAlign: 'left' }}
+                >
                   нет / минимально выражено
                 </p>
-                <p className="trkScaleLbl" style={{ left: 915, top: 521, width: 80 }}>
+                <p
+                  className="trkScaleLbl"
+                  style={{ left: 851, top: 521, width: 120, textAlign: 'right' }}
+                >
                   сильно выражено
                 </p>
 
@@ -376,7 +382,7 @@ export default function Tracker() {
                   <button
                     type="button"
                     className="acBtn"
-                    style={{ left: 580, top: 813, width: 281, height: 51, fontSize: 20 }}
+                    style={{ left: 580, top: 828, width: 281, height: 51, fontSize: 20 }}
                     onClick={save}
                     disabled={!canSave}
                   >
@@ -393,7 +399,7 @@ export default function Tracker() {
                   className="acAbs acTitle"
                   style={{
                     left: 1121,
-                    top: 404,
+                    top: 418,
                     fontSize: 24,
                     lineHeight: '32px',
                     textAlign: 'left',
@@ -439,7 +445,7 @@ export default function Tracker() {
                   <button
                     type="button"
                     className="acBtn"
-                    style={{ left: 1180, top: 813, width: 281, height: 51, fontSize: 20 }}
+                    style={{ left: 1180, top: 828, width: 281, height: 51, fontSize: 20 }}
                     onClick={save}
                     disabled={!canSave}
                   >

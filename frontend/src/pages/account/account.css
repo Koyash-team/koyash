@@ -146,6 +146,19 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 }
 .acInput::placeholder { color: #634938; opacity: 0.85; }
 .acField.acFieldError { border-color: #e06a5a; }
+/* Hide the browser's built-in password reveal / clear controls (the dark "eye"
+   Edge and Yandex add) so only our orange .acEye toggle remains. */
+.acInput::-ms-reveal,
+.acInput::-ms-clear {
+  display: none;
+}
+.acInput::-webkit-credentials-auto-fill-button,
+.acInput::-webkit-strong-password-auto-fill-button,
+.acInput::-webkit-textfield-decoration-container {
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+}
 
 /* eye toggle inside a password field */
 .acEye {
@@ -356,6 +369,29 @@ img.acAbs { pointer-events: none; object-fit: contain; }
   font-size: 16px; color: #d7863b; cursor: pointer; text-decoration: underline;
 }
 .careHint { font-size: 15px; color: #8a6a52; }
+/* feedback label above the comment box («Что именно не так?») */
+.careFbLabel { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; color: #634938; margin: 2px 0 -4px; }
+/* submitted comment shown read-only in its own box */
+.careCommentBox {
+  border: 1px solid #e9a563; border-radius: 12px; background: #fffdfa;
+  padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: 15px;
+  line-height: 21px; color: #634938;
+}
+/* «Спасибо за отзыв!» row + «Отправлен» badge */
+.careThanksRow { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.careSent { font-size: 14px; color: #a9805c; white-space: nowrap; }
+/* divider between suitable and unsuitable (replaced) products */
+.careDivider { height: 0; border: none; border-top: 2px solid #ecd8bf; margin: 6px 52px 34px; }
+/* «Выбрать» button rendered below a product card (replacement screen) */
+.careBelow { display: flex; justify-content: flex-end; margin: -14px 0 26px; }
+.careBelow .acBtn { position: static; }
+/* Replacement modal over the dimmed cosmetic bag */
+.replaceModal {
+  width: 1067px; max-width: 96vw; max-height: 92vh; overflow-y: auto;
+  background: #ffffff; border-radius: 24px; box-shadow: 0 24px 60px rgba(99, 73, 56, 0.28);
+  padding: 30px 40px 26px; box-sizing: border-box; color: #634938;
+}
+.replaceModal .careCard.hasBelow { margin-bottom: 8px; }
 .careFootRow { display: flex; align-items: center; gap: 26px; padding: 10px 52px 60px; }
 .careSum { margin-left: auto; font-size: 24px; font-weight: 700; color: #634938; }
 
@@ -394,12 +430,12 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 .trkStep.sel { border-color: #e9a563; box-shadow: 0 0 0 2px #ffe9cf; }
 .trkStep.locked { opacity: 0.7; }
 .trkStep:disabled { cursor: default; }
-.trkStepName { position: absolute; left: 53px; top: 20px; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: #634938; }
+.trkStepName { position: absolute; left: 53px; top: 30px; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: #634938; }
 .trkStepLine { position: absolute; left: 53px; font-family: 'Manrope', sans-serif; font-size: 15px; color: #8a6a52; }
 .trkStepStat { position: absolute; left: 204px; top: 38px; width: 30px; height: 30px; object-fit: contain; }
 .trkStatImg { width: 26px; height: 26px; object-fit: contain; display: block; }
 .trkNumImg { position: absolute; width: 34px; height: 34px; object-fit: contain; }
-.trkPill img { width: 20px; height: 20px; object-fit: contain; flex: 0 0 auto; }
+.trkPill img { width: 26px; height: 26px; object-fit: contain; flex: 0 0 auto; }
 
 /* center panel — criterion rows */
 .trkNum {
@@ -421,7 +457,7 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 /* right panel — overall rating */
 .trkPill {
   position: absolute; height: 42px; border-radius: 10px; background: #fff; border: 1px solid #eddcc7;
-  display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-sizing: border-box; padding: 0 10px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-sizing: border-box; padding: 0 8px;
   font-family: 'Manrope', sans-serif; font-size: 15px; white-space: nowrap; color: #634938; cursor: pointer;
 }
 .trkPill:hover:not(.on):not(:disabled) { background: #fff7ee; }
@@ -485,6 +521,31 @@ img.acAbs { pointer-events: none; object-fit: contain; }
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+/* ── Right-side slide-in drawer («Как всё устроено») ───────────────────── */
+.acDrawerOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(99, 73, 56, 0.35);
+}
+.acDrawer {
+  height: 100%;
+  overflow-y: auto;
+  background: #ffffff;
+  box-shadow: -24px 0 60px rgba(99, 73, 56, 0.28);
+  animation: acDrawerIn 0.32s ease;
+}
+@keyframes acDrawerIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 /* ── Avatar picker (Выбор профиля) ─────────────────────────────────────── */

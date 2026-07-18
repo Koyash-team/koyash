@@ -18,7 +18,7 @@ export default function Footer() {
         src={cloud}
         alt=""
         aria-hidden="true"
-        style={{ left: 205, top: 1520, width: 620, height: 233, objectFit: 'contain' }}
+        style={{ left: 270, top: 1539, width: 492, height: 187, objectFit: 'contain' }}
       />
       <p
         className="acAbs acHeading"
