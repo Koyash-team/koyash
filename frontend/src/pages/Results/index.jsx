@@ -185,7 +185,7 @@ export default function Results() {
         </div>
       </div>
 
-      {showOffer && <Offer onClose={() => navigate('/')} />}
+      {showOffer && <Offer onClose={() => navigate('/')} onDismiss={() => setShowOffer(false)} />}
     </div>
   );
 }

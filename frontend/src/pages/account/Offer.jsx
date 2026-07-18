@@ -47,10 +47,13 @@ const CARDS = [
 // Rendered either as a standalone route (/offer) or, when `onClose` is passed,
 // as a modal over the dimmed results screen. `onClose` is the «Назад» / backdrop
 // action (the guest leaving the offer).
-export default function Offer({ onClose }) {
+export default function Offer({ onClose, onDismiss }) {
   const navigate = useNavigate();
   const asModal = !!onClose;
   const back = () => (asModal ? onClose() : navigate(-1));
+  // Backdrop click just closes the modal (back to the results); «Назад» uses
+  // `back`. Falls back to `back` when no dismiss handler is given.
+  const dismiss = () => (onDismiss ? onDismiss() : back());
 
   const [scale, setScale] = useState(1);
   useLayoutEffect(() => {
@@ -136,7 +139,7 @@ export default function Offer({ onClose }) {
   // Modal over the dimmed results screen.
   if (asModal) {
     return (
-      <div className="offerOverlay" onClick={back}>
+      <div className="offerOverlay" onClick={dismiss}>
         <div
           style={{ width: 1189 * scale, height: 827 * scale }}
           onClick={(e) => e.stopPropagation()}
