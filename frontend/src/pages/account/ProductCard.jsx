@@ -41,12 +41,14 @@ export default function ProductCard({ item, side, below, dimmed = false }) {
               <span aria-hidden="true">⚠️</span> {item.justification.irritant_warning}
             </p>
           )}
-          <p className="carePrice">{formatPrice(p.price_rub)}</p>
-          {p.link && (
-            <a className="careShop" href={p.link} target="_blank" rel="noreferrer">
-              Перейти в магазин →
-            </a>
-          )}
+          <div className="carePriceRow">
+            <p className="carePrice">{formatPrice(p.price_rub)}</p>
+            {p.link && (
+              <a className="careShop" href={p.link} target="_blank" rel="noreferrer">
+                Перейти в магазин →
+              </a>
+            )}
+          </div>
         </div>
         {side && <div className="careSide">{side}</div>}
       </div>

@@ -292,6 +292,9 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 /* ── Cosmetic bag (косметичка) & replacement cards ─────────────────────── */
 .careList { position: relative; padding: 0 52px; }
 .careBanner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
   background: #fdf3e9;
   border-radius: 15px;
   padding: 20px 30px;
@@ -300,6 +303,7 @@ img.acAbs { pointer-events: none; object-fit: contain; }
   line-height: 22px;
   color: #634938;
 }
+.careBannerHeart { width: 46px; height: 46px; flex: 0 0 auto; object-fit: contain; }
 .careCard {
   position: relative;
   background: #fffdfa;
@@ -330,10 +334,12 @@ img.acAbs { pointer-events: none; object-fit: contain; }
   font-size: 15px; line-height: 21px; margin: 0 0 12px; padding: 10px 14px;
   border-radius: 10px; background: #fff4e6; border: 1px solid #f0c98a; color: #8a5a1e;
 }
-.carePrice { font-size: 24px; font-weight: 600; margin: 8px 0 0; }
-.careShop { font-size: 16px; color: #d7863b; text-decoration: none; }
+.carePriceRow { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 8px 0 0; }
+.carePrice { font-size: 24px; font-weight: 600; margin: 0; }
+.careShop { font-size: 16px; color: #d7863b; text-decoration: none; margin: 0; white-space: nowrap; }
 .careShop:hover { text-decoration: underline; }
-.careSide { flex: 0 0 340px; display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
+/* vertical divider between the product description and its feedback column */
+.careSide { flex: 0 0 340px; display: flex; flex-direction: column; align-items: stretch; gap: 12px; border-left: 2px solid #eddcc7; padding-left: 30px; }
 .careFbRow { display: flex; gap: 22px; }
 .careFbBtn {
   flex: 1 1 0;
@@ -354,7 +360,7 @@ img.acAbs { pointer-events: none; object-fit: contain; }
   width: 100%;
   min-height: 75px;
   box-sizing: border-box;
-  border: 1px solid #e9a563;
+  border: 3px solid #ffca96;
   border-radius: 12px;
   background: #fffdfa;
   padding: 10px 14px;
@@ -363,25 +369,55 @@ img.acAbs { pointer-events: none; object-fit: contain; }
   color: #634938;
   resize: vertical;
 }
-.careThanks { font-size: 18px; font-weight: 600; color: #634938; margin: 0; }
+.careThanks { font-size: 18px; font-weight: 400; color: #634938; margin: 0; }
 .careReplaceLink {
-  background: none; border: none; padding: 0; text-align: left;
-  font-size: 16px; color: #d7863b; cursor: pointer; text-decoration: underline;
+  background: none; border: none; padding: 0; display: block; width: 100%; text-align: center;
+  margin-top: 12px; font-size: 16px; color: #d7863b; cursor: pointer; text-decoration: underline;
 }
-.careHint { font-size: 15px; color: #8a6a52; }
+.careHint {
+  display: flex; justify-content: center; align-items: center; gap: 6px;
+  text-align: center; font-size: 15px; color: #8a6a52; margin-top: 4px;
+}
+.careSpark { color: #e9a563; font-size: 15px; line-height: 1; flex: 0 0 auto; }
+/* narrower «Отправить» button under the comment field */
+.careSubmit { width: 150px; height: 41px; align-self: flex-start; }
+/* limit-reached message (centered) + heart */
+.careLimit {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: 8px; font-size: 15px; color: #8a6a52; margin-top: 4px;
+}
+.careLimitHeart { width: 34px; height: 34px; object-fit: contain; }
+/* replaced-product feedback: «Отправлен» → «Спасибо…» → heart, centered */
+.careReplacedFb { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 2px; }
+.careThanksCenter { font-size: 18px; font-weight: 400; color: #9a9a9a; text-align: center; margin: 0; }
+.careReplacedHeart { width: 34px; height: 34px; object-fit: contain; }
 /* feedback label above the comment box («Что именно не так?») */
 .careFbLabel { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; color: #634938; margin: 2px 0 -4px; }
 /* submitted comment shown read-only in its own box */
 .careCommentBox {
-  border: 1px solid #e9a563; border-radius: 12px; background: #fffdfa;
+  border: 3px solid #ffca96; border-radius: 12px; background: #fffdfa;
   padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: 15px;
   line-height: 21px; color: #634938;
 }
 /* «Спасибо за отзыв!» row + «Отправлен» badge */
 .careThanksRow { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.careSent { font-size: 14px; color: #a9805c; white-space: nowrap; }
-/* divider between suitable and unsuitable (replaced) products */
-.careDivider { height: 0; border: none; border-top: 2px solid #ecd8bf; margin: 6px 52px 34px; }
+.careSent { font-size: 14px; color: #9a9a9a; white-space: nowrap; }
+/* full-width, bold divider between suitable and unsuitable (replaced) products */
+.careDivider { height: 0; border: none; border-top: 3px solid #634938; margin: 10px -52px 36px; }
+/* replaced cards: everything greyed out (Figma «косметичка с заменой») */
+.careCard.isReplaced { background: #f5f5f5; opacity: 1; border-color: #d0d0d0; color: #9a9a9a; }
+.careCard.isReplaced .careImg { border-color: #d0d0d0; filter: grayscale(0.7); }
+.careCard.isReplaced .careStep,
+.careCard.isReplaced .careName,
+.careCard.isReplaced .careBrand,
+.careCard.isReplaced .careDesc,
+.careCard.isReplaced .careWhy,
+.careCard.isReplaced .carePrice,
+.careCard.isReplaced .careShop { color: #9a9a9a; }
+.careCard.isReplaced .careSide { border-left-color: #d8d8d8; }
+.careCard.isReplaced .careFbBtn { border-color: #d0d0d0; color: #9a9a9a; }
+.careCard.isReplaced .careFbBtn.active { background: #d8d8d8; border-color: #d8d8d8; color: #fdfdfd; }
+.careCard.isReplaced .careCommentBox { border-color: #d0d0d0; color: #9a9a9a; background: #fbfbfb; }
 /* «Выбрать» button rendered below a product card (replacement screen) */
 .careBelow { display: flex; justify-content: flex-end; margin: -14px 0 26px; }
 .careBelow .acBtn { position: static; }

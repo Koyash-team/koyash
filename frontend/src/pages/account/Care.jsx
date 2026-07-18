@@ -9,6 +9,8 @@ import ConfirmDialog from './ConfirmDialog';
 import { useAuth } from '../../auth/useAuth';
 import { fetchCare, setItemFeedback } from '../../api/client';
 import { formatPrice } from './careFormat';
+import titleHeart from '../../assets/account/offer-spot.png';
+import heartFilled from '../../assets/account/pf-pref.png';
 
 const MAX_REPLACEMENTS = 2;
 
@@ -80,6 +82,13 @@ export default function Care() {
       <div className="acCanvas" style={{ width: 1633 }}>
         <div style={{ position: 'relative', height: 235 }}>
           <TopNav right={rightNav} />
+          <img
+            className="acAbs"
+            src={titleHeart}
+            alt=""
+            aria-hidden="true"
+            style={{ left: 560, top: 165, width: 56, height: 56, objectFit: 'contain' }}
+          />
           <p
             className="acAbs acTitle"
             style={{ left: 0, top: 154, width: 1633, fontSize: 48, lineHeight: '64px' }}
@@ -92,8 +101,11 @@ export default function Care() {
           <>
             <div className="careList">
               <div className="careBanner">
-                Оцени каждое средство: подошло или не подошло. Если что-то не подошло — оставь
-                комментарий и подбери похожую замену.
+                <img className="careBannerHeart" src={heartFilled} alt="" aria-hidden="true" />
+                <span>
+                  Оцени каждое средство: подошло или не подошло. Если что-то не подошло — оставь
+                  комментарий и подбери похожую замену.
+                </span>
               </div>
               {active.map((item) => (
                 <CareCard
