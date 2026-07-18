@@ -337,7 +337,9 @@ export default function Tracker() {
                   className="trkScaleLbl"
                   style={{ left: 851, top: 521, width: 120, textAlign: 'right' }}
                 >
-                  сильно выражено
+                  сильно
+                  <br />
+                  выражено
                 </p>
 
                 {criteria.map((c, i) => {

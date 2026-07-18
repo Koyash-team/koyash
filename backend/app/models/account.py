@@ -11,7 +11,7 @@ from typing import Literal, Optional
 
 from pydantic import BaseModel, model_validator
 
-from app.models.product import Justification, ProductOut, RecommendRequest
+from app.models.product import BagItem, Justification, ProductOut, RecommendRequest
 
 
 class ProfileOut(BaseModel):
@@ -74,7 +74,9 @@ class AlternativesOut(BaseModel):
     """Replacement candidates for one product's routine step."""
 
     step: str
-    alternatives: list[ProductOut]
+    # Full bag items (product + rule-based justification) so the UI can show the
+    # same explanations as the main bag.
+    alternatives: list[BagItem]
     replacements_used: int
     replacements_left: int
 

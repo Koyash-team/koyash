@@ -63,18 +63,18 @@ export default function Replace({ embedId, onClose, onReplaced }) {
   }
 
   // Similar-product cards: the «Выбрать» control sits below each card.
-  const alts = (alternatives || []).map((p) => (
+  const alts = (alternatives || []).map((it) => (
     <ProductCard
-      key={p.id}
-      item={{ product: p, justification: p.justification || {} }}
+      key={it.product.id}
+      item={it}
       below={
         <button
           type="button"
-          className={`acBtn acModalBtn${selected === p.id ? ' acBtnGhost' : ''}`}
+          className={`acBtn acModalBtn${selected === it.product.id ? ' acBtnGhost' : ''}`}
           style={{ width: 180 }}
-          onClick={() => setSelected(p.id)}
+          onClick={() => setSelected(it.product.id)}
         >
-          {selected === p.id ? 'Выбрано' : 'Выбрать'}
+          {selected === it.product.id ? 'Выбрано' : 'Выбрать'}
         </button>
       }
     />
@@ -96,7 +96,7 @@ export default function Replace({ embedId, onClose, onReplaced }) {
           <p className="careStep" style={{ margin: '10px 0 8px', fontWeight: 600 }}>
             Текущее средство
           </p>
-          <ProductCard item={current} dimmed />
+          <ProductCard item={current} />
         </>
       )}
 

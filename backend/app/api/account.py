@@ -200,7 +200,7 @@ async def get_alternatives(
     alternatives = [
         make_bag_item(
             p, concerns_set, request.vegan, request.cruelty_free, has_allergens, request.skin_type
-        ).product
+        )
         for p in products
     ]
     return AlternativesOut(
