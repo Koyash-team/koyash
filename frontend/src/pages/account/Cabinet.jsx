@@ -205,7 +205,7 @@ export default function Cabinet() {
           src={introHeart}
           alt=""
           aria-hidden="true"
-          style={{ left: 492, top: 309, width: 46, height: 46 }}
+          style={{ left: 498, top: 315, width: 34, height: 34 }}
         />
         <p
           className="acAbs acBody"
