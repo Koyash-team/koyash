@@ -170,7 +170,7 @@ export default function Tracker() {
   return (
     <Stage w={1633} mode="page">
       <div className="acCanvas" style={{ width: 1633, height: 1315 }}>
-        <TopNav right={rightNav} />
+        <TopNav right={rightNav} logoLeft={50} />
         <p
           className="acAbs acTitle"
           style={{ left: 0, top: 154, width: 1633, fontSize: 48, lineHeight: '64px' }}

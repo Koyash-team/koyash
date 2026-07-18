@@ -147,6 +147,7 @@ export default function Cabinet() {
     <Stage w={1633} h={1789} mode="screen">
       <div className="acCanvas" style={{ height: 1789 }}>
         <TopNav
+          logoLeft={50}
           right={
             <button
               type="button"

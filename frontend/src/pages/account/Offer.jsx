@@ -1,3 +1,4 @@
+import { useLayoutEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './account.css';
 import Stage from '../Quiz/Stage';
@@ -43,15 +44,32 @@ const CARDS = [
   },
 ];
 
-export default function Offer() {
+// Rendered either as a standalone route (/offer) or, when `onClose` is passed,
+// as a modal over the dimmed results screen. `onClose` is the «Назад» / backdrop
+// action (the guest leaving the offer).
+export default function Offer({ onClose }) {
   const navigate = useNavigate();
+  const asModal = !!onClose;
+  const back = () => (asModal ? onClose() : navigate(-1));
 
-  return (
-    <Stage w={1189} h={827} mode="screen">
-      <div className="acCanvas" style={{ width: 1189, height: 827 }}>
-        <p className="acAbs acTitle" style={{ left: 75, top: 49, width: 325 }}>
-          Сохрани свой уход
-        </p>
+  const [scale, setScale] = useState(1);
+  useLayoutEffect(() => {
+    if (!asModal) return;
+    const recompute = () => {
+      const sw = (Math.min(window.innerWidth, 1260) - 40) / 1189;
+      const sh = (window.innerHeight - 40) / 827;
+      setScale(Math.min(1, sw, sh));
+    };
+    recompute();
+    window.addEventListener('resize', recompute);
+    return () => window.removeEventListener('resize', recompute);
+  }, [asModal]);
+
+  const content = (
+    <>
+      <p className="acAbs acTitle" style={{ left: 75, top: 49, width: 325 }}>
+        Сохрани свой уход
+      </p>
         <img
           className="acAbs acHeart"
           src={spot}
@@ -88,7 +106,7 @@ export default function Offer() {
           type="button"
           className="acBtn acBtnGhost"
           style={{ left: 655, top: 602, width: 354, height: 51, fontSize: 20 }}
-          onClick={() => navigate(-1)}
+          onClick={back}
         >
           Назад
         </button>
@@ -112,6 +130,33 @@ export default function Offer() {
         >
           Войти
         </button>
+    </>
+  );
+
+  // Modal over the dimmed results screen.
+  if (asModal) {
+    return (
+      <div className="offerOverlay" onClick={back}>
+        <div
+          style={{ width: 1189 * scale, height: 827 * scale }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div
+            className="offerCard"
+            style={{ width: 1189, height: 827, transform: `scale(${scale})`, transformOrigin: 'top left' }}
+          >
+            {content}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Standalone route.
+  return (
+    <Stage w={1189} h={827} mode="screen">
+      <div className="acCanvas" style={{ width: 1189, height: 827 }}>
+        {content}
       </div>
     </Stage>
   );

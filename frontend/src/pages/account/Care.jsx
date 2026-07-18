@@ -81,7 +81,7 @@ export default function Care() {
     <Stage w={1633} mode="page">
       <div className="acCanvas" style={{ width: 1633 }}>
         <div style={{ position: 'relative', height: 235 }}>
-          <TopNav right={rightNav} />
+          <TopNav right={rightNav} logoLeft={50} />
           <img
             className="acAbs acHeart"
             src={titleHeart}

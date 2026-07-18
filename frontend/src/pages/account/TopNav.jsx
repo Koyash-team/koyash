@@ -6,7 +6,9 @@ import logo from '../../assets/landing/logo.png';
 // can drop in its own primary action ("Подобрать уход", the user's name, …).
 // The section links return to the landing AND scroll to that section (the
 // target id is passed through router state and read by LandingPage).
-export default function TopNav({ right }) {
+// `logoLeft` lets each screen place the logo: auth/password screens keep it at
+// 182 (Figma), the rest tuck it into the top-left corner (50).
+export default function TopNav({ right, logoLeft = 182 }) {
   const navigate = useNavigate();
   const go = (section) => () => navigate('/', { state: { scrollTo: section } });
 
@@ -16,7 +18,7 @@ export default function TopNav({ right }) {
         className="acAbs"
         src={logo}
         alt="Koyash"
-        style={{ left: 182, top: -12, width: 233, height: 194, cursor: 'pointer' }}
+        style={{ left: logoLeft, top: -12, width: 233, height: 194, cursor: 'pointer' }}
         onClick={() => navigate('/')}
       />
       <button

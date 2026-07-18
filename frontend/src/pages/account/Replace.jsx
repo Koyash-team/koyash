@@ -194,7 +194,7 @@ export default function Replace({ embedId, onClose, onReplaced }) {
     <Stage w={1633} mode="page">
       <div className="acCanvas" style={{ width: 1633 }}>
         <div style={{ position: 'relative', height: 205 }}>
-          <TopNav right={rightNav} />
+          <TopNav right={rightNav} logoLeft={50} />
           <p
             className="acAbs acTitle"
             style={{ left: 0, top: 150, width: 1633, fontSize: 40, lineHeight: '52px' }}

@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import './Results.css';
+import { useAuth } from '../../auth/useAuth';
+import Offer from '../account/Offer';
 import logo from '../../assets/landing/logo.png';
 import heart from '../../assets/landing/heart.png';
 import sceneLoading from '../../assets/quiz/scene-loading.png';
@@ -129,8 +132,13 @@ function ProductCard({ product: p, justification: j }) {
 export default function Results() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+  const [showOffer, setShowOffer] = useState(false);
   const { results, error } = location.state || {};
   const handleRetake = () => navigate('/quiz');
+  // Guests get nudged to register (saving their bag) before leaving; signed-in
+  // users go straight home.
+  const handleHome = () => (isAuthenticated ? navigate('/') : setShowOffer(true));
 
   if (error || !results || results.noResults || !results.bag || results.bag.length === 0) {
     return <NoResults onRetake={handleRetake} />;
@@ -168,17 +176,16 @@ export default function Results() {
         {meta.note && <p className="rMetaNote">{meta.note}</p>}
 
         <div className="rActions">
-          <Link to="/account" className="rBtnCabinet">
-            Мой кабинет
-          </Link>
           <button className="rBtnPrimary" type="button" onClick={handleRetake}>
             Пройти заново
           </button>
-          <Link to="/" className="rBtnGhost">
+          <button className="rBtnGhost" type="button" onClick={handleHome}>
             На главную
-          </Link>
+          </button>
         </div>
       </div>
+
+      {showOffer && <Offer onClose={() => navigate('/')} />}
     </div>
   );
 }

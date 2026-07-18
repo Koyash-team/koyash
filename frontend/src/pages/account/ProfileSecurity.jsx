@@ -127,6 +127,7 @@ export default function ProfileSecurity() {
     <Stage w={1633} h={1450} mode="screen">
       <div className="acCanvas" style={{ height: 1450 }}>
         <TopNav
+          logoLeft={50}
           right={
             <button
               type="button"

@@ -584,6 +584,28 @@ img.acAbs { pointer-events: none; object-fit: contain; }
   }
 }
 
+/* ── Registration-offer modal over the dimmed results («Предложение…») ──── */
+.offerOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 130;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: auto;
+  background: rgba(99, 73, 56, 0.35);
+}
+.offerCard {
+  position: relative;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(99, 73, 56, 0.28);
+  color: #634938;
+  font-family: 'Manrope', Arial, sans-serif;
+  overflow: hidden;
+}
+
 /* ── Avatar picker (Выбор профиля) ─────────────────────────────────────── */
 .avGrid {
   display: grid;
