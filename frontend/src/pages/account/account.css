@@ -401,7 +401,7 @@ img.acAbs { pointer-events: none; object-fit: contain; }
   display: flex; align-items: center; gap: 22px; padding: 0 30px;
   font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 22px; color: #634938;
 }
-.trkBanner img { width: 46px; height: 46px; flex: 0 0 auto; object-fit: contain; }
+.trkBanner img { width: 60px; height: 60px; flex: 0 0 auto; object-fit: contain; }
 
 .trkPanel { position: absolute; box-sizing: border-box; background: #fffdfa; border: 1px solid #e9a563; border-radius: 17px; }
 

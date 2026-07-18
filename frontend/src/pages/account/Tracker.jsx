@@ -165,7 +165,7 @@ export default function Tracker() {
   );
 
   const rowPitch = 64;
-  const innerBoxH = 44 + criteria.length * rowPitch;
+  const innerBoxH = 28 + criteria.length * rowPitch;
 
   return (
     <Stage w={1633} mode="page">
@@ -181,7 +181,7 @@ export default function Tracker() {
           className="acAbs acHeart"
           src={titleHeart}
           alt=""
-          style={{ left: 1030, top: 150, width: 74, height: 74 }}
+          style={{ left: 1026, top: 142, width: 90, height: 90 }}
         />
 
         <div className="trkBanner" style={{ left: 50, top: 246, width: 1533, height: 82 }}>
@@ -382,7 +382,7 @@ export default function Tracker() {
                   <button
                     type="button"
                     className="acBtn"
-                    style={{ left: 580, top: 828, width: 281, height: 51, fontSize: 20 }}
+                    style={{ left: 580, top: 813, width: 281, height: 51, fontSize: 20 }}
                     onClick={save}
                     disabled={!canSave}
                   >
@@ -445,7 +445,7 @@ export default function Tracker() {
                   <button
                     type="button"
                     className="acBtn"
-                    style={{ left: 1180, top: 828, width: 281, height: 51, fontSize: 20 }}
+                    style={{ left: 1180, top: 813, width: 281, height: 51, fontSize: 20 }}
                     onClick={save}
                     disabled={!canSave}
                   >
