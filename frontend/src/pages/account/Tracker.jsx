@@ -6,7 +6,7 @@ import TopNav from './TopNav';
 import { useAuth } from '../../auth/useAuth';
 import { fetchTracker, submitCheckpoint } from '../../api/client';
 import heartImg from '../../assets/account/trk-heart.png';
-import titleHeart from '../../assets/account/trk-heart-title.png';
+import titleHeart from '../../assets/account/offer-spot.png';
 import flagImg from '../../assets/account/trk-flag.png';
 import lockImg from '../../assets/account/trk-lock.png';
 import arrowImg from '../../assets/account/trk-arrow.png';
@@ -181,7 +181,7 @@ export default function Tracker() {
           className="acAbs acHeart"
           src={titleHeart}
           alt=""
-          style={{ left: 1026, top: 142, width: 90, height: 90 }}
+          style={{ left: 1030, top: 162, width: 56, height: 56, objectFit: 'contain' }}
         />
 
         <div className="trkBanner" style={{ left: 50, top: 246, width: 1533, height: 82 }}>
@@ -471,7 +471,7 @@ export default function Tracker() {
             />
             <p
               className="acAbs acTitle"
-              style={{ left: 105, top: 934, fontSize: 36, lineHeight: '48px', textAlign: 'left' }}
+              style={{ left: 105, top: 940, fontSize: 28, lineHeight: '38px', textAlign: 'left' }}
             >
               История результата
             </p>

@@ -5,6 +5,7 @@ import Stage from '../Quiz/Stage';
 import TopNav from './TopNav';
 import ProfileCard from './ProfileCard';
 import HowItWorks from './HowItWorks';
+import Footer from './Footer';
 import ConfirmDialog from './ConfirmDialog';
 import { useAuth } from '../../auth/useAuth';
 import {
@@ -124,8 +125,8 @@ export default function ProfileSecurity() {
 
   return (
     <>
-    <Stage w={1633} h={1450} mode="screen">
-      <div className="acCanvas" style={{ height: 1450 }}>
+    <Stage w={1633} h={1789} mode="screen">
+      <div className="acCanvas" style={{ height: 1789 }}>
         <TopNav
           logoLeft={50}
           right={
@@ -151,7 +152,7 @@ export default function ProfileSecurity() {
           src={heart}
           alt=""
           aria-hidden="true"
-          style={{ left: 1120, top: 156, width: 64, height: 64 }}
+          style={{ left: 1122, top: 162, width: 56, height: 56, objectFit: 'contain' }}
         />
 
         <ProfileCard
@@ -312,6 +313,8 @@ export default function ProfileSecurity() {
         >
           Удалить аккаунт
         </button>
+
+        <Footer />
 
         {askDelete && (
           <ConfirmDialog

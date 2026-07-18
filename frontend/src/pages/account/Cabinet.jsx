@@ -171,7 +171,7 @@ export default function Cabinet() {
           src={heart}
           alt=""
           aria-hidden="true"
-          style={{ left: 1024, top: 150, width: 72, height: 72 }}
+          style={{ left: 1024, top: 162, width: 56, height: 56, objectFit: 'contain' }}
         />
 
         <ProfileCard

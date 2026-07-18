@@ -389,7 +389,8 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 .careLimitHeart { width: 34px; height: 34px; object-fit: contain; }
 /* replaced-product feedback: «Отправлен» → «Спасибо…» → heart, centered */
 .careReplacedFb { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 2px; }
-.careThanksCenter { font-size: 18px; font-weight: 400; color: #a8a8a8; text-align: center; margin: 0; }
+.careReplacedFb .careSent { align-self: flex-end; }
+.careThanksCenter { font-size: 18px; font-weight: 400; color: #808080; text-align: center; margin: 0; }
 .careReplacedHeart { width: 34px; height: 34px; object-fit: contain; }
 /* feedback label above the comment box («Что именно не так?») */
 .careFbLabel { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; color: #634938; margin: 2px 0 -4px; }
@@ -405,7 +406,7 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 /* full-width, bold, orange divider between suitable and replaced products */
 .careDivider { height: 0; border: none; border-top: 3px solid #e9a563; margin: 10px -52px 36px; }
 /* replaced cards: greyed out, but keep the product image in colour (Figma) */
-.careCard.isReplaced { background: #f7f7f7; opacity: 1; border-color: #d6d6d6; color: #a8a8a8; }
+.careCard.isReplaced { background: #f7f7f7; opacity: 1; border-color: #d6d6d6; color: #808080; }
 .careCard.isReplaced .careImg { border-color: #d6d6d6; }
 .careCard.isReplaced .careStep,
 .careCard.isReplaced .careName,
@@ -413,11 +414,11 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 .careCard.isReplaced .careDesc,
 .careCard.isReplaced .careWhy,
 .careCard.isReplaced .carePrice,
-.careCard.isReplaced .careShop { color: #a8a8a8; }
+.careCard.isReplaced .careShop { color: #808080; }
 .careCard.isReplaced .careSide { border-left-color: #d6d6d6; }
-.careCard.isReplaced .careFbBtn { border-color: #cccccc; color: #a8a8a8; }
+.careCard.isReplaced .careFbBtn { border-color: #cccccc; color: #808080; }
 .careCard.isReplaced .careFbBtn.active { background: #b6b6b6; border-color: #b6b6b6; color: #ffffff; }
-.careCard.isReplaced .careCommentBox { border-color: #cccccc; color: #a8a8a8; background: #fbfbfb; }
+.careCard.isReplaced .careCommentBox { border-color: #cccccc; color: #808080; background: #fbfbfb; }
 /* «Выбрать» button rendered below a product card (replacement screen) */
 .careBelow { display: flex; justify-content: flex-end; margin: 6px 0 30px; }
 .careBelow .acBtn { position: static; }
