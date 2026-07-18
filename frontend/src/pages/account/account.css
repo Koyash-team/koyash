@@ -378,7 +378,7 @@ img.acAbs { pointer-events: none; object-fit: contain; }
   display: flex; justify-content: center; align-items: center; gap: 6px;
   text-align: center; font-size: 15px; color: #8a6a52; margin-top: 4px;
 }
-.careSpark { color: #e9a563; font-size: 15px; line-height: 1; flex: 0 0 auto; }
+.careSpark { width: 20px; height: 20px; object-fit: contain; flex: 0 0 auto; }
 /* narrower «Отправить» button under the comment field */
 .careSubmit { width: 150px; height: 41px; align-self: flex-start; }
 /* limit-reached message (centered) + heart */
@@ -389,7 +389,7 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 .careLimitHeart { width: 34px; height: 34px; object-fit: contain; }
 /* replaced-product feedback: «Отправлен» → «Спасибо…» → heart, centered */
 .careReplacedFb { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 2px; }
-.careThanksCenter { font-size: 18px; font-weight: 400; color: #9a9a9a; text-align: center; margin: 0; }
+.careThanksCenter { font-size: 18px; font-weight: 400; color: #a8a8a8; text-align: center; margin: 0; }
 .careReplacedHeart { width: 34px; height: 34px; object-fit: contain; }
 /* feedback label above the comment box («Что именно не так?») */
 .careFbLabel { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; color: #634938; margin: 2px 0 -4px; }
@@ -402,22 +402,22 @@ img.acAbs { pointer-events: none; object-fit: contain; }
 /* «Спасибо за отзыв!» row + «Отправлен» badge */
 .careThanksRow { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .careSent { font-size: 14px; color: #9a9a9a; white-space: nowrap; }
-/* full-width, bold divider between suitable and unsuitable (replaced) products */
-.careDivider { height: 0; border: none; border-top: 3px solid #634938; margin: 10px -52px 36px; }
-/* replaced cards: everything greyed out (Figma «косметичка с заменой») */
-.careCard.isReplaced { background: #f5f5f5; opacity: 1; border-color: #d0d0d0; color: #9a9a9a; }
-.careCard.isReplaced .careImg { border-color: #d0d0d0; filter: grayscale(0.7); }
+/* full-width, bold, orange divider between suitable and replaced products */
+.careDivider { height: 0; border: none; border-top: 3px solid #e9a563; margin: 10px -52px 36px; }
+/* replaced cards: greyed out, but keep the product image in colour (Figma) */
+.careCard.isReplaced { background: #f7f7f7; opacity: 1; border-color: #d6d6d6; color: #a8a8a8; }
+.careCard.isReplaced .careImg { border-color: #d6d6d6; }
 .careCard.isReplaced .careStep,
 .careCard.isReplaced .careName,
 .careCard.isReplaced .careBrand,
 .careCard.isReplaced .careDesc,
 .careCard.isReplaced .careWhy,
 .careCard.isReplaced .carePrice,
-.careCard.isReplaced .careShop { color: #9a9a9a; }
-.careCard.isReplaced .careSide { border-left-color: #d8d8d8; }
-.careCard.isReplaced .careFbBtn { border-color: #d0d0d0; color: #9a9a9a; }
-.careCard.isReplaced .careFbBtn.active { background: #d8d8d8; border-color: #d8d8d8; color: #fdfdfd; }
-.careCard.isReplaced .careCommentBox { border-color: #d0d0d0; color: #9a9a9a; background: #fbfbfb; }
+.careCard.isReplaced .careShop { color: #a8a8a8; }
+.careCard.isReplaced .careSide { border-left-color: #d6d6d6; }
+.careCard.isReplaced .careFbBtn { border-color: #cccccc; color: #a8a8a8; }
+.careCard.isReplaced .careFbBtn.active { background: #b6b6b6; border-color: #b6b6b6; color: #ffffff; }
+.careCard.isReplaced .careCommentBox { border-color: #cccccc; color: #a8a8a8; background: #fbfbfb; }
 /* «Выбрать» button rendered below a product card (replacement screen) */
 .careBelow { display: flex; justify-content: flex-end; margin: -14px 0 26px; }
 .careBelow .acBtn { position: static; }

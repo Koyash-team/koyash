@@ -83,11 +83,11 @@ export default function Care() {
         <div style={{ position: 'relative', height: 235 }}>
           <TopNav right={rightNav} />
           <img
-            className="acAbs"
+            className="acAbs acHeart"
             src={titleHeart}
             alt=""
             aria-hidden="true"
-            style={{ left: 560, top: 165, width: 56, height: 56, objectFit: 'contain' }}
+            style={{ left: 1012, top: 162, width: 56, height: 56, objectFit: 'contain' }}
           />
           <p
             className="acAbs acTitle"

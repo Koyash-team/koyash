@@ -8,6 +8,7 @@ import ConfirmDialog from './ConfirmDialog';
 import { useAuth } from '../../auth/useAuth';
 import { fetchCare, fetchAlternatives, replaceItem } from '../../api/client';
 import heart from '../../assets/account/offer-spot.png';
+import spark from '../../assets/account/spark.png';
 
 // Замена средства (Figma 2842:31) + «Замен не нашлось» (2844:109).
 // Lists similar products for a disliked item (GET alternatives) and swaps the
@@ -85,8 +86,9 @@ export default function Replace({ embedId, onClose, onReplaced }) {
       <p className="acBody" style={{ textAlign: 'center', margin: '0 0 6px' }}>
         Мы учли твой тип кожи, все особенности и бюджет. Вот средства, которые могут подойти
       </p>
-      <p className="careHint" style={{ textAlign: 'center', margin: '0 0 18px' }}>
-        ✦ Выбрать можно только одно средство
+      <p className="careHint" style={{ margin: '0 0 18px' }}>
+        <img className="careSpark" src={spark} alt="" aria-hidden="true" />
+        Выбрать можно только одно средство
       </p>
 
       {current && (

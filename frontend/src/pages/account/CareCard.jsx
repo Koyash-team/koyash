@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ProductCard from './ProductCard';
 import heartFilled from '../../assets/account/pf-pref.png';
+import spark from '../../assets/account/spark.png';
 
 // One product in the bag with its feedback controls (Figma 2673:1259).
 // - "Подошло"   → PUT feedback liked
@@ -92,9 +93,7 @@ export default function CareCard({ item, replacementsLeft, busy, onFeedback, onR
                     Заменить на похожий продукт
                   </button>
                   <span className="careHint">
-                    <span className="careSpark" aria-hidden="true">
-                      ✦
-                    </span>
+                    <img className="careSpark" src={spark} alt="" aria-hidden="true" />
                     Можно заменить: {replacementsLeft}&nbsp;
                     {replacementsLeft === 1 ? 'раз' : 'раза'}
                   </span>
