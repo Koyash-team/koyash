@@ -79,7 +79,7 @@ export default function Offer({ onClose, onDismiss }) {
           src={spot}
           alt=""
           aria-hidden="true"
-          style={{ left: 406, top: 34, width: 72, height: 72 }}
+          style={{ left: 408, top: 42, width: 58, height: 58 }}
         />
         <p className="acAbs acBody" style={{ left: 75, top: 111, width: 407 }}>
           Ты уже подобрал уход для своей кожи. Зарегистрируйся, чтобы сохранить рекомендации и

@@ -128,7 +128,12 @@ export function LandingPage() {
   // page has laid out.
   useEffect(() => {
     const target = location.state?.scrollTo;
-    if (!target) return;
+    if (!target) {
+      // Fresh entry (e.g. «На главную») — start at the very top, don't inherit
+      // the previous page's scroll position.
+      window.scrollTo(0, 0);
+      return;
+    }
     const t = setTimeout(() => scrollTo(target)(), 220);
     return () => clearTimeout(t);
   }, [location.state]);
