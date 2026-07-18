@@ -50,10 +50,11 @@ const CARDS = [
 export default function Offer({ onClose, onDismiss }) {
   const navigate = useNavigate();
   const asModal = !!onClose;
-  const back = () => (asModal ? onClose() : navigate(-1));
-  // Backdrop click just closes the modal (back to the results); «Назад» uses
-  // `back`. Falls back to `back` when no dismiss handler is given.
-  const dismiss = () => (onDismiss ? onDismiss() : back());
+  // «На главную» goes to the landing (via onClose in modal mode).
+  const home = () => (asModal ? onClose() : navigate('/'));
+  // Backdrop click just closes the modal (back to the results); falls back to
+  // `home` when no dismiss handler is given.
+  const dismiss = () => (onDismiss ? onDismiss() : home());
 
   const [scale, setScale] = useState(1);
   useLayoutEffect(() => {
@@ -109,9 +110,9 @@ export default function Offer({ onClose, onDismiss }) {
           type="button"
           className="acBtn acBtnGhost"
           style={{ left: 655, top: 602, width: 354, height: 51, fontSize: 20 }}
-          onClick={back}
+          onClick={home}
         >
-          Назад
+          На главную
         </button>
         <button
           type="button"
