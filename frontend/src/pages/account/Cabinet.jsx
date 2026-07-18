@@ -504,13 +504,13 @@ export default function Cabinet() {
             className="acAbs"
             style={{
               left: 680,
-              top: 1186,
+              top: 1192,
               width: 680,
               textAlign: 'center',
               fontFamily: "'Playfair Display', serif",
               fontWeight: 700,
-              fontSize: 30,
-              lineHeight: '40px',
+              fontSize: 26,
+              lineHeight: '34px',
               color: '#634938',
             }}
           >
