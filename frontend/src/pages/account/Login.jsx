@@ -113,8 +113,16 @@ export default function Login() {
 
         <button
           type="button"
+          className="acBtn acBtnGhost"
+          style={{ left: 597, top: 578 + shift, width: 161, height: 41, fontSize: 16 }}
+          onClick={() => navigate(-1)}
+        >
+          Назад
+        </button>
+        <button
+          type="button"
           className="acBtn"
-          style={{ left: 699, top: 578 + shift, width: 236, height: 41, fontSize: 16 }}
+          style={{ left: 782, top: 578 + shift, width: 247, height: 41, fontSize: 16 }}
           onClick={handleSubmit}
           disabled={busy}
         >
