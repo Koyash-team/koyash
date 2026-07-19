@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import './QuizStep.css';
 import Stage from './Stage';
 import logo from '../../assets/landing/logo.webp';
@@ -25,6 +26,7 @@ export default function QuizStep({
   onBack,
   onSkinTest,
 }) {
+  const navigate = useNavigate();
   const isTip = step.type === 'tip';
   const f = step.fig;
 
@@ -68,7 +70,13 @@ export default function QuizStep({
   return (
     <Stage>
       <div className="qRoot">
-        <img className="qLogo" src={logo} alt="Koyash" />
+        <img
+          className="qLogo"
+          src={logo}
+          alt="Koyash"
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate('/')}
+        />
         <div className="qTrack" />
         <div className="qFill" style={{ width: `${(progressPct / 100) * 1307}px` }} />
 

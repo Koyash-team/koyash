@@ -64,7 +64,13 @@ export default function Loading({ answers }) {
   return (
     <Stage>
       <div className="loadRoot">
-        <img className="loadLogo" src={logo} alt="Koyash" />
+        <img
+          className="loadLogo"
+          src={logo}
+          alt="Koyash"
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate('/')}
+        />
         <div className="loadTrack" />
         <div className="loadFill" style={{ width: `${(progress / 100) * 1307}px` }} />
 

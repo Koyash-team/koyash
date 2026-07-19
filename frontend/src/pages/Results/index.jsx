@@ -68,10 +68,17 @@ function productHref(link) {
 }
 
 function NoResults({ onRetake }) {
+  const navigate = useNavigate();
   return (
     <div className="noResultsPage">
       <header className="nrHeader">
-        <img className="nrLogo" src={logo} alt="Koyash" />
+        <img
+          className="nrLogo"
+          src={logo}
+          alt="Koyash"
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate('/')}
+        />
         <div className="nrBar" />
       </header>
       <img className="nrScene" src={sceneLoading} alt="" aria-hidden="true" />
@@ -149,7 +156,13 @@ export default function Results() {
   return (
     <div className="rPage">
       {/* logo + full-width bar, same look as the quiz header */}
-      <img className="rLogo" src={logo} alt="Koyash" />
+      <img
+        className="rLogo"
+        src={logo}
+        alt="Koyash"
+        style={{ cursor: 'pointer' }}
+        onClick={() => navigate('/')}
+      />
       <div className="rTrack" />
 
       <div className="rWrap">
