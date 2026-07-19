@@ -78,113 +78,113 @@ export default function Care() {
 
   return (
     <>
-    <Stage w={1633} mode="page">
-      <div className="acCanvas" style={{ width: 1633 }}>
-        <div style={{ position: 'relative', height: 235 }}>
-          <TopNav right={rightNav} logoLeft={50} />
-          <img
-            className="acAbs acHeart"
-            src={titleHeart}
-            alt=""
-            aria-hidden="true"
-            style={{ left: 1012, top: 162, width: 56, height: 56, objectFit: 'contain' }}
-          />
-          <p
-            className="acAbs acTitle"
-            style={{ left: 0, top: 154, width: 1633, fontSize: 48, lineHeight: '64px' }}
-          >
-            Моя косметичка
-          </p>
-        </div>
+      <Stage w={1633} mode="page">
+        <div className="acCanvas" style={{ width: 1633 }}>
+          <div style={{ position: 'relative', height: 235 }}>
+            <TopNav right={rightNav} logoLeft={50} />
+            <img
+              className="acAbs acHeart"
+              src={titleHeart}
+              alt=""
+              aria-hidden="true"
+              style={{ left: 1012, top: 162, width: 56, height: 56, objectFit: 'contain' }}
+            />
+            <p
+              className="acAbs acTitle"
+              style={{ left: 0, top: 154, width: 1633, fontSize: 48, lineHeight: '64px' }}
+            >
+              Моя косметичка
+            </p>
+          </div>
 
-        {care ? (
-          <>
-            <div className="careList">
-              <div className="careBanner">
-                <img className="careBannerHeart" src={heartFilled} alt="" aria-hidden="true" />
-                <span>
-                  Оцени каждое средство: подошло или не подошло. Если что-то не подошло — оставь
-                  комментарий и подбери похожую замену.
-                </span>
+          {care ? (
+            <>
+              <div className="careList">
+                <div className="careBanner">
+                  <img className="careBannerHeart" src={heartFilled} alt="" aria-hidden="true" />
+                  <span>
+                    Оцени каждое средство: подошло или не подошло. Если что-то не подошло — оставь
+                    комментарий и подбери похожую замену.
+                  </span>
+                </div>
+                {active.map((item) => (
+                  <CareCard
+                    key={item.product.id}
+                    item={item}
+                    replacementsLeft={leftFor(item)}
+                    busy={busy}
+                    onFeedback={handleFeedback}
+                    onReplace={(it) => setReplaceId(it.product.id)}
+                  />
+                ))}
+                {/* divider separating suitable products from replaced ones */}
+                {replaced.length > 0 && <div className="careDivider" />}
+                {replaced.map((item) => (
+                  <CareCard
+                    key={item.product.id}
+                    item={item}
+                    replacementsLeft={0}
+                    busy={busy}
+                    onFeedback={handleFeedback}
+                    onReplace={() => {}}
+                  />
+                ))}
               </div>
-              {active.map((item) => (
-                <CareCard
-                  key={item.product.id}
-                  item={item}
-                  replacementsLeft={leftFor(item)}
-                  busy={busy}
-                  onFeedback={handleFeedback}
-                  onReplace={(it) => setReplaceId(it.product.id)}
-                />
-              ))}
-              {/* divider separating suitable products from replaced ones */}
-              {replaced.length > 0 && <div className="careDivider" />}
-              {replaced.map((item) => (
-                <CareCard
-                  key={item.product.id}
-                  item={item}
-                  replacementsLeft={0}
-                  busy={busy}
-                  onFeedback={handleFeedback}
-                  onReplace={() => {}}
-                />
-              ))}
-            </div>
 
-            <div className="careFootRow">
-              <button
-                type="button"
-                className="acBtn acBtnGhost acModalBtn"
-                style={{ width: 200 }}
-                onClick={() => navigate('/account')}
-              >
-                Назад
-              </button>
-              <button
-                type="button"
-                className="acBtn acModalBtn"
-                style={{ width: 325 }}
-                onClick={() => setAskUpdate(true)}
-              >
-                Обновить косметичку
-              </button>
-              <button
-                type="button"
-                className="acBtn acModalBtn"
-                style={{ width: 325 }}
-                onClick={() => navigate('/account/tracker')}
-              >
-                Трекер результата
-              </button>
-              <span className="careSum">Сумма: {formatPrice(care.total_price_rub)}</span>
-            </div>
-          </>
-        ) : (
-          <p className="acBody" style={{ textAlign: 'center', padding: '80px 0' }}>
-            {loaded ? 'Косметичка пока пуста — пройди подбор ухода.' : 'Загружаем…'}
-          </p>
-        )}
+              <div className="careFootRow">
+                <button
+                  type="button"
+                  className="acBtn acBtnGhost acModalBtn"
+                  style={{ width: 200 }}
+                  onClick={() => navigate('/account')}
+                >
+                  Назад
+                </button>
+                <button
+                  type="button"
+                  className="acBtn acModalBtn"
+                  style={{ width: 325 }}
+                  onClick={() => setAskUpdate(true)}
+                >
+                  Обновить косметичку
+                </button>
+                <button
+                  type="button"
+                  className="acBtn acModalBtn"
+                  style={{ width: 325 }}
+                  onClick={() => navigate('/account/tracker')}
+                >
+                  Трекер результата
+                </button>
+                <span className="careSum">Сумма: {formatPrice(care.total_price_rub)}</span>
+              </div>
+            </>
+          ) : (
+            <p className="acBody" style={{ textAlign: 'center', padding: '80px 0' }}>
+              {loaded ? 'Косметичка пока пуста — пройди подбор ухода.' : 'Загружаем…'}
+            </p>
+          )}
 
-        {askUpdate && (
-          <ConfirmDialog
-            title="Точно хочешь обновить уход?"
-            message="Текущий уход будет удалён"
-            confirmLabel="Обновить"
-            onConfirm={() => navigate('/quick')}
-            onCancel={() => setAskUpdate(false)}
-          />
-        )}
-      </div>
-    </Stage>
-    {/* Replacement modal over the dimmed bag (outside <Stage> so its fixed
+          {askUpdate && (
+            <ConfirmDialog
+              title="Точно хочешь обновить уход?"
+              message="Текущий уход будет удалён"
+              confirmLabel="Обновить"
+              onConfirm={() => navigate('/quick')}
+              onCancel={() => setAskUpdate(false)}
+            />
+          )}
+        </div>
+      </Stage>
+      {/* Replacement modal over the dimmed bag (outside <Stage> so its fixed
         overlay isn't scaled by the stage transform). */}
-    {replaceId && (
-      <Replace
-        embedId={replaceId}
-        onClose={() => setReplaceId(null)}
-        onReplaced={handleReplaced}
-      />
-    )}
+      {replaceId && (
+        <Replace
+          embedId={replaceId}
+          onClose={() => setReplaceId(null)}
+          onReplaced={handleReplaced}
+        />
+      )}
     </>
   );
 }

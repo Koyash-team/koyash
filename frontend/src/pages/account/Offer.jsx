@@ -74,66 +74,66 @@ export default function Offer({ onClose, onDismiss }) {
       <p className="acAbs acTitle" style={{ left: 75, top: 49, width: 325 }}>
         Сохрани свой уход
       </p>
-        <img
-          className="acAbs acHeart"
-          src={spot}
-          alt=""
-          aria-hidden="true"
-          style={{ left: 410, top: 46, width: 50, height: 50 }}
-        />
-        <p className="acAbs acBody" style={{ left: 75, top: 111, width: 407 }}>
-          Ты уже подобрал уход для своей кожи. Зарегистрируйся, чтобы сохранить рекомендации и
-          вернуться к ним позже.
-        </p>
-        <img
-          className="acAbs"
-          src={hero}
-          alt=""
-          aria-hidden="true"
-          style={{ left: 507, top: 79, width: 649, height: 487 }}
-        />
+      <img
+        className="acAbs acHeart"
+        src={spot}
+        alt=""
+        aria-hidden="true"
+        style={{ left: 410, top: 46, width: 50, height: 50 }}
+      />
+      <p className="acAbs acBody" style={{ left: 75, top: 111, width: 407 }}>
+        Ты уже подобрал уход для своей кожи. Зарегистрируйся, чтобы сохранить рекомендации и
+        вернуться к ним позже.
+      </p>
+      <img
+        className="acAbs"
+        src={hero}
+        alt=""
+        aria-hidden="true"
+        style={{ left: 507, top: 79, width: 649, height: 487 }}
+      />
 
-        {CARDS.map((c) => (
-          <div key={c.title}>
-            <div className="acCard" style={{ left: 75, top: c.top, width: 444, height: 123 }} />
-            <img className="acAbs" src={c.icon} alt="" aria-hidden="true" style={c.iconStyle} />
-            <p className="acAbs acHeading" style={{ left: 233, top: c.top + 20, width: 262 }}>
-              {c.title}
-            </p>
-            <p className="acAbs acSmall" style={{ left: 233, top: c.top + 60, width: 286 }}>
-              {c.text}
-            </p>
-          </div>
-        ))}
+      {CARDS.map((c) => (
+        <div key={c.title}>
+          <div className="acCard" style={{ left: 75, top: c.top, width: 444, height: 123 }} />
+          <img className="acAbs" src={c.icon} alt="" aria-hidden="true" style={c.iconStyle} />
+          <p className="acAbs acHeading" style={{ left: 233, top: c.top + 20, width: 262 }}>
+            {c.title}
+          </p>
+          <p className="acAbs acSmall" style={{ left: 233, top: c.top + 60, width: 286 }}>
+            {c.text}
+          </p>
+        </div>
+      ))}
 
-        <button
-          type="button"
-          className="acBtn acBtnGhost"
-          style={{ left: 655, top: 602, width: 354, height: 51, fontSize: 20 }}
-          onClick={home}
-        >
-          На главную
-        </button>
-        <button
-          type="button"
-          className="acBtn"
-          style={{ left: 655, top: 670, width: 354, height: 50, fontSize: 20 }}
-          onClick={() => navigate('/register')}
-        >
-          Зарегистрироваться
-        </button>
+      <button
+        type="button"
+        className="acBtn acBtnGhost"
+        style={{ left: 655, top: 602, width: 354, height: 51, fontSize: 20 }}
+        onClick={home}
+      >
+        На главную
+      </button>
+      <button
+        type="button"
+        className="acBtn"
+        style={{ left: 655, top: 670, width: 354, height: 50, fontSize: 20 }}
+        onClick={() => navigate('/register')}
+      >
+        Зарегистрироваться
+      </button>
 
-        <p className="acAbs acBody" style={{ left: 714, top: 738, width: 176, textAlign: 'right' }}>
-          Уже есть аккаунт?
-        </p>
-        <button
-          type="button"
-          className="acAbs acLink"
-          style={{ left: 896, top: 738, fontSize: 20, lineHeight: '27px' }}
-          onClick={() => navigate('/login')}
-        >
-          Войти
-        </button>
+      <p className="acAbs acBody" style={{ left: 714, top: 738, width: 176, textAlign: 'right' }}>
+        Уже есть аккаунт?
+      </p>
+      <button
+        type="button"
+        className="acAbs acLink"
+        style={{ left: 896, top: 738, fontSize: 20, lineHeight: '27px' }}
+        onClick={() => navigate('/login')}
+      >
+        Войти
+      </button>
     </>
   );
 
@@ -147,7 +147,12 @@ export default function Offer({ onClose, onDismiss }) {
         >
           <div
             className="offerCard"
-            style={{ width: 1189, height: 827, transform: `scale(${scale})`, transformOrigin: 'top left' }}
+            style={{
+              width: 1189,
+              height: 827,
+              transform: `scale(${scale})`,
+              transformOrigin: 'top left',
+            }}
           >
             {content}
           </div>

@@ -93,106 +93,106 @@ export default function HowItWorks({ onClose }) {
               overflow: 'hidden',
             }}
           >
-          <p
-            style={{
-              position: 'absolute',
-              left: 133,
-              top: 42,
-              width: 304,
-              margin: 0,
-              textAlign: 'center',
-              fontFamily: "'Playfair Display', serif",
-              fontWeight: 700,
-              fontSize: 34,
-              lineHeight: '44px',
-              color: '#634938',
-            }}
-          >
-            Просто и понятно
-          </p>
-          <img
-            className="acHeart"
-            src={heart}
-            alt=""
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              left: 440,
-              top: 44,
-              width: 54,
-              height: 54,
-              objectFit: 'contain',
-            }}
-          />
-
-          {STEPS.map((s, i) => (
-            <div key={i}>
-              <div
-                style={{
-                  position: 'absolute',
-                  left: 50,
-                  top: s.cardY,
-                  width: 500,
-                  height: 203,
-                  background: '#FFFDFA',
-                  border: '1px solid #E9A563',
-                  borderRadius: 20,
-                }}
-              />
-              <img
-                src={s.ill}
-                alt=""
-                aria-hidden="true"
-                style={{ position: 'absolute', objectFit: 'contain', ...s.illStyle }}
-              />
-              <img
-                src={s.num}
-                alt=""
-                aria-hidden="true"
-                style={{ position: 'absolute', objectFit: 'contain', ...s.numStyle }}
-              />
-              <p
-                style={{
-                  position: 'absolute',
-                  margin: 0,
-                  fontFamily: "'Manrope', sans-serif",
-                  fontWeight: 500,
-                  fontSize: 20,
-                  lineHeight: '27px',
-                  color: '#634938',
-                  ...s.textStyle,
-                }}
-              >
-                {s.text}
-              </p>
-            </div>
-          ))}
-
-          {ARROW_Y.map((y) => (
+            <p
+              style={{
+                position: 'absolute',
+                left: 133,
+                top: 42,
+                width: 304,
+                margin: 0,
+                textAlign: 'center',
+                fontFamily: "'Playfair Display', serif",
+                fontWeight: 700,
+                fontSize: 34,
+                lineHeight: '44px',
+                color: '#634938',
+              }}
+            >
+              Просто и понятно
+            </p>
             <img
-              key={y}
-              src={arrow}
+              className="acHeart"
+              src={heart}
               alt=""
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                left: 282,
-                top: y,
-                width: 38,
-                height: 60,
+                left: 440,
+                top: 44,
+                width: 54,
+                height: 54,
                 objectFit: 'contain',
               }}
             />
-          ))}
 
-          <button
-            type="button"
-            className="acBtn"
-            style={{ left: 200, top: 1257, width: 200, height: 51, fontSize: 20 }}
-            onClick={close}
-          >
-            Понятно
-          </button>
+            {STEPS.map((s, i) => (
+              <div key={i}>
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: 50,
+                    top: s.cardY,
+                    width: 500,
+                    height: 203,
+                    background: '#FFFDFA',
+                    border: '1px solid #E9A563',
+                    borderRadius: 20,
+                  }}
+                />
+                <img
+                  src={s.ill}
+                  alt=""
+                  aria-hidden="true"
+                  style={{ position: 'absolute', objectFit: 'contain', ...s.illStyle }}
+                />
+                <img
+                  src={s.num}
+                  alt=""
+                  aria-hidden="true"
+                  style={{ position: 'absolute', objectFit: 'contain', ...s.numStyle }}
+                />
+                <p
+                  style={{
+                    position: 'absolute',
+                    margin: 0,
+                    fontFamily: "'Manrope', sans-serif",
+                    fontWeight: 500,
+                    fontSize: 20,
+                    lineHeight: '27px',
+                    color: '#634938',
+                    ...s.textStyle,
+                  }}
+                >
+                  {s.text}
+                </p>
+              </div>
+            ))}
+
+            {ARROW_Y.map((y) => (
+              <img
+                key={y}
+                src={arrow}
+                alt=""
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  left: 282,
+                  top: y,
+                  width: 38,
+                  height: 60,
+                  objectFit: 'contain',
+                }}
+              />
+            ))}
+
+            <button
+              type="button"
+              className="acBtn"
+              style={{ left: 200, top: 1257, width: 200, height: 51, fontSize: 20 }}
+              onClick={close}
+            >
+              Понятно
+            </button>
           </div>
         </div>
       </div>

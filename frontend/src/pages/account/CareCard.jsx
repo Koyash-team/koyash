@@ -101,12 +101,7 @@ export default function CareCard({ item, replacementsLeft, busy, onFeedback, onR
               ) : (
                 <div className="careLimit">
                   <span>Извини, но средство больше нельзя заменить, лимит закончился</span>
-                  <img
-                    className="careLimitHeart"
-                    src={heartFilled}
-                    alt=""
-                    aria-hidden="true"
-                  />
+                  <img className="careLimitHeart" src={heartFilled} alt="" aria-hidden="true" />
                 </div>
               )}
             </>

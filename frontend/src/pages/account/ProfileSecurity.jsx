@@ -125,233 +125,233 @@ export default function ProfileSecurity() {
 
   return (
     <>
-    <Stage w={1633} h={1789} mode="screen">
-      <div className="acCanvas" style={{ height: 1789 }}>
-        <TopNav
-          logoLeft={50}
-          right={
-            <button
-              type="button"
-              className="acBtn"
-              style={{ left: 1304, top: 23, width: 281, height: 51, fontSize: 20 }}
-              onClick={() => navigate('/account')}
-            >
-              Вернуться в профиль
-            </button>
-          }
-        />
-
-        <p
-          className="acAbs acTitle"
-          style={{ left: 519, top: 154, width: 594, fontSize: 48, lineHeight: '64px' }}
-        >
-          Профиль и безопасность
-        </p>
-        <img
-          className="acAbs acHeart"
-          src={heart}
-          alt=""
-          aria-hidden="true"
-          style={{ left: 1122, top: 162, width: 56, height: 56, objectFit: 'contain' }}
-        />
-
-        <ProfileCard
-          name={user?.name}
-          email={user?.email}
-          values={profileValues(profile)}
-          hasProfile={!!profile}
-          avatar={user?.avatar}
-          onAvatarClick={() =>
-            navigate('/account/avatar', { state: { from: '/account/security' } })
-          }
-          onEdit={() => navigate('/account/security')}
-          onLogout={logout}
-          onHowItWorks={() => setShowHowItWorks(true)}
-        />
-
-        {/* ── Personal data card ── */}
-        <div className="acCard" style={{ left: 487, top: 289, width: 530, height: 583 }} />
-        <p
-          className="acAbs acTitle"
-          style={{ left: 487, top: 324, width: 530, fontSize: 28, lineHeight: '37px' }}
-        >
-          Личные данные
-        </p>
-        <p className="acAbs" style={{ ...label, left: 530, top: 422 }}>
-          Имя
-        </p>
-        <input
-          className="acEditInput"
-          style={{ left: 688, top: 417, width: 289 }}
-          value={data.name}
-          onChange={setField('name')}
-        />
-        <p className="acAbs" style={{ ...label, left: 530, top: 512 }}>
-          Email
-        </p>
-        <input
-          className="acEditInput"
-          style={{ left: 688, top: 506, width: 289, fontSize: 16 }}
-          value={data.email}
-          onChange={setField('email')}
-        />
-        <p className="acAbs" style={{ ...label, left: 530, top: 613 }}>
-          Телефон
-        </p>
-        <input
-          className="acEditInput"
-          style={{ left: 688, top: 604, width: 289 }}
-          value={data.phone}
-          onChange={setField('phone')}
-          placeholder="+7 (…)"
-        />
-        <p className="acAbs" style={{ ...label, left: 530, top: 701 }}>
-          Возраст
-        </p>
-        <input
-          className="acEditInput"
-          style={{ left: 688, top: 694, width: 289 }}
-          value={data.age}
-          onChange={setField('age')}
-          inputMode="numeric"
-        />
-        {dataMsg && (
-          <p
-            className="acAbs acSmall"
-            style={{ left: 487, top: 762, width: 530, textAlign: 'center' }}
-          >
-            {dataMsg}
-          </p>
-        )}
-        <button
-          type="button"
-          className="acBtn"
-          style={{ left: 533, top: 796, width: 433, height: 51, fontSize: 20 }}
-          onClick={saveData}
-          disabled={busy}
-        >
-          Сохранить изменения
-        </button>
-
-        {/* ── Security card ── */}
-        <div className="acCard" style={{ left: 1039, top: 289, width: 530, height: 670 }} />
-        <p
-          className="acAbs acTitle"
-          style={{ left: 1039, top: 324, width: 530, fontSize: 28, lineHeight: '37px' }}
-        >
-          Безопасность
-        </p>
-        <p className="acAbs" style={{ ...label, left: 1062, top: 422 }}>
-          Текущий пароль
-        </p>
-        <input
-          className="acEditInput"
-          type="password"
-          style={{ left: 1257, top: 417, width: 289 }}
-          value={pw.current}
-          onChange={(e) => setPw((p) => ({ ...p, current: e.target.value }))}
-          autoComplete="current-password"
-        />
-        <p className="acAbs" style={{ ...label, left: 1065, top: 544 }}>
-          Новый пароль
-        </p>
-        <input
-          className="acEditInput"
-          type="password"
-          style={{ left: 1257, top: 535, width: 289 }}
-          value={pw.next}
-          onChange={(e) => setPw((p) => ({ ...p, next: e.target.value }))}
-          autoComplete="new-password"
-        />
-        <p className="acAbs" style={{ ...label, left: 1065, top: 648 }}>
-          Повторите пароль
-        </p>
-        <input
-          className="acEditInput"
-          type="password"
-          style={{ left: 1257, top: 642, width: 289 }}
-          value={pw.confirm}
-          onChange={(e) => setPw((p) => ({ ...p, confirm: e.target.value }))}
-          autoComplete="new-password"
-        />
-        <button
-          type="button"
-          className="acAbs acLink"
-          style={{
-            left: 1065,
-            top: 731,
-            textAlign: 'left',
-            color: '#634938',
-            textDecoration: 'underline',
-          }}
-          onClick={() => navigate('/forgot-password')}
-        >
-          Не помнишь текущий пароль?
-        </button>
-        {pwMsg && (
-          <p
-            className="acAbs acSmall"
-            style={{ left: 1039, top: 763, width: 530, textAlign: 'center' }}
-          >
-            {pwMsg}
-          </p>
-        )}
-        <button
-          type="button"
-          className="acBtn"
-          style={{ left: 1087, top: 797, width: 433, height: 51, fontSize: 20 }}
-          onClick={savePassword}
-          disabled={busy}
-        >
-          Сменить пароль
-        </button>
-        <button
-          type="button"
-          className="acBtn acBtnGhost"
-          style={{ left: 1088, top: 872, width: 432, height: 51, fontSize: 20 }}
-          onClick={() => setAskDelete(true)}
-        >
-          Удалить аккаунт
-        </button>
-
-        <Footer />
-
-        {askDelete && (
-          <ConfirmDialog
-            title="Точно хочешь удалить аккаунт?"
-            message={
-              'Это действие нельзя будет отменить.\nВсе данные будут удалены безвозвратно.\nЧтобы подтвердить удаление, введи пароль.'
+      <Stage w={1633} h={1789} mode="screen">
+        <div className="acCanvas" style={{ height: 1789 }}>
+          <TopNav
+            logoLeft={50}
+            right={
+              <button
+                type="button"
+                className="acBtn"
+                style={{ left: 1304, top: 23, width: 281, height: 51, fontSize: 20 }}
+                onClick={() => navigate('/account')}
+              >
+                Вернуться в профиль
+              </button>
             }
-            confirmLabel="Удалить"
-            onConfirm={confirmDelete}
-            onCancel={() => {
-              setAskDelete(false);
-              setDeletePw('');
-              setDeleteErr('');
-            }}
-            busy={busy}
-            error={deleteErr}
+          />
+
+          <p
+            className="acAbs acTitle"
+            style={{ left: 519, top: 154, width: 594, fontSize: 48, lineHeight: '64px' }}
           >
-            <div className="acModalField">
-              <span
-                className="acFieldIcon"
-                style={{ backgroundImage: `url(${icPass})` }}
-                aria-hidden="true"
-              />
-              <input
-                className="acInput"
-                type="password"
-                placeholder="Пароль"
-                value={deletePw}
-                onChange={(e) => setDeletePw(e.target.value)}
-                autoComplete="current-password"
-              />
-            </div>
-          </ConfirmDialog>
-        )}
-      </div>
-    </Stage>
-    {showHowItWorks && <HowItWorks onClose={() => setShowHowItWorks(false)} />}
+            Профиль и безопасность
+          </p>
+          <img
+            className="acAbs acHeart"
+            src={heart}
+            alt=""
+            aria-hidden="true"
+            style={{ left: 1122, top: 162, width: 56, height: 56, objectFit: 'contain' }}
+          />
+
+          <ProfileCard
+            name={user?.name}
+            email={user?.email}
+            values={profileValues(profile)}
+            hasProfile={!!profile}
+            avatar={user?.avatar}
+            onAvatarClick={() =>
+              navigate('/account/avatar', { state: { from: '/account/security' } })
+            }
+            onEdit={() => navigate('/account/security')}
+            onLogout={logout}
+            onHowItWorks={() => setShowHowItWorks(true)}
+          />
+
+          {/* ── Personal data card ── */}
+          <div className="acCard" style={{ left: 487, top: 289, width: 530, height: 583 }} />
+          <p
+            className="acAbs acTitle"
+            style={{ left: 487, top: 324, width: 530, fontSize: 28, lineHeight: '37px' }}
+          >
+            Личные данные
+          </p>
+          <p className="acAbs" style={{ ...label, left: 530, top: 422 }}>
+            Имя
+          </p>
+          <input
+            className="acEditInput"
+            style={{ left: 688, top: 417, width: 289 }}
+            value={data.name}
+            onChange={setField('name')}
+          />
+          <p className="acAbs" style={{ ...label, left: 530, top: 512 }}>
+            Email
+          </p>
+          <input
+            className="acEditInput"
+            style={{ left: 688, top: 506, width: 289, fontSize: 16 }}
+            value={data.email}
+            onChange={setField('email')}
+          />
+          <p className="acAbs" style={{ ...label, left: 530, top: 613 }}>
+            Телефон
+          </p>
+          <input
+            className="acEditInput"
+            style={{ left: 688, top: 604, width: 289 }}
+            value={data.phone}
+            onChange={setField('phone')}
+            placeholder="+7 (…)"
+          />
+          <p className="acAbs" style={{ ...label, left: 530, top: 701 }}>
+            Возраст
+          </p>
+          <input
+            className="acEditInput"
+            style={{ left: 688, top: 694, width: 289 }}
+            value={data.age}
+            onChange={setField('age')}
+            inputMode="numeric"
+          />
+          {dataMsg && (
+            <p
+              className="acAbs acSmall"
+              style={{ left: 487, top: 762, width: 530, textAlign: 'center' }}
+            >
+              {dataMsg}
+            </p>
+          )}
+          <button
+            type="button"
+            className="acBtn"
+            style={{ left: 533, top: 796, width: 433, height: 51, fontSize: 20 }}
+            onClick={saveData}
+            disabled={busy}
+          >
+            Сохранить изменения
+          </button>
+
+          {/* ── Security card ── */}
+          <div className="acCard" style={{ left: 1039, top: 289, width: 530, height: 670 }} />
+          <p
+            className="acAbs acTitle"
+            style={{ left: 1039, top: 324, width: 530, fontSize: 28, lineHeight: '37px' }}
+          >
+            Безопасность
+          </p>
+          <p className="acAbs" style={{ ...label, left: 1062, top: 422 }}>
+            Текущий пароль
+          </p>
+          <input
+            className="acEditInput"
+            type="password"
+            style={{ left: 1257, top: 417, width: 289 }}
+            value={pw.current}
+            onChange={(e) => setPw((p) => ({ ...p, current: e.target.value }))}
+            autoComplete="current-password"
+          />
+          <p className="acAbs" style={{ ...label, left: 1065, top: 544 }}>
+            Новый пароль
+          </p>
+          <input
+            className="acEditInput"
+            type="password"
+            style={{ left: 1257, top: 535, width: 289 }}
+            value={pw.next}
+            onChange={(e) => setPw((p) => ({ ...p, next: e.target.value }))}
+            autoComplete="new-password"
+          />
+          <p className="acAbs" style={{ ...label, left: 1065, top: 648 }}>
+            Повторите пароль
+          </p>
+          <input
+            className="acEditInput"
+            type="password"
+            style={{ left: 1257, top: 642, width: 289 }}
+            value={pw.confirm}
+            onChange={(e) => setPw((p) => ({ ...p, confirm: e.target.value }))}
+            autoComplete="new-password"
+          />
+          <button
+            type="button"
+            className="acAbs acLink"
+            style={{
+              left: 1065,
+              top: 731,
+              textAlign: 'left',
+              color: '#634938',
+              textDecoration: 'underline',
+            }}
+            onClick={() => navigate('/forgot-password')}
+          >
+            Не помнишь текущий пароль?
+          </button>
+          {pwMsg && (
+            <p
+              className="acAbs acSmall"
+              style={{ left: 1039, top: 763, width: 530, textAlign: 'center' }}
+            >
+              {pwMsg}
+            </p>
+          )}
+          <button
+            type="button"
+            className="acBtn"
+            style={{ left: 1087, top: 797, width: 433, height: 51, fontSize: 20 }}
+            onClick={savePassword}
+            disabled={busy}
+          >
+            Сменить пароль
+          </button>
+          <button
+            type="button"
+            className="acBtn acBtnGhost"
+            style={{ left: 1088, top: 872, width: 432, height: 51, fontSize: 20 }}
+            onClick={() => setAskDelete(true)}
+          >
+            Удалить аккаунт
+          </button>
+
+          <Footer />
+
+          {askDelete && (
+            <ConfirmDialog
+              title="Точно хочешь удалить аккаунт?"
+              message={
+                'Это действие нельзя будет отменить.\nВсе данные будут удалены безвозвратно.\nЧтобы подтвердить удаление, введи пароль.'
+              }
+              confirmLabel="Удалить"
+              onConfirm={confirmDelete}
+              onCancel={() => {
+                setAskDelete(false);
+                setDeletePw('');
+                setDeleteErr('');
+              }}
+              busy={busy}
+              error={deleteErr}
+            >
+              <div className="acModalField">
+                <span
+                  className="acFieldIcon"
+                  style={{ backgroundImage: `url(${icPass})` }}
+                  aria-hidden="true"
+                />
+                <input
+                  className="acInput"
+                  type="password"
+                  placeholder="Пароль"
+                  value={deletePw}
+                  onChange={(e) => setDeletePw(e.target.value)}
+                  autoComplete="current-password"
+                />
+              </div>
+            </ConfirmDialog>
+          )}
+        </div>
+      </Stage>
+      {showHowItWorks && <HowItWorks onClose={() => setShowHowItWorks(false)} />}
     </>
   );
 }
