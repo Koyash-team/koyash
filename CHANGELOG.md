@@ -28,6 +28,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - The personal-cabinet profile card shows the questionnaire allergen categories
   («Силиконы», «Отдушки», …) under «Аллергии» instead of the expanded list of
   excluded ingredients.
+- The account, tracker and results screens were reworked to match the approved
+  design, and the navigation gaps found in the Week 6 trial were fixed: the logo is
+  clickable (returns to the top of the page / the landing), the sign-in screen has
+  a «Назад» button, and the results screen offers registration in a modal with a
+  clear way back to the bag. Interface images were also converted to WebP to load
+  faster.
+- Replacement options for a product now show the same rule-based justification as
+  the main cosmetic bag, so it is clear why each suggested alternative fits.
 
 ### Fixed
 
