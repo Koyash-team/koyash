@@ -24,6 +24,37 @@ export function setToken(token) {
   }
 }
 
+// A guest generates a bag anonymously (the backend saves nothing), so we stash
+// the `/recommend` request they used. After they sign up / sign in we replay it
+// with their token so the same bag + profile get persisted to the account.
+const GUEST_BAG_KEY = 'koyash_guest_bag_request';
+
+export function saveGuestBagRequest(request) {
+  try {
+    localStorage.setItem(GUEST_BAG_KEY, JSON.stringify(request));
+  } catch {
+    /* storage unavailable — the bag just won't carry over */
+  }
+}
+
+export function clearGuestBagRequest() {
+  try {
+    localStorage.removeItem(GUEST_BAG_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+function takeGuestBagRequest() {
+  try {
+    const raw = localStorage.getItem(GUEST_BAG_KEY);
+    localStorage.removeItem(GUEST_BAG_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
 // Thrown for any non-2xx response, carrying the backend's Russian `detail`
 // message so screens can show it verbatim next to the offending field.
 export class ApiError extends Error {
@@ -101,6 +132,18 @@ export const deleteAccount = (payload) =>
   request('/account/delete', { method: 'POST', body: payload, auth: true });
 
 // ── Cosmetic bag (косметичка) ──────────────────────────────────────────────
+
+// Replay a guest's stashed `/recommend` request as the signed-in user, so the
+// backend saves that bag + profile to the account. Called right after sign-up /
+// sign-in. Returns true if a stashed request existed and was replayed; a no-op
+// (false) otherwise. The stash is consumed either way.
+export async function saveGuestBagToAccount() {
+  const req = takeGuestBagRequest();
+  if (!req) return false;
+  await request('/recommend', { method: 'POST', body: req, auth: true });
+  return true;
+}
+
 export const fetchCare = () => request('/care', { auth: true });
 
 export const setItemFeedback = (productId, payload) =>

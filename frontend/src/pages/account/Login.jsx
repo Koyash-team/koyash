@@ -6,7 +6,7 @@ import TopNav from './TopNav';
 import AuthField from './AuthField';
 import FieldError from './FieldError';
 import { useAuth } from '../../auth/useAuth';
-import { ApiError, loginUser } from '../../api/client';
+import { ApiError, loginUser, saveGuestBagToAccount } from '../../api/client';
 
 import hero from '../../assets/account/hero-login.webp';
 import lineHeart from '../../assets/account/line-heart.webp';
@@ -34,6 +34,13 @@ export default function Login() {
     try {
       const token = await loginUser({ email: email.trim(), password });
       signIn(token);
+      // If the user just took the questionnaire as a guest and signed in from the
+      // results offer, carry that freshly generated bag into their account.
+      try {
+        await saveGuestBagToAccount();
+      } catch {
+        /* keep the existing saved bag; sign-in itself succeeded */
+      }
       navigate('/account');
     } catch (e) {
       setError(e instanceof ApiError ? e.message : 'Не удалось войти');

@@ -5,7 +5,7 @@ import Stage from './Stage';
 import logo from '../../assets/landing/logo.webp';
 import sceneLoading from '../../assets/quiz/scene-loading.webp';
 import { buildRequest } from './quizConfig';
-import { getToken } from '../../api/client';
+import { getToken, saveGuestBagRequest, clearGuestBagRequest } from '../../api/client';
 
 const LOADING_STEPS = [
   'Смотрю, что подойдёт именно тебе...',
@@ -41,7 +41,15 @@ export default function Loading({ answers }) {
     // anonymous and nothing is saved).
     const headers = { 'Content-Type': 'application/json' };
     const token = getToken();
-    if (token) headers.Authorization = `Bearer ${token}`;
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+      // Signed-in: the bag is saved directly — drop any stale guest stash.
+      clearGuestBagRequest();
+    } else {
+      // Guest: stash the request so it can be saved if they register/sign in
+      // from the results offer.
+      saveGuestBagRequest(request);
+    }
     fetch(`${API_URL}/recommend`, {
       method: 'POST',
       headers,

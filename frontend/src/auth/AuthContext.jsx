@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { fetchMe, getToken, setToken, updateAccount } from '../api/client';
+import { clearGuestBagRequest, fetchMe, getToken, setToken, updateAccount } from '../api/client';
 import { AuthContext } from './useAuth';
 
 const USER_KEY = 'koyash_user';
@@ -83,6 +83,8 @@ export function AuthProvider({ children }) {
     setToken(null);
     writeStoredUser(null);
     setUser(null);
+    // Drop any stashed guest bag so a later sign-in can't replay a stale one.
+    clearGuestBagRequest();
   }, []);
 
   // Patch the cached user after a profile edit without a full re-fetch.

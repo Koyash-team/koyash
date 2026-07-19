@@ -6,7 +6,7 @@ import TopNav from './TopNav';
 import AuthField from './AuthField';
 import FieldError from './FieldError';
 import { useAuth } from '../../auth/useAuth';
-import { ApiError, registerUser } from '../../api/client';
+import { ApiError, registerUser, saveGuestBagToAccount } from '../../api/client';
 
 import hero from '../../assets/account/hero-register.webp';
 import lineHeart from '../../assets/account/line-heart.webp';
@@ -66,6 +66,14 @@ export default function Register() {
     try {
       const token = await registerUser(payload);
       signIn(token);
+      // Carry the guest's freshly generated bag into the new account: replay the
+      // stashed /recommend request with the token so it is saved server-side.
+      // Best-effort — a failure here must not block the successful registration.
+      try {
+        await saveGuestBagToAccount();
+      } catch {
+        /* the cabinet may just start empty; the account itself is fine */
+      }
       // Land in the cabinet and open the avatar picker over it (dimmed),
       // instead of a standalone empty picker screen.
       navigate('/account', { state: { pickAvatar: true } });
