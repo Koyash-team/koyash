@@ -370,8 +370,11 @@ def test_alternatives_for_disliked_item(app_client):
     body = r.json()
     assert body["step"] == "serum"
     assert body["replacements_left"] == 2
-    ids = [a["id"] for a in body["alternatives"]]
+    ids = [a["product"]["id"] for a in body["alternatives"]]
     assert pid not in ids and len(ids) >= 1
+    # Alternatives now carry the full bag item (product + rule-based justification),
+    # so the replacement screen can show the same explanations as the main bag.
+    assert all("product" in a and "justification" in a for a in body["alternatives"])
 
 
 def test_alternatives_require_disliked(app_client):
@@ -385,7 +388,7 @@ def test_alternatives_require_disliked(app_client):
 
 def test_replace_swaps_and_keeps_old_dimmed(app_client):
     token, pid = _setup_disliked_serum(app_client)
-    new_id = _alternatives(app_client, token, pid)[0]["id"]
+    new_id = _alternatives(app_client, token, pid)[0]["product"]["id"]
     r = app_client.post(
         f"/care/items/{pid}/replace", json={"new_product_id": new_id}, headers=_auth(token)
     )
@@ -412,7 +415,7 @@ def test_replacement_limited_to_two_per_step(app_client):
     # 1st replacement
     r1 = app_client.post(
         f"/care/items/{pid}/replace",
-        json={"new_product_id": _alternatives(app_client, token, pid)[0]["id"]},
+        json={"new_product_id": _alternatives(app_client, token, pid)[0]["product"]["id"]},
         headers=_auth(token),
     ).json()
     s1 = _serum_id(r1["items"])
@@ -424,7 +427,7 @@ def test_replacement_limited_to_two_per_step(app_client):
     # 2nd replacement
     r2 = app_client.post(
         f"/care/items/{s1}/replace",
-        json={"new_product_id": _alternatives(app_client, token, s1)[0]["id"]},
+        json={"new_product_id": _alternatives(app_client, token, s1)[0]["product"]["id"]},
         headers=_auth(token),
     ).json()
     assert r2["replacements"]["serum"] == 2

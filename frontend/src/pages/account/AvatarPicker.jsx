@@ -3,12 +3,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './account.css';
 import { useAuth } from '../../auth/useAuth';
 import { AVATARS } from './avatars';
-import heart from '../../assets/account/offer-spot.png';
+import heart from '../../assets/account/offer-spot.webp';
 
 // Выбор профиля (Figma 2828:1036) — pick a profile avatar. Reached from the
 // registration flow and from «Профиль и безопасность». Saves via the auth
-// context (server best-effort + local fallback).
-export default function AvatarPicker() {
+// context (server best-effort + local fallback). When rendered as an overlay
+// on top of a page (e.g. the cabinet right after registration) the caller
+// passes `onClose`; otherwise it navigates back to `location.state.from`.
+export default function AvatarPicker({ onClose }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, isAuthenticated, ready, setAvatar } = useAuth();
@@ -20,9 +22,11 @@ export default function AvatarPicker() {
     if (ready && !isAuthenticated) navigate('/login', { replace: true });
   }, [ready, isAuthenticated, navigate]);
 
+  const close = () => (onClose ? onClose() : navigate(from, { replace: true }));
+
   function save() {
     if (selected) setAvatar(selected);
-    navigate(from, { replace: true });
+    close();
   }
 
   return (
@@ -70,7 +74,7 @@ export default function AvatarPicker() {
             type="button"
             className="acBtn acBtnGhost acModalBtn"
             style={{ width: 220 }}
-            onClick={() => navigate(from, { replace: true })}
+            onClick={close}
           >
             Назад
           </button>

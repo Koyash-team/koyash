@@ -1,5 +1,5 @@
 import './account.css';
-import lineHeart from '../../assets/account/line-heart.png';
+import lineHeart from '../../assets/account/line-heart.webp';
 
 // Centered confirm modal used for "Точно хочешь обновить уход?" (Figma 2811:216)
 // and "Точно хочешь удалить аккаунт?" (2813:238). `children` lets the delete

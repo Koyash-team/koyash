@@ -5,7 +5,7 @@ import QuizStep from './QuizStep';
 import Loading from './Loading';
 import SkinTest from '../SkinTest';
 import { STEPS } from './quizConfig';
-import sceneLoading from '../../assets/quiz/scene-loading.png';
+import sceneLoading from '../../assets/quiz/scene-loading.webp';
 
 const INTRO_STEP = 0;
 const LOADING_STEP = STEPS.length + 1;

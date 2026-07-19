@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import ProductCard from './ProductCard';
+import heartFilled from '../../assets/account/pf-pref.webp';
+import spark from '../../assets/account/spark.webp';
 
 // One product in the bag with its feedback controls (Figma 2673:1259).
 // - "Подошло"   → PUT feedback liked
@@ -7,6 +9,7 @@ import ProductCard from './ProductCard';
 // - once disliked, offer a replacement while the step still has swaps left
 export default function CareCard({ item, replacementsLeft, busy, onFeedback, onReplace }) {
   const feedback = item.feedback; // 'liked' | 'disliked' | null
+  const isReplaced = item.status === 'replaced';
   const [commenting, setCommenting] = useState(false);
   const [comment, setComment] = useState(item.comment || '');
 
@@ -44,16 +47,16 @@ export default function CareCard({ item, replacementsLeft, busy, onFeedback, onR
 
       {commenting && feedback !== 'disliked' && (
         <>
+          <p className="careFbLabel">Что именно не так?</p>
           <textarea
             className="careComment"
-            placeholder="Что именно не так? Комментарий…"
+            placeholder="Комментарий"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
           <button
             type="button"
-            className="acBtn acModalBtn"
-            style={{ width: '100%' }}
+            className="acBtn acModalBtn careSubmit"
             onClick={submitDislike}
             disabled={busy || !comment.trim()}
           >
@@ -64,33 +67,49 @@ export default function CareCard({ item, replacementsLeft, busy, onFeedback, onR
 
       {feedback === 'disliked' && (
         <>
-          <p className="careThanks">Спасибо за отзыв!</p>
-          {item.comment && (
-            <p className="careWhy" style={{ margin: 0 }}>
-              {item.comment}
-            </p>
-          )}
-          {replacementsLeft > 0 ? (
-            <>
-              <button
-                type="button"
-                className="careReplaceLink"
-                onClick={() => onReplace(item)}
-                disabled={busy}
-              >
-                Заменить на похожий продукт
-              </button>
-              <span className="careHint">Можно заменить: {replacementsLeft}&nbsp;раза</span>
-            </>
+          {item.comment && <div className="careCommentBox">{item.comment}</div>}
+
+          {isReplaced ? (
+            // Replaced product: «Отправлен» → «Спасибо за отзыв!» → heart, centered
+            <div className="careReplacedFb">
+              <span className="careSent">Отправлен</span>
+              <p className="careThanksCenter">Спасибо за отзыв!</p>
+              <img className="careReplacedHeart" src={heartFilled} alt="" aria-hidden="true" />
+            </div>
           ) : (
-            <span className="careHint">
-              Извини, но средство больше нельзя заменить — лимит исчерпан
-            </span>
+            <>
+              <div className="careThanksRow">
+                <span className="careThanks">Спасибо за отзыв!</span>
+                <span className="careSent">Отправлен</span>
+              </div>
+              {replacementsLeft > 0 ? (
+                <>
+                  <button
+                    type="button"
+                    className="careReplaceLink"
+                    onClick={() => onReplace(item)}
+                    disabled={busy}
+                  >
+                    Заменить на похожий продукт
+                  </button>
+                  <span className="careHint">
+                    <img className="careSpark" src={spark} alt="" aria-hidden="true" />
+                    Можно заменить: {replacementsLeft}&nbsp;
+                    {replacementsLeft === 1 ? 'раз' : 'раза'}
+                  </span>
+                </>
+              ) : (
+                <div className="careLimit">
+                  <span>Извини, но средство больше нельзя заменить, лимит закончился</span>
+                  <img className="careLimitHeart" src={heartFilled} alt="" aria-hidden="true" />
+                </div>
+              )}
+            </>
           )}
         </>
       )}
     </>
   );
 
-  return <ProductCard item={item} side={side} dimmed={item.status === 'replaced'} />;
+  return <ProductCard item={item} side={side} dimmed={isReplaced} />;
 }

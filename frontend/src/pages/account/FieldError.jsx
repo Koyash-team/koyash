@@ -1,4 +1,4 @@
-import icError from '../../assets/account/ic-error.png';
+import icError from '../../assets/account/ic-error.webp';
 
 // Inline form error shown under the fields on the auth screens (Figma error
 // frames, e.g. 2787:47): a warning glyph next to the message. Centered on the

@@ -1,16 +1,19 @@
+import { useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import './Results.css';
-import logo from '../../assets/landing/logo.png';
-import heart from '../../assets/landing/heart.png';
-import sceneLoading from '../../assets/quiz/scene-loading.png';
+import { useAuth } from '../../auth/useAuth';
+import Offer from '../account/Offer';
+import logo from '../../assets/landing/logo.webp';
+import heart from '../../assets/landing/heart.webp';
+import sceneLoading from '../../assets/quiz/scene-loading.webp';
 
-import bagCleanser from '../../assets/results/bag-cleanser.png';
-import bagToner from '../../assets/results/bag-toner.png';
-import bagSerum from '../../assets/results/bag-serum.png';
-import bagCream from '../../assets/results/bag-cream.png';
-import bagSpf from '../../assets/results/bag-spf.png';
-import bagNightCream from '../../assets/results/bag-night-cream.png';
-import bagNotFound from '../../assets/results/bag-not-found.png.png';
+import bagCleanser from '../../assets/results/bag-cleanser.webp';
+import bagToner from '../../assets/results/bag-toner.webp';
+import bagSerum from '../../assets/results/bag-serum.webp';
+import bagCream from '../../assets/results/bag-cream.webp';
+import bagSpf from '../../assets/results/bag-spf.webp';
+import bagNightCream from '../../assets/results/bag-night-cream.webp';
+import bagNotFound from '../../assets/results/bag-not-found.webp';
 
 const STEP_IMG = {
   cleanse: bagCleanser,
@@ -65,10 +68,17 @@ function productHref(link) {
 }
 
 function NoResults({ onRetake }) {
+  const navigate = useNavigate();
   return (
     <div className="noResultsPage">
       <header className="nrHeader">
-        <img className="nrLogo" src={logo} alt="Koyash" />
+        <img
+          className="nrLogo"
+          src={logo}
+          alt="Koyash"
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate('/')}
+        />
         <div className="nrBar" />
       </header>
       <img className="nrScene" src={sceneLoading} alt="" aria-hidden="true" />
@@ -129,8 +139,13 @@ function ProductCard({ product: p, justification: j }) {
 export default function Results() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+  const [showOffer, setShowOffer] = useState(false);
   const { results, error } = location.state || {};
   const handleRetake = () => navigate('/quiz');
+  // Guests get nudged to register (saving their bag) before leaving; signed-in
+  // users go straight home.
+  const handleHome = () => (isAuthenticated ? navigate('/') : setShowOffer(true));
 
   if (error || !results || results.noResults || !results.bag || results.bag.length === 0) {
     return <NoResults onRetake={handleRetake} />;
@@ -141,7 +156,13 @@ export default function Results() {
   return (
     <div className="rPage">
       {/* logo + full-width bar, same look as the quiz header */}
-      <img className="rLogo" src={logo} alt="Koyash" />
+      <img
+        className="rLogo"
+        src={logo}
+        alt="Koyash"
+        style={{ cursor: 'pointer' }}
+        onClick={() => navigate('/')}
+      />
       <div className="rTrack" />
 
       <div className="rWrap">
@@ -168,17 +189,16 @@ export default function Results() {
         {meta.note && <p className="rMetaNote">{meta.note}</p>}
 
         <div className="rActions">
-          <Link to="/account" className="rBtnCabinet">
-            Мой кабинет
-          </Link>
           <button className="rBtnPrimary" type="button" onClick={handleRetake}>
             Пройти заново
           </button>
-          <Link to="/" className="rBtnGhost">
+          <button className="rBtnGhost" type="button" onClick={handleHome}>
             На главную
-          </Link>
+          </button>
         </div>
       </div>
+
+      {showOffer && <Offer onClose={() => navigate('/')} onDismiss={() => setShowOffer(false)} />}
     </div>
   );
 }

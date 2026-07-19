@@ -8,13 +8,13 @@ import FieldError from './FieldError';
 import { useAuth } from '../../auth/useAuth';
 import { ApiError, registerUser } from '../../api/client';
 
-import hero from '../../assets/account/hero-register.png';
-import lineHeart from '../../assets/account/line-heart.png';
-import icName from '../../assets/account/ic-name.png';
-import icAge from '../../assets/account/ic-age.png';
-import icPhone from '../../assets/account/ic-phone.png';
-import icEmail from '../../assets/account/ic-email.png';
-import icPass from '../../assets/account/ic-pass.png';
+import hero from '../../assets/account/hero-register.webp';
+import lineHeart from '../../assets/account/line-heart.webp';
+import icName from '../../assets/account/ic-name.webp';
+import icAge from '../../assets/account/ic-age.webp';
+import icPhone from '../../assets/account/ic-phone.webp';
+import icEmail from '../../assets/account/ic-email.webp';
+import icPass from '../../assets/account/ic-pass.webp';
 
 // Регистрация (Figma 2673:1066). Guest-first: this is an optional account on
 // top of the questionnaire. On success the user is signed in immediately
@@ -66,7 +66,9 @@ export default function Register() {
     try {
       const token = await registerUser(payload);
       signIn(token);
-      navigate('/account/avatar', { state: { from: '/account' } });
+      // Land in the cabinet and open the avatar picker over it (dimmed),
+      // instead of a standalone empty picker screen.
+      navigate('/account', { state: { pickAvatar: true } });
     } catch (e) {
       setError(e instanceof ApiError ? e.message : 'Не удалось зарегистрироваться');
     } finally {
@@ -163,8 +165,16 @@ export default function Register() {
 
         <button
           type="button"
+          className="acBtn acBtnGhost"
+          style={{ left: 597, top: 698 + shift, width: 161, height: 41, fontSize: 16 }}
+          onClick={() => navigate(-1)}
+        >
+          Назад
+        </button>
+        <button
+          type="button"
           className="acBtn"
-          style={{ left: 684, top: 698 + shift, width: 265, height: 41, fontSize: 16 }}
+          style={{ left: 782, top: 698 + shift, width: 247, height: 41, fontSize: 16 }}
           onClick={handleSubmit}
           disabled={busy}
         >

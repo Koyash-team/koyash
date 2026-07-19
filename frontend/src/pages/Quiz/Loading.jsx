@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Loading.css';
 import Stage from './Stage';
-import logo from '../../assets/landing/logo.png';
-import sceneLoading from '../../assets/quiz/scene-loading.png';
+import logo from '../../assets/landing/logo.webp';
+import sceneLoading from '../../assets/quiz/scene-loading.webp';
 import { buildRequest } from './quizConfig';
 import { getToken } from '../../api/client';
 
@@ -23,11 +23,16 @@ export default function Loading({ answers }) {
   const [progress, setProgress] = useState(8);
 
   useEffect(() => {
+    let cancelled = false;
+    const timers = [];
+
     LOADING_STEPS.forEach((_, i) => {
-      setTimeout(() => {
-        setVisibleCount(i + 1);
-        setProgress(Math.round(((i + 1) / LOADING_STEPS.length) * 80) + 8);
-      }, i * 650);
+      timers.push(
+        setTimeout(() => {
+          setVisibleCount(i + 1);
+          setProgress(Math.round(((i + 1) / LOADING_STEPS.length) * 80) + 8);
+        }, i * 650),
+      );
     });
 
     const request = buildRequest(answers);
@@ -55,16 +60,35 @@ export default function Loading({ answers }) {
         return res.json();
       })
       .then((data) => {
+        if (cancelled) return;
         setProgress(100);
-        setTimeout(() => navigate('/results', { state: { results: data, answers } }), 550);
+        timers.push(
+          setTimeout(() => navigate('/results', { state: { results: data, answers } }), 550),
+        );
       })
-      .catch(() => navigate('/results', { state: { error: true, answers } }));
+      .catch(() => {
+        if (cancelled) return;
+        navigate('/results', { state: { error: true, answers } });
+      });
+
+    // Clear pending timers and ignore late async resolutions on unmount, so a
+    // fired timer never calls setState after teardown (the test-teardown flake).
+    return () => {
+      cancelled = true;
+      timers.forEach(clearTimeout);
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Stage>
       <div className="loadRoot">
-        <img className="loadLogo" src={logo} alt="Koyash" />
+        <img
+          className="loadLogo"
+          src={logo}
+          alt="Koyash"
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate('/')}
+        />
         <div className="loadTrack" />
         <div className="loadFill" style={{ width: `${(progress / 100) * 1307}px` }} />
 

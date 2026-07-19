@@ -1,9 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import './QuizScreen1.css';
 import Stage from './Stage';
-import logo from '../../assets/landing/logo.png';
-import sceneOpening from '../../assets/quiz/scene-opening.png';
-import decorLeaf from '../../assets/quiz/decor-leaf.png';
-import heart from '../../assets/landing/heart.png';
+import logo from '../../assets/landing/logo.webp';
+import sceneOpening from '../../assets/quiz/scene-opening.webp';
+import decorLeaf from '../../assets/quiz/decor-leaf.webp';
+import heart from '../../assets/landing/heart.webp';
 
 const title = 'Ты заходишь в уютный дом. Пахнет травяным чаем. В окно мягко заглядывает солнце.';
 const text = `— Заходи, солнышко. Садись поудобнее, чай уже тёплый.
@@ -13,10 +14,17 @@ const text = `— Заходи, солнышко. Садись поудобне�
 Давай посмотрим, что подойдёт именно тебе. Несколько вопросов — и готово.`;
 
 export default function QuizScreen1({ onNext, onBack }) {
+  const navigate = useNavigate();
   return (
     <Stage>
       <div className="introRoot">
-        <img className="introLogo" src={logo} alt="Koyash" />
+        <img
+          className="introLogo"
+          src={logo}
+          alt="Koyash"
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate('/')}
+        />
         <div className="introTrack" />
         <img className="introScene" src={sceneOpening} alt="" aria-hidden="true" />
         <img className="introLeaf" src={decorLeaf} alt="" aria-hidden="true" />

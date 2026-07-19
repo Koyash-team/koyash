@@ -1,6 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import './QuickStep.css';
 import Stage from '../Quiz/Stage';
-import logo from '../../assets/landing/logo.png';
+import logo from '../../assets/landing/logo.webp';
 
 const AGE_MIN = 10;
 const AGE_MAX = 100;
@@ -22,6 +23,7 @@ export default function QuickStep({
   onBack,
   onSkinTest,
 }) {
+  const navigate = useNavigate();
   const f = step.fig;
   const isAge = step.id === 'age';
   const ageErr = isAge ? ageError(answer) : '';
@@ -61,7 +63,13 @@ export default function QuickStep({
   return (
     <Stage>
       <div className="kRoot">
-        <img className="kLogo" src={logo} alt="Koyash" />
+        <img
+          className="kLogo"
+          src={logo}
+          alt="Koyash"
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate('/')}
+        />
         <div className="kTrack" />
         <div className="kFill" style={{ width: `${(progressPct / 100) * 1307}px` }} />
 

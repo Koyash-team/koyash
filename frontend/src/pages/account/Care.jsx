@@ -4,10 +4,13 @@ import './account.css';
 import Stage from '../Quiz/Stage';
 import TopNav from './TopNav';
 import CareCard from './CareCard';
+import Replace from './Replace';
 import ConfirmDialog from './ConfirmDialog';
 import { useAuth } from '../../auth/useAuth';
 import { fetchCare, setItemFeedback } from '../../api/client';
 import { formatPrice } from './careFormat';
+import titleHeart from '../../assets/account/offer-spot.webp';
+import heartFilled from '../../assets/account/pf-pref.webp';
 
 const MAX_REPLACEMENTS = 2;
 
@@ -22,6 +25,15 @@ export default function Care() {
   const [loaded, setLoaded] = useState(false);
   const [busy, setBusy] = useState(false);
   const [askUpdate, setAskUpdate] = useState(false);
+  // Замена средства — shown as a modal over the dimmed bag.
+  const [replaceId, setReplaceId] = useState(null);
+
+  function handleReplaced() {
+    setReplaceId(null);
+    fetchCare()
+      .then(setCare)
+      .catch(() => {});
+  }
 
   useEffect(() => {
     if (ready && !isAuthenticated) navigate('/login', { replace: true });
@@ -65,91 +77,114 @@ export default function Care() {
   const leftFor = (item) => MAX_REPLACEMENTS - (replacements[item.product.routine_step] || 0);
 
   return (
-    <Stage w={1633} mode="page">
-      <div className="acCanvas" style={{ width: 1633 }}>
-        <div style={{ position: 'relative', height: 235 }}>
-          <TopNav right={rightNav} />
-          <p
-            className="acAbs acTitle"
-            style={{ left: 0, top: 154, width: 1633, fontSize: 48, lineHeight: '64px' }}
-          >
-            Моя косметичка
-          </p>
-        </div>
+    <>
+      <Stage w={1633} mode="page">
+        <div className="acCanvas" style={{ width: 1633 }}>
+          <div style={{ position: 'relative', height: 235 }}>
+            <TopNav right={rightNav} logoLeft={50} />
+            <img
+              className="acAbs acHeart"
+              src={titleHeart}
+              alt=""
+              aria-hidden="true"
+              style={{ left: 1012, top: 162, width: 56, height: 56, objectFit: 'contain' }}
+            />
+            <p
+              className="acAbs acTitle"
+              style={{ left: 0, top: 154, width: 1633, fontSize: 48, lineHeight: '64px' }}
+            >
+              Моя косметичка
+            </p>
+          </div>
 
-        {care ? (
-          <>
-            <div className="careList">
-              <div className="careBanner">
-                Оцени каждое средство: подошло или не подошло. Если что-то не подошло — оставь
-                комментарий и подбери похожую замену.
+          {care ? (
+            <>
+              <div className="careList">
+                <div className="careBanner">
+                  <img className="careBannerHeart" src={heartFilled} alt="" aria-hidden="true" />
+                  <span>
+                    Оцени каждое средство: подошло или не подошло. Если что-то не подошло — оставь
+                    комментарий и подбери похожую замену.
+                  </span>
+                </div>
+                {active.map((item) => (
+                  <CareCard
+                    key={item.product.id}
+                    item={item}
+                    replacementsLeft={leftFor(item)}
+                    busy={busy}
+                    onFeedback={handleFeedback}
+                    onReplace={(it) => setReplaceId(it.product.id)}
+                  />
+                ))}
+                {/* divider separating suitable products from replaced ones */}
+                {replaced.length > 0 && <div className="careDivider" />}
+                {replaced.map((item) => (
+                  <CareCard
+                    key={item.product.id}
+                    item={item}
+                    replacementsLeft={0}
+                    busy={busy}
+                    onFeedback={handleFeedback}
+                    onReplace={() => {}}
+                  />
+                ))}
               </div>
-              {active.map((item) => (
-                <CareCard
-                  key={item.product.id}
-                  item={item}
-                  replacementsLeft={leftFor(item)}
-                  busy={busy}
-                  onFeedback={handleFeedback}
-                  onReplace={(it) => navigate(`/account/care/replace/${it.product.id}`)}
-                />
-              ))}
-              {replaced.map((item) => (
-                <CareCard
-                  key={item.product.id}
-                  item={item}
-                  replacementsLeft={0}
-                  busy={busy}
-                  onFeedback={handleFeedback}
-                  onReplace={() => {}}
-                />
-              ))}
-            </div>
 
-            <div className="careFootRow">
-              <button
-                type="button"
-                className="acBtn acBtnGhost acModalBtn"
-                style={{ width: 200 }}
-                onClick={() => navigate('/account')}
-              >
-                Назад
-              </button>
-              <button
-                type="button"
-                className="acBtn acModalBtn"
-                style={{ width: 325 }}
-                onClick={() => setAskUpdate(true)}
-              >
-                Обновить косметичку
-              </button>
-              <button
-                type="button"
-                className="acBtn acModalBtn"
-                style={{ width: 325 }}
-                onClick={() => navigate('/account/tracker')}
-              >
-                Трекер результата
-              </button>
-              <span className="careSum">Сумма: {formatPrice(care.total_price_rub)}</span>
-            </div>
-          </>
-        ) : (
-          <p className="acBody" style={{ textAlign: 'center', padding: '80px 0' }}>
-            {loaded ? 'Косметичка пока пуста — пройди подбор ухода.' : 'Загружаем…'}
-          </p>
-        )}
+              <div className="careFootRow">
+                <button
+                  type="button"
+                  className="acBtn acBtnGhost acModalBtn"
+                  style={{ width: 200 }}
+                  onClick={() => navigate('/account')}
+                >
+                  Назад
+                </button>
+                <button
+                  type="button"
+                  className="acBtn acModalBtn"
+                  style={{ width: 325 }}
+                  onClick={() => setAskUpdate(true)}
+                >
+                  Обновить косметичку
+                </button>
+                <button
+                  type="button"
+                  className="acBtn acModalBtn"
+                  style={{ width: 325 }}
+                  onClick={() => navigate('/account/tracker')}
+                >
+                  Трекер результата
+                </button>
+                <span className="careSum">Сумма: {formatPrice(care.total_price_rub)}</span>
+              </div>
+            </>
+          ) : (
+            <p className="acBody" style={{ textAlign: 'center', padding: '80px 0' }}>
+              {loaded ? 'Косметичка пока пуста — пройди подбор ухода.' : 'Загружаем…'}
+            </p>
+          )}
 
-        {askUpdate && (
-          <ConfirmDialog
-            title="Точно хочешь обновить уход?"
-            message="Текущий уход будет удалён"
-            confirmLabel="Обновить"
-            onConfirm={() => navigate('/quick')}
-            onCancel={() => setAskUpdate(false)}
-          />
-        )}
-      </div>
-    </Stage>
+          {askUpdate && (
+            <ConfirmDialog
+              title="Точно хочешь обновить уход?"
+              message="Текущий уход будет удалён"
+              confirmLabel="Обновить"
+              onConfirm={() => navigate('/quick')}
+              onCancel={() => setAskUpdate(false)}
+            />
+          )}
+        </div>
+      </Stage>
+      {/* Replacement modal over the dimmed bag (outside <Stage> so its fixed
+        overlay isn't scaled by the stage transform). */}
+      {replaceId && (
+        <Replace
+          embedId={replaceId}
+          onClose={() => setReplaceId(null)}
+          onReplaced={handleReplaced}
+        />
+      )}
+    </>
   );
 }

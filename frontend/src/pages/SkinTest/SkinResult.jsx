@@ -1,14 +1,22 @@
+import { useNavigate } from 'react-router-dom';
 import './SkinResult.css';
 import Stage from '../Quiz/Stage';
-import logo from '../../assets/landing/logo.png';
+import logo from '../../assets/landing/logo.webp';
 import { SKIN_RESULTS, RESULT_SCENE, RESULT_NOTE } from './skinTypeConfig';
 
 export default function SkinResult({ type, onBack, onDone }) {
+  const navigate = useNavigate();
   const r = SKIN_RESULTS[type] || SKIN_RESULTS.normal;
   return (
     <Stage>
       <div className="srRoot">
-        <img className="srLogo" src={logo} alt="Koyash" />
+        <img
+          className="srLogo"
+          src={logo}
+          alt="Koyash"
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate('/')}
+        />
         <div className="srTrack" />
         <div className="srFill" style={{ width: '1307px' }} />
 

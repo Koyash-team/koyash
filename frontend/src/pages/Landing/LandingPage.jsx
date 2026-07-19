@@ -4,31 +4,31 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Stage from '../Quiz/Stage';
 import { useAuth } from '../../auth/useAuth';
 
-import logo from '../../assets/landing/logo.png';
-import mascot from '../../assets/landing/maskot.png';
-import heart from '../../assets/landing/heart.png';
-import problemNote from '../../assets/landing/problem-caption-note.png';
-import cloudNote from '../../assets/landing/decor-cloud-note.png';
-import problemArrow from '../../assets/landing/problem-arrow.png';
-import lineHeart from '../../assets/landing/line-heart.png';
-import lineHeart2 from '../../assets/landing/line-heart-2.png';
-import hLineLeft from '../../assets/landing/horizontal-line-left.png';
-import hLineRight from '../../assets/landing/horizontal-line-right.png';
-import decorCream from '../../assets/landing/decor-cream.png';
-import smear from '../../assets/landing/smear.png';
-import analysisSmear from '../../assets/landing/analysis-smear.png';
-import analysisLine from '../../assets/landing/analysis-line.png';
-import aLeft from '../../assets/landing/analysis-decor-left.png';
-import aMid from '../../assets/landing/analysis-decor-middle.png';
-import aRight from '../../assets/landing/analysis-decor-right.png';
-import step1 from '../../assets/landing/step-icon-1.png';
-import step2 from '../../assets/landing/step-icon-2.png';
-import step3 from '../../assets/landing/step-icon-3.png';
-import trustSun from '../../assets/landing/trust-sun.png';
-import imagePhotoroom from '../../assets/landing/advice-cta.png';
-import endCloud from '../../assets/landing/end-cloud.png';
-import endEmail from '../../assets/landing/end-email.png';
-import endTelegram from '../../assets/landing/end-telegram.png';
+import logo from '../../assets/landing/logo.webp';
+import mascot from '../../assets/landing/maskot.webp';
+import heart from '../../assets/landing/heart.webp';
+import problemNote from '../../assets/landing/problem-caption-note.webp';
+import cloudNote from '../../assets/landing/decor-cloud-note.webp';
+import problemArrow from '../../assets/landing/problem-arrow.webp';
+import lineHeart from '../../assets/landing/line-heart.webp';
+import lineHeart2 from '../../assets/landing/line-heart-2.webp';
+import hLineLeft from '../../assets/landing/horizontal-line-left.webp';
+import hLineRight from '../../assets/landing/horizontal-line-right.webp';
+import decorCream from '../../assets/landing/decor-cream.webp';
+import smear from '../../assets/landing/smear.webp';
+import analysisSmear from '../../assets/landing/analysis-smear.webp';
+import analysisLine from '../../assets/landing/analysis-line.webp';
+import aLeft from '../../assets/landing/analysis-decor-left.webp';
+import aMid from '../../assets/landing/analysis-decor-middle.webp';
+import aRight from '../../assets/landing/analysis-decor-right.webp';
+import step1 from '../../assets/landing/step-icon-1.webp';
+import step2 from '../../assets/landing/step-icon-2.webp';
+import step3 from '../../assets/landing/step-icon-3.webp';
+import trustSun from '../../assets/landing/trust-sun.webp';
+import imagePhotoroom from '../../assets/landing/advice-cta.webp';
+import endCloud from '../../assets/landing/end-cloud.webp';
+import endEmail from '../../assets/landing/end-email.webp';
+import endTelegram from '../../assets/landing/end-telegram.webp';
 
 const Img = ({ src, x, y, w, h, cls = '', reveal = true }) => (
   <img
@@ -128,7 +128,12 @@ export function LandingPage() {
   // page has laid out.
   useEffect(() => {
     const target = location.state?.scrollTo;
-    if (!target) return;
+    if (!target) {
+      // Fresh entry (e.g. «На главную») — start at the very top, don't inherit
+      // the previous page's scroll position.
+      window.scrollTo(0, 0);
+      return;
+    }
     const t = setTimeout(() => scrollTo(target)(), 220);
     return () => clearTimeout(t);
   }, [location.state]);
@@ -137,16 +142,31 @@ export function LandingPage() {
     <Stage w={1633} h={4149} mode="page">
       <div className="landingCanvas">
         <span id="top" className="lAbs" style={{ left: 0, top: 0, width: 1, height: 1 }} />
+        <span id="about" className="lAbs" style={{ left: 0, top: 700, width: 1, height: 1 }} />
         <span id="how" className="lAbs" style={{ left: 0, top: 2040, width: 1, height: 1 }} />
         <span id="trust" className="lAbs" style={{ left: 0, top: 2640, width: 1, height: 1 }} />
 
-        {/* Header */}
-        <Img src={logo} x={165} y={-13} w={233} h={194} reveal={false} />
+        {/* Header — clicking the logo eases back to the top of the landing.
+            pointerEvents overrides the `img.lAbs { pointer-events: none }` rule. */}
+        <img
+          className="lAbs"
+          src={logo}
+          alt="Koyash"
+          style={{
+            left: 56,
+            top: -13,
+            width: 233,
+            height: 194,
+            cursor: 'pointer',
+            pointerEvents: 'auto',
+          }}
+          onClick={scrollTo('top')}
+        />
         <button
           type="button"
           className="lAbs lNav"
           style={{ left: 492, top: 47 }}
-          onClick={scrollTo('top')}
+          onClick={scrollTo('about')}
         >
           О нас
         </button>
@@ -201,7 +221,7 @@ export function LandingPage() {
 
         {/* Hero */}
         <Img src={mascot} x={881} y={104} w={575} h={575} cls="lFloat" />
-        <Img src={heart} x={637} y={250} w={135} h={135} cls="lHeart" />
+        <Img src={heart} x={597} y={260} w={135} h={135} cls="lHeart" />
         <p className="lAbs reveal lHeroTitle" style={{ left: 191, top: 181, width: 510 }}>
           Косметика должна <span className="accent">служить тебе</span>,<br />а не ты — косметике
         </p>
@@ -366,7 +386,20 @@ export function LandingPage() {
         </T>
 
         {/* Контакты / footer */}
-        <Img src={logo} x={56} y={3926} w={193} h={160} reveal={false} />
+        <img
+          className="lAbs"
+          src={logo}
+          alt="Koyash"
+          style={{
+            left: 56,
+            top: 3926,
+            width: 193,
+            height: 160,
+            cursor: 'pointer',
+            pointerEvents: 'auto',
+          }}
+          onClick={scrollTo('top')}
+        />
         <Img src={endCloud} x={334} y={3918} w={492} h={187} reveal={false} />
         <div
           className="lAbs lSmearTitle reveal"
@@ -374,7 +407,7 @@ export function LandingPage() {
         >
           {'Остались вопросы?\nСвяжитесь с нами'}
         </div>
-        <Img src={heart} x={699} y={3980} w={58} h={58} cls="lHeart" reveal={false} />
+        <Img src={heart} x={697} y={3978} w={78} h={78} cls="lHeart" reveal={false} />
         <T x={951} y={3924} w={220} cls="lCardTitleLg">
           Контакты:
         </T>

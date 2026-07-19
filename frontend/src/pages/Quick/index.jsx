@@ -4,7 +4,7 @@ import QuickStep from './QuickStep';
 import Loading from '../Quiz/Loading';
 import SkinTest from '../SkinTest';
 import { STEPS, TOTAL_QUESTION_STEPS } from './quickConfig';
-import sceneLoading from '../../assets/quiz/scene-loading.png';
+import sceneLoading from '../../assets/quiz/scene-loading.webp';
 
 const LOADING_STEP = STEPS.length + 1;
 

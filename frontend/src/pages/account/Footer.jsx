@@ -1,7 +1,7 @@
-import cloud from '../../assets/account/foot-cloud.png';
-import email from '../../assets/account/foot-email.png';
-import telegram from '../../assets/account/foot-telegram.png';
-import heart from '../../assets/account/offer-spot.png';
+import cloud from '../../assets/account/foot-cloud.webp';
+import email from '../../assets/account/foot-email.webp';
+import telegram from '../../assets/account/foot-telegram.webp';
+import heart from '../../assets/account/offer-spot.webp';
 
 // Shared cabinet footer (contacts + legal links), positioned at the raw Figma
 // coordinates near the bottom of the 1789px cabinet canvas.
@@ -10,7 +10,7 @@ export default function Footer() {
     <>
       <div
         className="acAbs"
-        style={{ left: 9, top: 1529, width: 1633, height: 0, borderTop: '3px solid #634938' }}
+        style={{ left: 9, top: 1529, width: 1633, height: 0, borderTop: '3px solid #E9A563' }}
       />
 
       <img
@@ -18,7 +18,7 @@ export default function Footer() {
         src={cloud}
         alt=""
         aria-hidden="true"
-        style={{ left: 205, top: 1520, width: 620, height: 233, objectFit: 'contain' }}
+        style={{ left: 270, top: 1539, width: 492, height: 187, objectFit: 'contain' }}
       />
       <p
         className="acAbs acHeading"
