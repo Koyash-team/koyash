@@ -26,7 +26,7 @@ and [customer handover](docs/customer-handover.md).
 
 - **Web app:** <https://koyash-production-25e0.up.railway.app>
 - **API + Swagger:** <https://koyash-production.up.railway.app/docs>
-- **Demo video (MVP v1):** <https://youtu.be/SDuBlborKr0>
+- **Demo video (MVP v3):** <https://youtu.be/12R0pu7QiqE>
 
 No account is needed to get a recommendation — signing in only adds the personal
 features.
