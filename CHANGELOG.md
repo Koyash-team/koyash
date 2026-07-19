@@ -46,6 +46,10 @@ personal-account experience.
 
 ### Fixed
 
+- A guest's freshly generated cosmetic bag is now actually saved to the account on
+  sign-up / sign-in. The results screen offers registration to «save your care», but the
+  bag was never carried over — the new account opened empty. The questionnaire request is
+  now replayed with the new session so the bag and profile are persisted.
 - The password-reset email is delivered through the [Resend](https://resend.com)
   HTTPS API instead of raw SMTP. Railway blocks outbound SMTP (ports 25/465/587)
   on its Free/Hobby plans, so the previous SMTP sender could never actually deliver
