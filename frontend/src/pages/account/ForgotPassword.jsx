@@ -7,10 +7,10 @@ import AuthField from './AuthField';
 import FieldError from './FieldError';
 import { forgotPassword } from '../../api/client';
 
-import hero from '../../assets/account/hero-login.png';
-import icEmail from '../../assets/account/ic-email.png';
-import mailHero from '../../assets/account/mail-hero.png';
-import mailDot from '../../assets/account/mail-dot.png';
+import hero from '../../assets/account/hero-login.webp';
+import icEmail from '../../assets/account/ic-email.webp';
+import mailHero from '../../assets/account/mail-hero.webp';
+import mailDot from '../../assets/account/mail-dot.webp';
 
 // Забыли пароль → Письмо отправлено (Figma 2778:2 → 2673:1134).
 //

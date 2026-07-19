@@ -17,8 +17,8 @@ import {
 } from '../../api/client';
 import { profileValues } from './labels';
 
-import heart from '../../assets/account/offer-spot.png';
-import icPass from '../../assets/account/ic-pass.png';
+import heart from '../../assets/account/offer-spot.webp';
+import icPass from '../../assets/account/ic-pass.webp';
 
 // Профиль и безопасность (Figma 2673:1574). Edits personal data (PATCH
 // /account), changes the password (PUT /account/password), logs out and

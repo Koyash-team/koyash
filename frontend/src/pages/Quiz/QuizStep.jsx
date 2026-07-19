@@ -1,8 +1,8 @@
 import './QuizStep.css';
 import Stage from './Stage';
-import logo from '../../assets/landing/logo.png';
-import advice from '../../assets/landing/advice-cta.png';
-import heart from '../../assets/landing/heart.png';
+import logo from '../../assets/landing/logo.webp';
+import advice from '../../assets/landing/advice-cta.webp';
+import heart from '../../assets/landing/heart.webp';
 
 // age input accepts 10–100 only
 const AGE_MIN = 10;

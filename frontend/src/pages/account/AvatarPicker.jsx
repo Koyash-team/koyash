@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './account.css';
 import { useAuth } from '../../auth/useAuth';
 import { AVATARS } from './avatars';
-import heart from '../../assets/account/offer-spot.png';
+import heart from '../../assets/account/offer-spot.webp';
 
 // Выбор профиля (Figma 2828:1036) — pick a profile avatar. Reached from the
 // registration flow and from «Профиль и безопасность». Saves via the auth

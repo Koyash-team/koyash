@@ -7,8 +7,8 @@ import AuthField from './AuthField';
 import FieldError from './FieldError';
 import { resetPassword } from '../../api/client';
 
-import hero from '../../assets/account/hero-login.png';
-import icPass from '../../assets/account/ic-pass.png';
+import hero from '../../assets/account/hero-login.webp';
+import icPass from '../../assets/account/ic-pass.webp';
 
 // Новый пароль → Готово! (Figma 2779:49 / 2879:392 → 2673:1370).
 //

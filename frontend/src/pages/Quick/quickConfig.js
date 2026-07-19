@@ -1,13 +1,13 @@
 // Short quiz uses its own distinct illustrations (Figma "Короткая анкета").
-import sceneAge from '../../assets/quiz/scene-quick-age.png';
-import sceneSkinType from '../../assets/quiz/scene-quick-skin.png';
-import sceneProblems from '../../assets/quiz/scene-quick-concerns.png';
-import sceneBudget from '../../assets/quiz/scene-quick-budget.png';
-import sceneAllergens from '../../assets/quiz/scene-quick-allergens.png';
-import sceneImportance from '../../assets/quiz/scene-quick-values.png';
-import sceneExperience from '../../assets/quiz/scene-experience.png';
-import sceneIssues from '../../assets/quiz/scene-quick-conditions.png';
-import decorCupLeaf from '../../assets/quiz/decor-cup-leaf.png';
+import sceneAge from '../../assets/quiz/scene-quick-age.webp';
+import sceneSkinType from '../../assets/quiz/scene-quick-skin.webp';
+import sceneProblems from '../../assets/quiz/scene-quick-concerns.webp';
+import sceneBudget from '../../assets/quiz/scene-quick-budget.webp';
+import sceneAllergens from '../../assets/quiz/scene-quick-allergens.webp';
+import sceneImportance from '../../assets/quiz/scene-quick-values.webp';
+import sceneExperience from '../../assets/quiz/scene-experience.webp';
+import sceneIssues from '../../assets/quiz/scene-quick-conditions.webp';
+import decorCupLeaf from '../../assets/quiz/decor-cup-leaf.webp';
 
 export { buildRequest } from '../Quiz/quizConfig';
 

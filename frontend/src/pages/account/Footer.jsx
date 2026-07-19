@@ -1,7 +1,7 @@
-import cloud from '../../assets/account/foot-cloud.png';
-import email from '../../assets/account/foot-email.png';
-import telegram from '../../assets/account/foot-telegram.png';
-import heart from '../../assets/account/offer-spot.png';
+import cloud from '../../assets/account/foot-cloud.webp';
+import email from '../../assets/account/foot-email.webp';
+import telegram from '../../assets/account/foot-telegram.webp';
+import heart from '../../assets/account/offer-spot.webp';
 
 // Shared cabinet footer (contacts + legal links), positioned at the raw Figma
 // coordinates near the bottom of the 1789px cabinet canvas.

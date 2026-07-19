@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import eyeIcon from '../../assets/account/ic-eye.png';
+import eyeIcon from '../../assets/account/ic-eye.webp';
 
 // One absolutely-positioned form field (icon + input, optional show/hide eye
 // for passwords). Geometry matches the Figma inputs: 434×44, left icon, and

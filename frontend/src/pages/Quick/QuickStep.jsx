@@ -1,6 +1,6 @@
 import './QuickStep.css';
 import Stage from '../Quiz/Stage';
-import logo from '../../assets/landing/logo.png';
+import logo from '../../assets/landing/logo.webp';
 
 const AGE_MIN = 10;
 const AGE_MAX = 100;

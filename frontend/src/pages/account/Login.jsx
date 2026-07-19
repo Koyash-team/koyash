@@ -8,10 +8,10 @@ import FieldError from './FieldError';
 import { useAuth } from '../../auth/useAuth';
 import { ApiError, loginUser } from '../../api/client';
 
-import hero from '../../assets/account/hero-login.png';
-import lineHeart from '../../assets/account/line-heart.png';
-import icEmail from '../../assets/account/ic-email.png';
-import icPass from '../../assets/account/ic-pass.png';
+import hero from '../../assets/account/hero-login.webp';
+import lineHeart from '../../assets/account/line-heart.webp';
+import icEmail from '../../assets/account/ic-email.webp';
+import icPass from '../../assets/account/ic-pass.webp';
 
 // Авторизация (Figma 2673:1108).
 export default function Login() {

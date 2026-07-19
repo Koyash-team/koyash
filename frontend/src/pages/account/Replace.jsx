@@ -7,8 +7,8 @@ import ProductCard from './ProductCard';
 import ConfirmDialog from './ConfirmDialog';
 import { useAuth } from '../../auth/useAuth';
 import { fetchCare, fetchAlternatives, replaceItem } from '../../api/client';
-import heart from '../../assets/account/offer-spot.png';
-import spark from '../../assets/account/spark.png';
+import heart from '../../assets/account/offer-spot.webp';
+import spark from '../../assets/account/spark.webp';
 
 // Замена средства (Figma 2842:31) + «Замен не нашлось» (2844:109).
 // Lists similar products for a disliked item (GET alternatives) and swaps the

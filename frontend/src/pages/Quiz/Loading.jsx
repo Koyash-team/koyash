@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Loading.css';
 import Stage from './Stage';
-import logo from '../../assets/landing/logo.png';
-import sceneLoading from '../../assets/quiz/scene-loading.png';
+import logo from '../../assets/landing/logo.webp';
+import sceneLoading from '../../assets/quiz/scene-loading.webp';
 import { buildRequest } from './quizConfig';
 import { getToken } from '../../api/client';
 

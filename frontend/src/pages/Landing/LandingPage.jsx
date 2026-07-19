@@ -4,31 +4,31 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Stage from '../Quiz/Stage';
 import { useAuth } from '../../auth/useAuth';
 
-import logo from '../../assets/landing/logo.png';
-import mascot from '../../assets/landing/maskot.png';
-import heart from '../../assets/landing/heart.png';
-import problemNote from '../../assets/landing/problem-caption-note.png';
-import cloudNote from '../../assets/landing/decor-cloud-note.png';
-import problemArrow from '../../assets/landing/problem-arrow.png';
-import lineHeart from '../../assets/landing/line-heart.png';
-import lineHeart2 from '../../assets/landing/line-heart-2.png';
-import hLineLeft from '../../assets/landing/horizontal-line-left.png';
-import hLineRight from '../../assets/landing/horizontal-line-right.png';
-import decorCream from '../../assets/landing/decor-cream.png';
-import smear from '../../assets/landing/smear.png';
-import analysisSmear from '../../assets/landing/analysis-smear.png';
-import analysisLine from '../../assets/landing/analysis-line.png';
-import aLeft from '../../assets/landing/analysis-decor-left.png';
-import aMid from '../../assets/landing/analysis-decor-middle.png';
-import aRight from '../../assets/landing/analysis-decor-right.png';
-import step1 from '../../assets/landing/step-icon-1.png';
-import step2 from '../../assets/landing/step-icon-2.png';
-import step3 from '../../assets/landing/step-icon-3.png';
-import trustSun from '../../assets/landing/trust-sun.png';
-import imagePhotoroom from '../../assets/landing/advice-cta.png';
-import endCloud from '../../assets/landing/end-cloud.png';
-import endEmail from '../../assets/landing/end-email.png';
-import endTelegram from '../../assets/landing/end-telegram.png';
+import logo from '../../assets/landing/logo.webp';
+import mascot from '../../assets/landing/maskot.webp';
+import heart from '../../assets/landing/heart.webp';
+import problemNote from '../../assets/landing/problem-caption-note.webp';
+import cloudNote from '../../assets/landing/decor-cloud-note.webp';
+import problemArrow from '../../assets/landing/problem-arrow.webp';
+import lineHeart from '../../assets/landing/line-heart.webp';
+import lineHeart2 from '../../assets/landing/line-heart-2.webp';
+import hLineLeft from '../../assets/landing/horizontal-line-left.webp';
+import hLineRight from '../../assets/landing/horizontal-line-right.webp';
+import decorCream from '../../assets/landing/decor-cream.webp';
+import smear from '../../assets/landing/smear.webp';
+import analysisSmear from '../../assets/landing/analysis-smear.webp';
+import analysisLine from '../../assets/landing/analysis-line.webp';
+import aLeft from '../../assets/landing/analysis-decor-left.webp';
+import aMid from '../../assets/landing/analysis-decor-middle.webp';
+import aRight from '../../assets/landing/analysis-decor-right.webp';
+import step1 from '../../assets/landing/step-icon-1.webp';
+import step2 from '../../assets/landing/step-icon-2.webp';
+import step3 from '../../assets/landing/step-icon-3.webp';
+import trustSun from '../../assets/landing/trust-sun.webp';
+import imagePhotoroom from '../../assets/landing/advice-cta.webp';
+import endCloud from '../../assets/landing/end-cloud.webp';
+import endEmail from '../../assets/landing/end-email.webp';
+import endTelegram from '../../assets/landing/end-telegram.webp';
 
 const Img = ({ src, x, y, w, h, cls = '', reveal = true }) => (
   <img
@@ -146,12 +146,20 @@ export function LandingPage() {
         <span id="how" className="lAbs" style={{ left: 0, top: 2040, width: 1, height: 1 }} />
         <span id="trust" className="lAbs" style={{ left: 0, top: 2640, width: 1, height: 1 }} />
 
-        {/* Header — clicking the logo eases back to the top of the landing */}
+        {/* Header — clicking the logo eases back to the top of the landing.
+            pointerEvents overrides the `img.lAbs { pointer-events: none }` rule. */}
         <img
           className="lAbs"
           src={logo}
           alt="Koyash"
-          style={{ left: 56, top: -13, width: 233, height: 194, cursor: 'pointer' }}
+          style={{
+            left: 56,
+            top: -13,
+            width: 233,
+            height: 194,
+            cursor: 'pointer',
+            pointerEvents: 'auto',
+          }}
           onClick={scrollTo('top')}
         />
         <button
@@ -382,7 +390,14 @@ export function LandingPage() {
           className="lAbs"
           src={logo}
           alt="Koyash"
-          style={{ left: 56, top: 3926, width: 193, height: 160, cursor: 'pointer' }}
+          style={{
+            left: 56,
+            top: 3926,
+            width: 193,
+            height: 160,
+            cursor: 'pointer',
+            pointerEvents: 'auto',
+          }}
           onClick={scrollTo('top')}
         />
         <Img src={endCloud} x={334} y={3918} w={492} h={187} reveal={false} />

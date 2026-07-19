@@ -1,15 +1,15 @@
-import sceneAge from '../../assets/quiz/scene-age.png';
-import sceneSkinType from '../../assets/quiz/scene-skin-type.png';
-import sceneSpf from '../../assets/quiz/scene-spf.png';
-import sceneIssues from '../../assets/quiz/scene-issues.png';
-import sceneBudget from '../../assets/quiz/scene-budget.png';
-import sceneCleanser from '../../assets/quiz/scene-cleanser.png';
-import sceneAllergens from '../../assets/quiz/scene-allergens.png';
-import sceneImportance from '../../assets/quiz/scene-importance.png';
-import sceneActives from '../../assets/quiz/scene-actives.png';
-import sceneProblems from '../../assets/quiz/scene-problems.png';
-import sceneExperience from '../../assets/quiz/scene-experience.png';
-import decorCupLeaf from '../../assets/quiz/decor-cup-leaf.png';
+import sceneAge from '../../assets/quiz/scene-age.webp';
+import sceneSkinType from '../../assets/quiz/scene-skin-type.webp';
+import sceneSpf from '../../assets/quiz/scene-spf.webp';
+import sceneIssues from '../../assets/quiz/scene-issues.webp';
+import sceneBudget from '../../assets/quiz/scene-budget.webp';
+import sceneCleanser from '../../assets/quiz/scene-cleanser.webp';
+import sceneAllergens from '../../assets/quiz/scene-allergens.webp';
+import sceneImportance from '../../assets/quiz/scene-importance.webp';
+import sceneActives from '../../assets/quiz/scene-actives.webp';
+import sceneProblems from '../../assets/quiz/scene-problems.webp';
+import sceneExperience from '../../assets/quiz/scene-experience.webp';
+import decorCupLeaf from '../../assets/quiz/decor-cup-leaf.webp';
 
 // Main "story" quiz — Figma Prototype ("История"). Canvas 1307×738 (≈16:9),
 // small logo top-left on every screen, note shown as a #f8e1c0 pill, tip

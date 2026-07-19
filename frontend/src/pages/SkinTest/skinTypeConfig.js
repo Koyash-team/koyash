@@ -1,8 +1,8 @@
-import sceneCleanse from '../../assets/quiz/skintype_cleanse.png';
-import scenePore from '../../assets/quiz/skintype_pore.png';
-import sceneHours from '../../assets/quiz/skintype_hours.png';
-import sceneWeather from '../../assets/quiz/skintype_weather.png';
-import sceneResult from '../../assets/quiz/skintype_result.png';
+import sceneCleanse from '../../assets/quiz/skintype_cleanse.webp';
+import scenePore from '../../assets/quiz/skintype_pore.webp';
+import sceneHours from '../../assets/quiz/skintype_hours.webp';
+import sceneWeather from '../../assets/quiz/skintype_weather.webp';
+import sceneResult from '../../assets/quiz/skintype_result.webp';
 
 // Skin-type sub-quiz — Figma Prototype "Тип кожи для истории/короткой анкеты".
 // 4 scored questions → the skin type with the most points is shown as the

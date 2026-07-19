@@ -1,9 +1,9 @@
 import './QuizScreen1.css';
 import Stage from './Stage';
-import logo from '../../assets/landing/logo.png';
-import sceneOpening from '../../assets/quiz/scene-opening.png';
-import decorLeaf from '../../assets/quiz/decor-leaf.png';
-import heart from '../../assets/landing/heart.png';
+import logo from '../../assets/landing/logo.webp';
+import sceneOpening from '../../assets/quiz/scene-opening.webp';
+import decorLeaf from '../../assets/quiz/decor-leaf.webp';
+import heart from '../../assets/landing/heart.webp';
 
 const title = 'Ты заходишь в уютный дом. Пахнет травяным чаем. В окно мягко заглядывает солнце.';
 const text = `— Заходи, солнышко. Садись поудобнее, чай уже тёплый.

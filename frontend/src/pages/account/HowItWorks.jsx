@@ -1,16 +1,16 @@
 import { useLayoutEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './account.css';
-import heart from '../../assets/account/offer-spot.png';
-import num1 from '../../assets/account/howto/num1.png';
-import num2 from '../../assets/account/howto/num2.png';
-import num3 from '../../assets/account/howto/num3.png';
-import num4 from '../../assets/account/howto/num4.png';
-import ill1 from '../../assets/account/howto/ill1.png';
-import ill2 from '../../assets/account/howto/ill2.png';
-import ill3 from '../../assets/account/howto/ill3.png';
-import ill4 from '../../assets/account/howto/ill4.png';
-import arrow from '../../assets/account/howto/arrow.png';
+import heart from '../../assets/account/offer-spot.webp';
+import num1 from '../../assets/account/howto/num1.webp';
+import num2 from '../../assets/account/howto/num2.webp';
+import num3 from '../../assets/account/howto/num3.webp';
+import num4 from '../../assets/account/howto/num4.webp';
+import ill1 from '../../assets/account/howto/ill1.webp';
+import ill2 from '../../assets/account/howto/ill2.webp';
+import ill3 from '../../assets/account/howto/ill3.webp';
+import ill4 from '../../assets/account/howto/ill4.webp';
+import arrow from '../../assets/account/howto/arrow.webp';
 
 // Как всё устроено / «Просто и понятно» (Figma 2673:1386, 600×1350) — a modal
 // explainer opened from the profile card. Four numbered step cards with their

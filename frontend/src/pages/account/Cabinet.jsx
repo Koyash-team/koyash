@@ -12,19 +12,19 @@ import { useAuth } from '../../auth/useAuth';
 import { fetchProfile, fetchCare, fetchTracker } from '../../api/client';
 import { profileValues } from './labels';
 
-import heart from '../../assets/account/offer-spot.png';
-import decorCream from '../../assets/account/decor-cream.png';
-import mascot from '../../assets/account/mascot.png';
-import trkIllust from '../../assets/account/trk-illust.png';
-import trkIc1 from '../../assets/account/trk-ic1.png';
-import trkIc2 from '../../assets/account/trk-ic2.png';
-import trkIc3 from '../../assets/account/trk-ic3.png';
-import trkIc4 from '../../assets/account/trk-ic4.png';
-import bagIllust from '../../assets/account/bag-illust.png';
-import bagIcDate from '../../assets/account/pf-age.png';
-import bagIcCount from '../../assets/account/bag-ic-date.png';
-import bagIcTotal from '../../assets/account/bag-ic-count.png';
-import introHeart from '../../assets/account/pf-pref.png';
+import heart from '../../assets/account/offer-spot.webp';
+import decorCream from '../../assets/account/decor-cream.webp';
+import mascot from '../../assets/account/mascot.webp';
+import trkIllust from '../../assets/account/trk-illust.webp';
+import trkIc1 from '../../assets/account/trk-ic1.webp';
+import trkIc2 from '../../assets/account/trk-ic2.webp';
+import trkIc3 from '../../assets/account/trk-ic3.webp';
+import trkIc4 from '../../assets/account/trk-ic4.webp';
+import bagIllust from '../../assets/account/bag-illust.webp';
+import bagIcDate from '../../assets/account/pf-age.webp';
+import bagIcCount from '../../assets/account/bag-ic-date.webp';
+import bagIcTotal from '../../assets/account/bag-ic-count.webp';
+import introHeart from '../../assets/account/pf-pref.webp';
 
 // Small stat glyph, sized to the Figma box (w×h).
 const StatIcon = ({ src, x, y, w = 34, h = 34 }) => (

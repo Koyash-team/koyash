@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ProductCard from './ProductCard';
-import heartFilled from '../../assets/account/pf-pref.png';
-import spark from '../../assets/account/spark.png';
+import heartFilled from '../../assets/account/pf-pref.webp';
+import spark from '../../assets/account/spark.webp';
 
 // One product in the bag with its feedback controls (Figma 2673:1259).
 // - "Подошло"   → PUT feedback liked

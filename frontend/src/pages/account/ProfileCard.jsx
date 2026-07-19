@@ -1,12 +1,12 @@
-import sun from '../../assets/account/avatar-sun.png';
-import lineHeart from '../../assets/account/line-heart.png';
-import icLogout from '../../assets/account/ic-logout.png';
-import icAge from '../../assets/account/pf-age.png';
-import icProblems from '../../assets/account/pf-skin.png';
-import icAllergy from '../../assets/account/pf-allergy.png';
-import icBudget from '../../assets/account/pf-budget.png';
-import icPref from '../../assets/account/pf-pref.png';
-import icConditions from '../../assets/account/pf-conditions.png';
+import sun from '../../assets/account/avatar-sun.webp';
+import lineHeart from '../../assets/account/line-heart.webp';
+import icLogout from '../../assets/account/ic-logout.webp';
+import icAge from '../../assets/account/pf-age.webp';
+import icProblems from '../../assets/account/pf-skin.webp';
+import icAllergy from '../../assets/account/pf-allergy.webp';
+import icBudget from '../../assets/account/pf-budget.webp';
+import icPref from '../../assets/account/pf-pref.webp';
+import icConditions from '../../assets/account/pf-conditions.webp';
 import { avatarSrc } from './avatars';
 
 // Each profile field row: Figma y-position, its label, and the small glyph

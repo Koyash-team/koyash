@@ -3,17 +3,17 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import './Results.css';
 import { useAuth } from '../../auth/useAuth';
 import Offer from '../account/Offer';
-import logo from '../../assets/landing/logo.png';
-import heart from '../../assets/landing/heart.png';
-import sceneLoading from '../../assets/quiz/scene-loading.png';
+import logo from '../../assets/landing/logo.webp';
+import heart from '../../assets/landing/heart.webp';
+import sceneLoading from '../../assets/quiz/scene-loading.webp';
 
-import bagCleanser from '../../assets/results/bag-cleanser.png';
-import bagToner from '../../assets/results/bag-toner.png';
-import bagSerum from '../../assets/results/bag-serum.png';
-import bagCream from '../../assets/results/bag-cream.png';
-import bagSpf from '../../assets/results/bag-spf.png';
-import bagNightCream from '../../assets/results/bag-night-cream.png';
-import bagNotFound from '../../assets/results/bag-not-found.png.png';
+import bagCleanser from '../../assets/results/bag-cleanser.webp';
+import bagToner from '../../assets/results/bag-toner.webp';
+import bagSerum from '../../assets/results/bag-serum.webp';
+import bagCream from '../../assets/results/bag-cream.webp';
+import bagSpf from '../../assets/results/bag-spf.webp';
+import bagNightCream from '../../assets/results/bag-night-cream.webp';
+import bagNotFound from '../../assets/results/bag-not-found.webp';
 
 const STEP_IMG = {
   cleanse: bagCleanser,

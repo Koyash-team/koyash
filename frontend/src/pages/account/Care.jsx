@@ -9,8 +9,8 @@ import ConfirmDialog from './ConfirmDialog';
 import { useAuth } from '../../auth/useAuth';
 import { fetchCare, setItemFeedback } from '../../api/client';
 import { formatPrice } from './careFormat';
-import titleHeart from '../../assets/account/offer-spot.png';
-import heartFilled from '../../assets/account/pf-pref.png';
+import titleHeart from '../../assets/account/offer-spot.webp';
+import heartFilled from '../../assets/account/pf-pref.webp';
 
 const MAX_REPLACEMENTS = 2;
 

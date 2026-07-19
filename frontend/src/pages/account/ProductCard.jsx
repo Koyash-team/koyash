@@ -1,11 +1,11 @@
 import { formatPrice, stepLine, descLine, whyLine } from './careFormat';
-import bagCleanser from '../../assets/results/bag-cleanser.png';
-import bagToner from '../../assets/results/bag-toner.png';
-import bagSerum from '../../assets/results/bag-serum.png';
-import bagCream from '../../assets/results/bag-cream.png';
-import bagSpf from '../../assets/results/bag-spf.png';
-import bagNightCream from '../../assets/results/bag-night-cream.png';
-import bagNotFound from '../../assets/results/bag-not-found.png.png';
+import bagCleanser from '../../assets/results/bag-cleanser.webp';
+import bagToner from '../../assets/results/bag-toner.webp';
+import bagSerum from '../../assets/results/bag-serum.webp';
+import bagCream from '../../assets/results/bag-cream.webp';
+import bagSpf from '../../assets/results/bag-spf.webp';
+import bagNightCream from '../../assets/results/bag-night-cream.webp';
+import bagNotFound from '../../assets/results/bag-not-found.webp';
 
 // Product jar by routine step — mirrors the results screen so the saved bag
 // shows the same illustrations. A product's own image_url wins when present.

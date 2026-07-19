@@ -8,13 +8,13 @@ import FieldError from './FieldError';
 import { useAuth } from '../../auth/useAuth';
 import { ApiError, registerUser } from '../../api/client';
 
-import hero from '../../assets/account/hero-register.png';
-import lineHeart from '../../assets/account/line-heart.png';
-import icName from '../../assets/account/ic-name.png';
-import icAge from '../../assets/account/ic-age.png';
-import icPhone from '../../assets/account/ic-phone.png';
-import icEmail from '../../assets/account/ic-email.png';
-import icPass from '../../assets/account/ic-pass.png';
+import hero from '../../assets/account/hero-register.webp';
+import lineHeart from '../../assets/account/line-heart.webp';
+import icName from '../../assets/account/ic-name.webp';
+import icAge from '../../assets/account/ic-age.webp';
+import icPhone from '../../assets/account/ic-phone.webp';
+import icEmail from '../../assets/account/ic-email.webp';
+import icPass from '../../assets/account/ic-pass.webp';
 
 // Регистрация (Figma 2673:1066). Guest-first: this is an optional account on
 // top of the questionnaire. On success the user is signed in immediately

@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import './account.css';
 import Stage from '../Quiz/Stage';
 
-import spot from '../../assets/account/offer-spot.png';
-import hero from '../../assets/account/offer-hero.png';
-import card1 from '../../assets/account/offer-card-1.png';
-import card2 from '../../assets/account/offer-card-2.png';
-import card3 from '../../assets/account/offer-card-3.png';
-import card4 from '../../assets/account/offer-card-4.png';
+import spot from '../../assets/account/offer-spot.webp';
+import hero from '../../assets/account/offer-hero.webp';
+import card1 from '../../assets/account/offer-card-1.webp';
+import card2 from '../../assets/account/offer-card-2.webp';
+import card3 from '../../assets/account/offer-card-3.webp';
+import card4 from '../../assets/account/offer-card-4.webp';
 
 // Предложение о регистрации (Figma 2851:2). Shown after a guest generates a
 // bag, nudging them to register so the result is saved. "Назад" returns to the

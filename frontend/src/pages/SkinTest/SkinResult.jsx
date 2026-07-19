@@ -1,6 +1,6 @@
 import './SkinResult.css';
 import Stage from '../Quiz/Stage';
-import logo from '../../assets/landing/logo.png';
+import logo from '../../assets/landing/logo.webp';
 import { SKIN_RESULTS, RESULT_SCENE, RESULT_NOTE } from './skinTypeConfig';
 
 export default function SkinResult({ type, onBack, onDone }) {

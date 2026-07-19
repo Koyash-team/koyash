@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/landing/logo.png';
+import logo from '../../assets/landing/logo.webp';
 
 // Shared header for the account / auth screens. Matches the landing header
 // (logo + three section links) and exposes the right-hand slot so each screen
@@ -18,7 +18,14 @@ export default function TopNav({ right, logoLeft = 182 }) {
         className="acAbs"
         src={logo}
         alt="Koyash"
-        style={{ left: logoLeft, top: -12, width: 233, height: 194, cursor: 'pointer' }}
+        style={{
+          left: logoLeft,
+          top: -12,
+          width: 233,
+          height: 194,
+          cursor: 'pointer',
+          pointerEvents: 'auto',
+        }}
         onClick={() => navigate('/')}
       />
       <button
