@@ -94,6 +94,48 @@ Live values are held in the Railway project environment (and GitHub Actions
 secrets for CI). If a secret is ever exposed, rotate it in Railway/Atlas and
 redeploy; nothing needs to change in the repository.
 
+## Transferring operational ownership (if the customer self-hosts)
+
+By default the team keeps running the service on its own accounts (see
+[Handover status](#handover-status)). If the customer decides to operate KOYASH
+on her side, this section is the concrete list of what must be handed over.
+**Credential values are shared only through a secure private channel — never
+committed to the repository or pasted into issues, PRs, or chat logs.**
+
+**1. Accounts and services to take over or recreate**
+
+| Service | Role | Handover option |
+|---|---|---|
+| GitHub repo (`Koyash-team/koyash`) | Source code, CI, docs site | Add her as admin/owner, or transfer the repo |
+| Railway project (frontend + backend services) | Hosting; redeploys from `main` | Invite her to the Railway project, or she recreates it against her GitHub copy |
+| MongoDB Atlas cluster | Product catalog + account data (`products`, `users`, `care`, `tracker`) | Invite her to the Atlas project, or she creates her own cluster and we load the catalog |
+| Resend account + verified mail domain | Sends the password-reset email | She registers with Resend, verifies her domain, issues her own API key |
+| LLM provider key (optional) | Only if she enables LLM rewording | Her own key + the customer-authored prompt; off by default |
+
+**2. Environment values to provide** (today these live in the Railway
+environment — hand them over securely, or she generates her own):
+
+- `MONGODB_URI` — Atlas connection string (**secret**)
+- `MONGO_DB_NAME` / `DB_NAME` — database name
+- `JWT_SECRET` — a strong random string (**secret**); she can set her own, but
+  changing it signs every currently-logged-in user out
+- `RESEND_API_KEY` — her Resend key (**secret**)
+- `MAIL_FROM` — a from-address on her Resend-verified domain
+- `FRONTEND_URL` — her deployed web-app URL (the reset link in the email points here)
+- `RESET_TOKEN_TTL_MINUTES` — optional, defaults to 30
+- `LLM_ENABLED` / `LLM_API` / `LLM_BASE_URL` / `LLM_MODEL` / `LLM_SYSTEM_PROMPT`
+  — only if she turns the LLM on
+- Frontend build: `VITE_API_URL` must point to her backend URL
+
+**3. One-time data step.** The product catalog is loaded **offline** (it is not
+created at runtime). On a fresh database, load it with the scripts in
+[`db/`](../db/README.md). The `users`, `care`, and `tracker` collections are
+created by end users at runtime and start empty.
+
+**4. What is *not* handed over.** No secret lives in the repository — only
+sanitized `*.env.example` templates. If any value is ever exposed, rotate it in
+Railway / Atlas / Resend and redeploy; nothing changes in the repository.
+
 ## Operational notes
 
 - **Shipping a change** = merging a reviewed pull request into `main`. The
@@ -161,6 +203,12 @@ usual course channel.
 
 **Current level reached: `Ready for independent use`.**
 
+**Customer-confirmation status: `Accepted`.** At the Week 7 transition-confirmation meeting
+(2026-07-18) the customer trialed `MVP v3`, confirmed she had tried the product herself and
+approved it, and accepted this handover document in writing as sufficient for the reached
+handover level. She does not need the product deployed on her side during the course; a
+possible operational transfer is deferred to a post-course discussion.
+
 The product is deployed, publicly reachable, and requires no installation or
 technical setup from the customer, and the maintained documentation describes
 how to access, configure, and operate it.
@@ -177,7 +225,8 @@ two stronger levels are **not** reached yet:
 - `Deployed or operated on customer side` — not deployed on her side; hosting,
   database, and LLM credentials are still owned by the team.
 
-This status is re-assessed after the Week 7 final transition.
+This status was re-assessed and confirmed at the Week 7 final transition meeting
+(2026-07-18); see the customer-confirmation status above.
 
 ## Remaining actions
 
