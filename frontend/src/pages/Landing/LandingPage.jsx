@@ -146,8 +146,14 @@ export function LandingPage() {
         <span id="how" className="lAbs" style={{ left: 0, top: 2040, width: 1, height: 1 }} />
         <span id="trust" className="lAbs" style={{ left: 0, top: 2640, width: 1, height: 1 }} />
 
-        {/* Header */}
-        <Img src={logo} x={56} y={-13} w={233} h={194} reveal={false} />
+        {/* Header — clicking the logo eases back to the top of the landing */}
+        <img
+          className="lAbs"
+          src={logo}
+          alt="Koyash"
+          style={{ left: 56, top: -13, width: 233, height: 194, cursor: 'pointer' }}
+          onClick={scrollTo('top')}
+        />
         <button
           type="button"
           className="lAbs lNav"
@@ -372,7 +378,13 @@ export function LandingPage() {
         </T>
 
         {/* Контакты / footer */}
-        <Img src={logo} x={56} y={3926} w={193} h={160} reveal={false} />
+        <img
+          className="lAbs"
+          src={logo}
+          alt="Koyash"
+          style={{ left: 56, top: 3926, width: 193, height: 160, cursor: 'pointer' }}
+          onClick={scrollTo('top')}
+        />
         <Img src={endCloud} x={334} y={3918} w={492} h={187} reveal={false} />
         <div
           className="lAbs lSmearTitle reveal"
