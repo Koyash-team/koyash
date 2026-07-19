@@ -337,6 +337,10 @@ product was shown: the chosen alternative became active and the replaced product
 bottom, dimmed, keeping its comment. The 2-per-step limit and the "no alternatives" case were
 not explicitly exercised in this session.
 
+**Also exercised (2026-07-18, Week 7 transition meeting):** the reworked replacement screen was
+reviewed and accepted; the offered alternatives now show the same rule-based justification as
+the main bag (PBI-506), so it is clear why each alternative fits.
+
 **Customer comments / observed issues:** No defect raised.
 
 **Resulting PBIs or issues:** —
@@ -380,6 +384,10 @@ and the per-checkpoint statistics. Real over-time unlocking was not exercised (i
 declared problems and skin type, with a base fallback). Asked that the tracker match the design
 once the UI polish is finished.
 
+**Also exercised (2026-07-18, Week 7 transition meeting):** the tracker UI now matches the
+design (the polish the customer asked for in Week 6, delivered in PBI-506); she explored the
+tracker herself via a shared link and accepted it.
+
 **Resulting PBIs or issues:** —
 
 ## UAT-012: Manage and delete my account
@@ -405,9 +413,8 @@ refused. The old password stops working and the new one works. Deleting the acco
 requires the password, and afterwards the saved bag and the tracker are gone and signing in
 with those credentials fails.
 
-**Note:** There is no self-service password reset in this release — "Forgot password?" is
-intentionally hidden until a transactional email service is connected (see
-[customer handover](customer-handover.md#known-limitations-unfinished-areas-and-risks)).
+**Note:** Self-service password reset shipped in Sprint 5 (it was hidden in the Week 6
+trial) — that flow is covered by **UAT-013**.
 
 **Related:** [US-26](https://github.com/Koyash-team/koyash/issues/158).
 
@@ -416,8 +423,82 @@ and delete-account were shown in the personal cabinet. Deletion was not run dest
 the edit-personal-data / wrong-password / re-login paths were not exercised step by step in
 this session.
 
-**Customer comments / observed issues:** No defect raised. (There is no self-service password
-reset in this release; the customer will provide a mail domain so it can be built — see the
-Week 6 Sprint Review summary.)
+**Also exercised (2026-07-18, Week 7 transition meeting):** the finished account UI was
+reviewed against the design and accepted; «Профиль и безопасность» is now reachable with the
+reworked navigation.
+
+**Customer comments / observed issues:** No defect raised.
+
+**Resulting PBIs or issues:** —
+
+## UAT-013: Reset a forgotten password via an email link
+
+**Status:** Active
+
+**User goal:** As a user who forgot their password, I want to reset it through a link sent to
+my email, so that I can regain access to my account on my own.
+
+**Preconditions:** The deployed app is reachable with the mail transport configured
+(`RESEND_API_KEY`, `MAIL_FROM`, `FRONTEND_URL`). A **throwaway sanitized demo account** with a
+reachable mailbox is available.
+
+**Steps:**
+1. On the sign-in screen, open **«Забыли пароль?»** and submit the account's email.
+2. Submit the form again for an **unknown** email address.
+3. Open the reset link from the delivered email and set a new password.
+4. Open the same link a second time.
+5. Wait past the link's expiry (30 minutes) with a fresh link and try it.
+6. Sign in with the new password.
+
+**Expected outcome:** A reset email with a link is delivered for the registered address. The
+unknown address produces the **same** on-screen response and the same response time (the mail
+is sent in the background), so the form cannot reveal who is registered. The link sets a new
+password, works **once**, and is refused after reuse or after 30 minutes with a clear message.
+The new password signs the user in; the old one no longer works. Changing the password while
+signed in also invalidates any outstanding reset link.
+
+**Related:** [US-27](https://github.com/Koyash-team/koyash/issues/159), [PBI-503](https://github.com/Koyash-team/koyash/issues/166).
+
+**Execution results (2026-07-18, Week 7):** Passed. Verified end-to-end on the deployed backend
+by the team — a reset email is delivered via the Resend HTTPS API and the link sets a new
+password — and presented at the Week 7 transition meeting. The single-use / expiry and
+no-user-enumeration behaviour are additionally covered by automated tests
+(`backend/tests/test_auth.py`).
+
+**Customer comments / observed issues:** No defect raised; the customer confirmed the mail
+domain she provided works.
+
+**Resulting PBIs or issues:** —
+
+## UAT-014: Warning about a potential irritant in a suitable product
+
+**Status:** Active
+
+**User goal:** As a user with sensitive skin, I want a heads-up when a recommended product
+still contains a common irritant, so that I can patch-test it before use.
+
+**Preconditions:** The deployed app is reachable. No account is required.
+
+**Steps:**
+1. Complete the questionnaire declaring **sensitive** skin (or the sensitivity concern).
+2. Open the results screen (and, if signed in, «Текущий уход»).
+3. Inspect the cards of products whose actives include a common irritant (fragrance, drying
+   alcohol, a retinoid, or an acid).
+4. Repeat with a **non-sensitive** profile.
+
+**Expected outcome:** For the sensitive-skin profile, a product that is still recommended but
+carries a common irritant shows a ⚠️ patch-test heads-up on its card; the product is **not**
+removed from the bag. For a non-sensitive profile the note does not appear. The note is
+deterministic (not produced by the LLM), and declared allergens and special conditions remain
+hard-excluded as before, independently of this warning.
+
+**Related:** [US-11](https://github.com/Koyash-team/koyash/issues/15), [PBI-505](https://github.com/Koyash-team/koyash/issues/184).
+
+**Execution results (2026-07-18, Week 7):** Passed. The behaviour is covered by automated tests
+(`backend/tests/test_irritant_warning.py`) and shown in the UI; it was described and accepted at
+the Week 7 transition meeting.
+
+**Customer comments / observed issues:** No defect raised; the deterministic, justification-only
+scope (the LLM never judges ingredients) was confirmed as intended.
 
 **Resulting PBIs or issues:** —
