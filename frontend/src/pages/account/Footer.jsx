@@ -10,7 +10,7 @@ export default function Footer() {
     <>
       <div
         className="acAbs"
-        style={{ left: 9, top: 1529, width: 1633, height: 0, borderTop: '3px solid #634938' }}
+        style={{ left: 9, top: 1529, width: 1633, height: 0, borderTop: '3px solid #E9A563' }}
       />
 
       <img
