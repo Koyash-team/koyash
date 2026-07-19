@@ -41,10 +41,13 @@ Introduce a thin, **guest-first** authentication layer:
   profile snapshot embedded), one `care` document (the single saved bag), and
   one `tracker` document, each keyed by the user id. A unique index on
   `users.email` enforces identity at the database level.
-- **Deliberately out of scope for the trial:** OAuth/social login, refresh
+- **Deliberately out of scope for the Week 6 trial:** OAuth/social login, refresh
   tokens, server-side sessions, and email-based password reset. Password reset
-  needs a transactional email service and is deferred (PBI-503); until it ships,
-  the "Forgot password?" entry point is hidden.
+  needed a transactional email service, so it was deferred (PBI-503) and the
+  "Forgot password?" entry point was hidden for the trial. It **shipped in
+  `v1.4.0`** (US-27): a single-use, 30-minute reset link sent via the Resend HTTPS
+  API (Railway blocks outbound SMTP). OAuth, refresh tokens, and server-side
+  sessions remain out of scope.
 
 ## Consequences and tradeoffs
 
