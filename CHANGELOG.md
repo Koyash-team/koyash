@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-07-18
+
+Final Assignment 6 release — the final course version, `MVP v3`. It builds on the
+`v1.3.0` Week 6 trial with the deterministic irritant warning for sensitive-skin
+users, self-service password reset, and the frontend rework that completes the
+personal-account experience.
+
 ### Added
 
 - «Мой кабинет» button on the results screen, linking straight into the personal
